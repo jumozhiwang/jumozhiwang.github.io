@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/true" title="LSP's Home" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="符号计算一、符号变量、表达式及符号方程进行符号运算前，先定义符号对象，然后利用符号对象构建表达式，最后进行符号计算。 1、创建符号变量与表达式1、sym函数 123456S &#x3D; sym(A)   % 把数字、字符串或表达式A转换为符号对象Sx &#x3D; sym(&#39;x&#39;)  %以x为名创建符号变量，结果储存到xx &#x3D; sym(&#39;x&#39;,&#39;real&#39;)  %限定x表示实型符号变量k &#x3D; sym(&#39;k&#39;,&#39;po">
+<meta property="og:type" content="article">
+<meta property="og:title" content="符号计算">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="LSP&#39;s Home">
+<meta property="og:description" content="符号计算一、符号变量、表达式及符号方程进行符号运算前，先定义符号对象，然后利用符号对象构建表达式，最后进行符号计算。 1、创建符号变量与表达式1、sym函数 123456S &#x3D; sym(A)   % 把数字、字符串或表达式A转换为符号对象Sx &#x3D; sym(&#39;x&#39;)  %以x为名创建符号变量，结果储存到xx &#x3D; sym(&#39;x&#39;,&#39;real&#39;)  %限定x表示实型符号变量k &#x3D; sym(&#39;k&#39;,&#39;po">
+<meta property="article:published_time" content="2020-02-06T13:58:34.201Z">
+<meta property="article:modified_time" content="2020-02-09T09:32:27.851Z">
+<meta property="article:author" content="tangxingfeng">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/06/符号计算/"/>
+
+
+
+
+
+  <title>符号计算 | LSP's Home</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://https://the-outlier.github.io/lsp/" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LSP's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">寒冬卧冰，盛夏吻火</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tangxingfeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LSP's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">符号计算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-06T21:58:34+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="符号计算"><a href="#符号计算" class="headerlink" title="符号计算"></a>符号计算</h1><h2 id="一、符号变量、表达式及符号方程"><a href="#一、符号变量、表达式及符号方程" class="headerlink" title="一、符号变量、表达式及符号方程"></a>一、符号变量、表达式及符号方程</h2><p>进行符号运算前，先定义符号对象，然后利用符号对象构建表达式，最后进行符号计算。</p>
+<h3 id="1、创建符号变量与表达式"><a href="#1、创建符号变量与表达式" class="headerlink" title="1、创建符号变量与表达式"></a>1、创建符号变量与表达式</h3><p>1、sym函数</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">S = sym(A)   <span class="comment">% 把数字、字符串或表达式A转换为符号对象S</span></span><br><span class="line">x = sym(<span class="string">'x'</span>)  <span class="comment">%以x为名创建符号变量，结果储存到x</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'real'</span>)  <span class="comment">%限定x表示实型符号变量</span></span><br><span class="line">k = sym(<span class="string">'k'</span>,<span class="string">'positive'</span>)   <span class="comment">%限定x表示正的实型符号变量</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'clear'</span>)   <span class="comment">%无附件条件设x为纯形式变量</span></span><br><span class="line">S = sym(A,flag)   <span class="comment">%将数值标量或者矩阵转换为符号形式，参数flag是定义转换符号对象应符合的格式</span></span><br></pre></td></tr></table></figure>
+
+<p>【例1-1】sym函数定义符号表达式</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=sym(<span class="string">'a'</span>),b=sym(<span class="string">'b'</span>),c=sym(<span class="string">'c'</span>),d=sym(<span class="string">'d'</span>),x=sym(<span class="string">'x'</span>);</span><br><span class="line">f=a*x^<span class="number">2</span>+b*x+c,g=sym(<span class="string">'a*x^2+b*x+c'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>2、syms函数      可同时将多个变量创建为符号对象</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">syms arg1 arg2...      <span class="comment">%等同于arg1=sym('arg1');arg2=sym('arg2');...</span></span><br><span class="line">syms arg1 arg2...<span class="built_in">real</span>   <span class="comment">%等同于arg1=sym('srg1','real');arg2=sym('arg2','real');...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-运算符和基本函数"><a href="#2-运算符和基本函数" class="headerlink" title="2.运算符和基本函数"></a>2.运算符和基本函数</h3><p>基础运算符：+、-、*、/、^、等</p>
+<p>关系运算符：’==’ ‘~=’  表示等于、不等于</p>
+<p>三角、双曲函数：除了atan2函数只用于数值计算，其余都可用于符号计算</p>
+<p>指数、对数函数：指数函数均可用，对数只能用 log函数，不能用 log2 和 log10</p>
+<p>复数函数与矩阵代数：符号计算与数值计算基本相同</p>
+<h2 id="二、符号微积分"><a href="#二、符号微积分" class="headerlink" title="二、符号微积分"></a>二、符号微积分</h2><h3 id="1、符号求导与微分"><a href="#1、符号求导与微分" class="headerlink" title="1、符号求导与微分"></a>1、符号求导与微分</h3><p>已知diff函数可实现函数求导与求微分，实现一元函数求导和多元函数求偏导。当输入参数为符号表达式时，diff函数还可用于实现符号微分，调用语法如下</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">diff(S)    <span class="comment">%实现表达式S的求导，自变量可通过函数 symvar查看</span></span><br><span class="line">diff(S,<span class="string">'v'</span>)   <span class="comment">%表达式对指定变量v的求导   还可写为 diff(S,sym('v'))</span></span><br><span class="line">diff(S,n)     <span class="comment">%S的n阶导</span></span><br><span class="line">diff(S,<span class="string">'v'</span>,n)   <span class="comment">%S对v的n阶导</span></span><br></pre></td></tr></table></figure>
+
+<p>【例2-1】符号矩阵求导</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syms a x</span><br><span class="line">A = [<span class="built_in">cos</span>(a*x),<span class="built_in">sin</span>(a*x);-<span class="built_in">sin</span>(a*x),<span class="built_in">cos</span>(a*x)]</span><br><span class="line">diff(A)=</span><br><span class="line">[ -a*<span class="built_in">sin</span>(a*x), a*<span class="built_in">cos</span>(a*x)]</span><br><span class="line">[ -a*<span class="built_in">cos</span>(a*x), -a*<span class="built_in">sin</span>(a*x)]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、符号求极限"><a href="#2、符号求极限" class="headerlink" title="2、符号求极限"></a>2、符号求极限</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">limit(F,x,a)     <span class="comment">% x趋近于a时表达式F的极限</span></span><br><span class="line">limit(F,a)      <span class="comment">% F中自变量趋近于a时F的极限</span></span><br><span class="line">limit(F)       <span class="comment">% F中自变量趋近于0时F的极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'right'</span>)    <span class="comment">% x从右侧趋近于a时F极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'left'</span>)      <span class="comment">% 左侧</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、符号积分"><a href="#3、符号积分" class="headerlink" title="3、符号积分"></a>3、符号积分</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int（S）          <span class="comment">%求表达式s的不定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（S，v）       <span class="comment">%求表达式S对自变量v的不定积分。</span></span><br><span class="line">int（S，a，b）     <span class="comment">%求表达式s在区间［a，b］上的定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（s，v，a，b）   <span class="comment">%求表达式在区间［a，b］上的定积分，自变量为v</span></span><br></pre></td></tr></table></figure>
+
+<p>【例3-1】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syms x z ；</span><br><span class="line">A＝［<span class="built_in">exp</span>（x）,<span class="built_in">exp</span>（z*x）, <span class="built_in">sin</span> （z）， <span class="built_in">cos</span> （z）］创建符号矩阵表达式</span><br><span class="line">A = </span><br><span class="line">[ <span class="built_in">exp</span>（x）， <span class="built_in">exp</span>（x*z）］</span><br><span class="line">[<span class="built_in">sin</span>（ z），  <span class="built_in">cos</span> （z）］</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、级数求和"><a href="#4、级数求和" class="headerlink" title="4、级数求和"></a>4、级数求和</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">symsum(s)     <span class="comment">%计算s从0到k-1的和</span></span><br><span class="line">symsum(s,v)    <span class="comment">%计算表达式s从0到v-1的和</span></span><br><span class="line">symsum(s,a,b)    <span class="comment">%计算自变量从a到b之间s的和</span></span><br><span class="line">symsum(s,v,a,b)    <span class="comment">%计算v从a到b之间的s的和</span></span><br></pre></td></tr></table></figure>
+
+<p>【例4-1】级数求和</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">syms k n x</span><br><span class="line">symsum(<span class="number">1</span>/<span class="number">2</span>^k,<span class="number">1</span>,<span class="built_in">inf</span>)    <span class="comment">%求表达式1/2^k从1到无穷的和</span></span><br><span class="line">s2 = symsum(x^k,k,<span class="number">0</span>,<span class="built_in">inf</span>)    <span class="comment">%级数求和可以得出分段函数表达式</span></span><br><span class="line">s2 = piecewise([<span class="number">1</span> &lt;= x,Inf][<span class="built_in">abs</span>(x)&lt;<span class="number">1</span>,<span class="number">-1</span>/(x<span class="number">-1</span>)])</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、Taylor级数"><a href="#5、Taylor级数" class="headerlink" title="5、Taylor级数"></a>5、Taylor级数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">taylor(f)     <span class="comment">%返回f的5阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v)   <span class="comment">%计算f的关于符号变量v的n-1阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v,a)    <span class="comment">%根据指定变量v，阶数n，计算f在a的级数，a可以是数值、符号或字符串</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、符号表达式的化简与替换"><a href="#三、符号表达式的化简与替换" class="headerlink" title="三、符号表达式的化简与替换"></a>三、符号表达式的化简与替换</h2><h3 id="1、合并符号表达式同类项"><a href="#1、合并符号表达式同类项" class="headerlink" title="1、合并符号表达式同类项"></a>1、合并符号表达式同类项</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">R= collect(S)    <span class="comment">%按默认变量x的次数合并系数</span></span><br><span class="line">R= collect(S,v)   <span class="comment">%按指定变量v进行合并符号表达式同类项运算</span></span><br><span class="line"></span><br><span class="line">expand(S)         <span class="comment">%对符号表达式进行展开</span></span><br><span class="line"></span><br><span class="line">horner(f)          <span class="comment">%对符号表达式f进行horner分解，分解为嵌套形式的多项式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">factor</span>(f)         <span class="comment">%因式分解，n为正整数，返回值为n的质数分解式；n为多项式或整数矩阵，分解矩阵每一                          个1元素。若整数矩阵中一个元素位数超过16位，必须首先使用函数sym创建该元素</span></span><br><span class="line"></span><br><span class="line">simplify(S)       <span class="comment">%使用MuPAD化简规则对符号表达式矩阵每个元素化简</span></span><br><span class="line">simplify(S,n)      <span class="comment">%使用正整数n控制简化过程中尝试次数，默认为50</span></span><br><span class="line"></span><br><span class="line">r=simple(S)      <span class="comment">%以长度最短为目标对符号表达式简化</span></span><br><span class="line">[r,how]=simple(S)   <span class="comment">%r为简化后形式，how为简化方法</span></span><br><span class="line"></span><br><span class="line">pretty(B)     <span class="comment">%用习惯的书写方式显示符号表达式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、符号表达式的替换"><a href="#2、符号表达式的替换" class="headerlink" title="2、符号表达式的替换"></a>2、符号表达式的替换</h3><p>符号结果显冗长，子表达式出现多处可用新变量替换。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Y,SIGMA]=subexpr(X,SIGMA)      <span class="comment">%指定变量SIGMA的值替代符号表达式中重复出现字符串，Y为替换结果</span></span><br><span class="line">[Y,SIGMA]=subexpr(X,<span class="string">'SIGMA'</span>)    <span class="comment">%第二输入为字符或者字符串</span></span><br><span class="line"></span><br><span class="line">R=subs(S)         <span class="comment">%用工作空间中变量替换S中所有符号变量</span></span><br><span class="line">R=subs(S,new)      <span class="comment">%用新符号变量new替换S中默认变量</span></span><br><span class="line">R=subs(S,old,new)   <span class="comment">%用new替换old</span></span><br></pre></td></tr></table></figure>
+
+<p>【例2-1】替换</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subs(<span class="built_in">cos</span>(a)+<span class="built_in">sin</span>(b),&#123;a,b&#125;,&#123;sym(<span class="string">'alpha'</span>),<span class="number">2</span>&#125;)</span><br><span class="line"><span class="built_in">ans</span> = <span class="built_in">sin</span>(<span class="number">2</span>) + <span class="built_in">cos</span>(alpha)             <span class="comment">%多变量替换</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、符号可变精度计算"><a href="#四、符号可变精度计算" class="headerlink" title="四、符号可变精度计算"></a>四、符号可变精度计算</h2><p>数值计算受计算机字长限制，每次数值操作可能有截断误差，因此任何一次数值计算无论什么算法都可能产生累积误差。MATLAB的符号计算工具提供3个不同类型计算精度：</p>
+<p>数值类型：MATLAB浮点数计算</p>
+<p>有理数类型：MuPAD软件中精确符号计算</p>
+<p>VPA类型：MuPAD软件中任意精度计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">digits(D)   %设置数值精度位数D</span><br><span class="line">D&#x3D;digits     %返回当前数值精度</span><br><span class="line">R&#x3D;vpa(s)      %显示符号表达式s在当前精度下的值</span><br><span class="line">vpa(s,D)     %显示符号表达式s在精度D下的值</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、符号线性代数"><a href="#五、符号线性代数" class="headerlink" title="五、符号线性代数"></a>五、符号线性代数</h2><h3 id="1、基础代数运算"><a href="#1、基础代数运算" class="headerlink" title="1、基础代数运算"></a>1、基础代数运算</h3><h2 id="六、符号方程求解"><a href="#六、符号方程求解" class="headerlink" title="六、符号方程求解"></a>六、符号方程求解</h2><h3 id="1、求代数方程符号解"><a href="#1、求代数方程符号解" class="headerlink" title="1、求代数方程符号解"></a>1、求代数方程符号解</h3><p>代数方程包括线性，非线性和超越方程等，求解函数为solve。方程不存在符号解时，solve给出数值解。调用语法为：solve(S)—–求解S=0时符号变量的值。求解指定符号变量b可用：b = solve(S,b)</p>
+<p><code>s=solve(&#39;cos(2*x)+sin(x)=1&#39;)</code>求解f(x)=q(x)的方程</p>
+<h3 id="2、求代数方程组的符号解"><a href="#2、求代数方程组的符号解" class="headerlink" title="2、求代数方程组的符号解"></a>2、求代数方程组的符号解</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">syms x y alpha         <span class="comment">%创建必须的符号对象</span></span><br><span class="line">[x,y] = solve(x^<span class="number">2</span>*y^<span class="number">2</span>, x-y/<span class="number">2</span>-alpha)      <span class="comment">%解方程组</span></span><br><span class="line">esql = <span class="string">'x^2*y^2=1, x-y/2-alpha'</span>;   <span class="comment">%创建方程组</span></span><br><span class="line">[x,y] = solve(esql)</span><br><span class="line">S = solve(<span class="string">'u^2-v^2 = a^2'</span>,<span class="string">'u + v = 1'</span>,<span class="string">'a^2-2*a=3'</span>)</span><br><span class="line">S =                 <span class="comment">%返回一个结果的架构数组</span></span><br><span class="line">  包含以下字段的 struct:        <span class="comment">% S.a查看相应结果</span></span><br><span class="line">    a: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    u: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    v: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、求微分方程符号解"><a href="#3、求微分方程符号解" class="headerlink" title="3、求微分方程符号解"></a>3、求微分方程符号解</h3><p>函数dsolve可计算常微分方程的符号解。常微分方程由包含表达微分的字母D的符号表达式表示。符号D2,D3……DN分别对应第2，第3……第N阶导数。D2y等同于表达式d²y/dt²，默认自变量为t。</p>
+<p>符号变量的名字不能包含字母D</p>
+<p>初始条件由附加方程指定，若没有指定初始条件，结果将包括积分常数项C1、C2等</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r = dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)  <span class="comment">%eq...指定常微分方程，v代表自变量，cond...设置初始条件</span></span><br><span class="line">r = dsolve(<span class="string">'eq1'</span>,<span class="string">'eq2'</span>,...,<span class="string">'cond1'</span>,<span class="string">'cond2'</span>...,<span class="string">'v'</span>)</span><br><span class="line">dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>微分方程组类似方程组求解</p>
+<h2 id="七、符号积分变换"><a href="#七、符号积分变换" class="headerlink" title="七、符号积分变换"></a>七、符号积分变换</h2><h3 id="1、Fourier变换及其反变换"><a href="#1、Fourier变换及其反变换" class="headerlink" title="1、Fourier变换及其反变换"></a>1、Fourier变换及其反变换</h3><p>函数 f(x) 的傅里叶变换的定义式为：<br>$$<br>F<a href="w">f</a>=\int_{-\infty}^{\infty}{f(x)e^{-iwx}}dx<br>$$<br>傅里叶反变换的定义式为：<br>$$<br>F^{-1}<a href="x">f</a>=\frac{1}{2π}\int_{-\infty}^{\infty}{f(x)e^{iwx}}du<br>$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F = fourier(f,u,v)       <span class="comment">%时域函数f的傅里叶变换F，f以u为自变量的时域函数，F以频率v为自变量的频域函数</span></span><br><span class="line">f = ifourier(F,u,v)      <span class="comment">%傅里叶反函数</span></span><br></pre></td></tr></table></figure>
+
+<p>【例1-1】傅里叶变换</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syms x</span><br><span class="line">f = <span class="built_in">exp</span>(-x^<span class="number">2</span>);</span><br><span class="line">fourier(f) = <span class="built_in">pi</span>^(<span class="number">1</span>/<span class="number">2</span>)/<span class="built_in">exp</span>(w^<span class="number">2</span>/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、Laplace变换及其反变换"><a href="#2、Laplace变换及其反变换" class="headerlink" title="2、Laplace变换及其反变换"></a>2、Laplace变换及其反变换</h3><p>Laplace变换的定义式为<br>$$<br>L<a href="s">f</a>=\int_{0}^{\infty}{f(t)e^{-ts}}dt<br>$$<br>Laplace反变换的定义式为<br>$$<br>L^{-1}<a href="x">f</a>=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds<br>$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = laplace(F,w,z)        <span class="comment">%时域函数F的拉普拉斯变换L，F以w为自变量的时域函数，L以频率z为自变量的频域函数</span></span><br><span class="line">F = ilaplace(L,y,x)       <span class="comment">%拉普拉斯反函数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、Z变换"><a href="#3、Z变换" class="headerlink" title="3、Z变换"></a>3、Z变换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F &#x3D; ztrans(f,k,w)       %时域函数f的ztrans变换F，f以k为自变量的时域函数，F以频率w为自变量的频域函数</span><br><span class="line">f &#x3D; iztrans(F,w,k)       %Z反变换</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+        
+          <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的拜读（/dog）-------------</div>
+        
+     </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/30/python_note/" rel="next" title="python_note">
+                <i class="fa fa-chevron-left"></i> python_note
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/09/MATLAB%E7%BC%96%E7%A8%8B/" rel="prev" title="MATLAB编程">
+                MATLAB编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="tangxingfeng" />
+            
+              <p class="site-author-name" itemprop="name">tangxingfeng</p>
+              <p class="site-description motion-element" itemprop="description">学习杂记</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/true" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/the-outlier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://newmail.shu.edu.cn/" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.nature.com/" target="_blank" title="Nature">
+                    
+                      <i class="fa fa-fw fa-glasses"></i>Nature</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#符号计算"><span class="nav-number">1.</span> <span class="nav-text">符号计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、符号变量、表达式及符号方程"><span class="nav-number">1.1.</span> <span class="nav-text">一、符号变量、表达式及符号方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建符号变量与表达式"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、创建符号变量与表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-运算符和基本函数"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.运算符和基本函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、符号微积分"><span class="nav-number">1.2.</span> <span class="nav-text">二、符号微积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、符号求导与微分"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、符号求导与微分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、符号求极限"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、符号求极限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、符号积分"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、符号积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、级数求和"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、级数求和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Taylor级数"><span class="nav-number">1.2.5.</span> <span class="nav-text">5、Taylor级数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、符号表达式的化简与替换"><span class="nav-number">1.3.</span> <span class="nav-text">三、符号表达式的化简与替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、合并符号表达式同类项"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、合并符号表达式同类项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、符号表达式的替换"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、符号表达式的替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、符号可变精度计算"><span class="nav-number">1.4.</span> <span class="nav-text">四、符号可变精度计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、符号线性代数"><span class="nav-number">1.5.</span> <span class="nav-text">五、符号线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、基础代数运算"><span class="nav-number">1.5.1.</span> <span class="nav-text">1、基础代数运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、符号方程求解"><span class="nav-number">1.6.</span> <span class="nav-text">六、符号方程求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、求代数方程符号解"><span class="nav-number">1.6.1.</span> <span class="nav-text">1、求代数方程符号解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、求代数方程组的符号解"><span class="nav-number">1.6.2.</span> <span class="nav-text">2、求代数方程组的符号解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、求微分方程符号解"><span class="nav-number">1.6.3.</span> <span class="nav-text">3、求微分方程符号解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、符号积分变换"><span class="nav-number">1.7.</span> <span class="nav-text">七、符号积分变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Fourier变换及其反变换"><span class="nav-number">1.7.1.</span> <span class="nav-text">1、Fourier变换及其反变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Laplace变换及其反变换"><span class="nav-number">1.7.2.</span> <span class="nav-text">2、Laplace变换及其反变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Z变换"><span class="nav-number">1.7.3.</span> <span class="nav-text">3、Z变换</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+	  
+	   <div id="music163player">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1384026889&auto=1&height=66"></iframe>
+       </div>
+	   
+	  <div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tangxingfeng</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共15.4k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":230,"height":460},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
