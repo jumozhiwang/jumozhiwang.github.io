@@ -366,7 +366,7 @@
 <p>不能接受输入参数，也不返回输出结果</p>
 <p>将变量保存在基本(Base)工作空间，这是多个脚本和命令窗口建立的变量的共享空间。</p>
 <p>MTALAB函数(MATLAB functions)：</p>
-<p>有函数定义语句—-function，主要用来写应用程序</p>
+<p>有函数定义语句——function，主要用来写应用程序</p>
 <p>能够接受输入参数，也能返回输出结果</p>
 <p>有自己单独的工作空间，变量保存于此</p>
 <h3 id="1-1、M文件编辑器"><a href="#1-1、M文件编辑器" class="headerlink" title="1-1、M文件编辑器"></a>1-1、M文件编辑器</h3><p>M文件不仅可以用来编辑M文件，还可对M文件进行交互性调试。而且，M文件编辑器还可用于阅读和编辑其他ASCII码文件。打开M文件编辑器：</p>
@@ -374,7 +374,6 @@
 <p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
 <p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
 <p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
 <p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
@@ -389,11 +388,10 @@
 <p><code>switch···case···end</code></p>
 <p>3、for循环（嵌套）</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
 <p>4、while循环</p>
 <p><code>while 表达式    执行语句      end</code></p>
-<p>5、continue命令—–break命令</p>
-<p>跳过进行下一次循环——-根据终止条件跳出循环</p>
+<p>5、continue命令——-break命令</p>
+<p>跳过进行下一次循环———-根据终止条件跳出循环</p>
 <p>6、return命令</p>
 <p>使得当前调用的函数正常退出   <code>return</code></p>
 <h3 id="2-2、人机交互命令"><a href="#2-2、人机交互命令" class="headerlink" title="2-2、人机交互命令"></a>2-2、人机交互命令</h3><p>1、输入提示命令input</p>
@@ -403,11 +401,9 @@
 <p>3、pause命令</p>
 <p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure>
-
 <p>4、echo语句</p>
 <p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
 
       
@@ -935,7 +931,7 @@ if(canvas.getContext){
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">18.9k</span>
+    <span title="Site words total count">16.5k</span>
   
 </div>
 
@@ -961,7 +957,7 @@ if(canvas.getContext){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共18.9k字</span>
+  <span class="post-count">博客全站共16.5k字</span>
 </div>
 
         
@@ -1112,6 +1108,8 @@ if(canvas.getContext){
   
 
   
+  
+
 
   
 
