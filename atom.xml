@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-03-22T09:22:00.816Z</updated>
+  <updated>2022-03-22T15:08:04.728Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DAYS</title>
+    <link href="http://yoursite.com/2022/03/22/DAYS/"/>
+    <id>http://yoursite.com/2022/03/22/DAYS/</id>
+    <published>2022-03-22T15:07:14.000Z</published>
+    <updated>2022-03-22T15:08:04.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>test</p><p>！！！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;test&lt;/p&gt;
+&lt;p&gt;！！！&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>宇宙学</title>
