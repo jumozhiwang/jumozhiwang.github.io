@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-03-22T15:08:04.728Z</updated>
+  <updated>2022-03-22T15:09:45.654Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2022/03/22/DAYS/"/>
     <id>http://yoursite.com/2022/03/22/DAYS/</id>
     <published>2022-03-22T15:07:14.000Z</published>
-    <updated>2022-03-22T15:08:04.728Z</updated>
+    <updated>2022-03-22T15:09:45.654Z</updated>
     
     <content type="html"><![CDATA[<p>test</p><p>！！！</p>]]></content>
     
@@ -35,6 +35,8 @@
     
     
     
+    
+    <category term="diary" scheme="http://yoursite.com/tags/diary/"/>
     
   </entry>
   
