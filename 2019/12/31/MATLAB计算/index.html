@@ -94,15 +94,15 @@
 <meta property="og:url" content="http://yoursite.com/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/index.html">
 <meta property="og:site_name" content="LSP&#39;s Home">
 <meta property="og:description" content="MATLAB计算关于matlab的数值计算以及符号计算问题。">
-<meta property="og:image" content="http://yoursite.com/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/20161207224852700.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/disburition.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/9-1578887741457.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/20161207224852700.png">
+<meta property="og:image" content="http://yoursite.com/assets/disburition.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/9-1578887741457.jpg">
 <meta property="article:published_time" content="2019-12-31T04:43:17.000Z">
-<meta property="article:modified_time" content="2021-04-25T06:55:59.763Z">
+<meta property="article:modified_time" content="2022-03-22T09:02:22.849Z">
 <meta property="article:author" content="tangxingfeng">
 <meta property="article:tag" content="MATLAB计算">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/20161207224852700.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/20161207224852700.png">
 
 
 
@@ -454,10 +454,10 @@
 <td align="center">trnd</td>
 </tr>
 </tbody></table>
-<p>​                                                        .<img src="/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/20161207224852700.png" alt="img"></p>
+<p>​                                                        .<img src="/assets/20161207224852700.png" alt="img"></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">100</span>;p=<span class="number">0.2</span>;k=<span class="number">0</span>:N;</span><br><span class="line">pk=binopdf(k,N,p);</span><br><span class="line">ck=binocdf(k,N,p);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);h=plotyy(k,pk,k,ck);</span><br><span class="line">text(<span class="number">55</span>,<span class="number">0.07</span>,<span class="string">'p=0.2'</span>);title(<span class="string">'二项分布'</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">20</span>;y1=poisspdf(x,<span class="number">2.5</span>);y2=poisspdf(x,<span class="number">5</span>);y3=poisspdf(x,<span class="number">10</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="built_in">plot</span>(x,y1,<span class="string">'r*'</span>,x,y2,<span class="string">'b-'</span>,x,y3,<span class="string">'g&lt;'</span>);</span><br><span class="line">title(<span class="string">'Poisson分布'</span>);</span><br><span class="line"></span><br><span class="line">x3=<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>;n=normpdf(x3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="built_in">plot</span>(x3,n);grid;</span><br><span class="line">title(<span class="string">'标准正态分布'</span>);</span><br><span class="line"></span><br><span class="line">x4=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">30</span>;</span><br><span class="line">z=chi2pdf(x4,<span class="number">1</span>);</span><br><span class="line">z1=chi2pdf(x4,<span class="number">4</span>);</span><br><span class="line">z2=chi2pdf(x4,<span class="number">10</span>);</span><br><span class="line">z3=chi2pdf(x4,<span class="number">20</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);<span class="built_in">plot</span>(x4,z,<span class="string">'r-'</span>,x4,z1,<span class="string">'-.b'</span>,x4,z2,<span class="string">':k'</span>,x4,z3,<span class="string">'--g'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'自由度为1'</span>,<span class="string">'自由度为4'</span>,<span class="string">'自由度为10'</span>,<span class="string">'自由度为20'</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0.2</span>]);title(<span class="string">'卡方分布'</span>);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/disburition.jpg" alt="disburition"></p>
+<p><img src="/assets/disburition.jpg" alt="disburition"></p>
 <h2 id="三、数值求导与积分"><a href="#三、数值求导与积分" class="headerlink" title="三、数值求导与积分"></a>三、数值求导与积分</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Y=diff(X)              <span class="comment">%X相邻元素间一阶差分</span></span><br><span class="line">FX=gradient(F)         <span class="comment">%向量F的一维数值梯度</span></span><br><span class="line">[FX,FY]=gradient(F)     <span class="comment">%矩阵F的二维梯度x和y部分</span></span><br><span class="line"></span><br><span class="line">q=quad(fun,,a,b)          <span class="comment">%函数fun在a到b区间数值积分----Simpson方法，，精度高</span></span><br><span class="line">q=quadl(fun,,a,b)         <span class="comment">%函数fun在a到b区间数值积分----Lobatto方法，，精度较高</span></span><br><span class="line">T=trapz(y)                <span class="comment">%计算向量或者矩阵每列的积分----梯形法，，速度快，精度差</span></span><br><span class="line">Z=cumtrapz(X,Y)           <span class="comment">%求Y对X的积分             ----梯形法</span></span><br><span class="line"></span><br><span class="line">q=dblquad(fun,xmin,xmax,ymin,ymax)        <span class="comment">%二重积分</span></span><br><span class="line">q=triplequad(fun,xmin,xmax,ymin,ymax,zmin,zmax)     <span class="comment">%三重积分</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="四、插值"><a href="#四、插值" class="headerlink" title="四、插值"></a>四、插值</h2><p>插值指在已知数据之间计算估计值的过程。<br>一维数据插值常用函数interp1，一般的语法格式为：</p>
@@ -471,7 +471,7 @@
 <p>e.g.</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">strmod=&#123;<span class="string">'nearest'</span>,<span class="string">'linear'</span>,<span class="string">'spline'</span>,<span class="string">'cubic'</span>&#125;;</span><br><span class="line">strlb=&#123;<span class="string">'(a)method=nearest'</span>,<span class="string">'(b)method=linear'</span>,<span class="string">'(c)method=spline'</span>,<span class="string">'(d)method=cubic'</span>&#125;;</span><br><span class="line">x1=<span class="number">1</span>:<span class="number">10</span>;y1=<span class="built_in">cos</span>(x1);xi1=<span class="number">0</span>:<span class="number">0.25</span>:<span class="number">10</span>;</span><br><span class="line">[x2,y2,z2]=peaks(<span class="number">6</span>);</span><br><span class="line">[xi2,yi2]=<span class="built_in">meshgrid</span>(<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>);</span><br><span class="line">[x3,y3,z3,v3]=flow(<span class="number">8</span>);</span><br><span class="line">[xi3,yi3,zi3]=<span class="built_in">meshgrid</span>(<span class="number">0.1</span>:<span class="number">0.25</span>:<span class="number">10</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">yi1=interp1(x1,y1,xi1,strmod&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">i</span>)</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">'ro'</span>,xi1,yi1,<span class="string">'b'</span>),xlabel(strlb(<span class="built_in">i</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);mesh(x2,y2,z2);title(<span class="string">'原始数据'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">8</span></span><br><span class="line">zi2=interp2(x2,y2,x2,xi2,yi2,strmod&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">j</span>);mesh(xi2,yi2,zi2);title(strlb&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>);slice(x3,y3,z3,v3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);title(<span class="string">'插值前'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">10</span>:<span class="number">12</span></span><br><span class="line">vi3=interp3(x3,y3,z3,v3,xi3,yi3,zi3,strmod&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,k);slice(xi3,yi3,zi3,vi3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);xlabel(strlb&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/assets/9-1578887741457.jpg" alt="9"></p>
+<p><img src="/assets/9-1578887741457.jpg" alt="9"></p>
 <h2 id="五、曲线拟合"><a href="#五、曲线拟合" class="headerlink" title="五、曲线拟合"></a>五、曲线拟合</h2><p>​       曲线拟合用于求与一组数据最吻合的函数，用polyfit函数实现，该函数采用最小二乘法计算，使拟合函数多项式在各数据点处偏差的平方之和达最小。调用格式如下：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=polyfit(x,y,n)         <span class="comment">% P(1)*X^N + P(2)*X^(N-1) +...+ P(N)*X + P(N+1)即为该函数</span></span><br><span class="line">[p,s]=polyfit(x,y,n)     <span class="comment">% s为拟合多项式有关误差估计的结构数组</span></span><br><span class="line">p=polyfit(x,<span class="built_in">log10</span>(y),<span class="number">1</span>)  <span class="comment">% y=b(10)^mx指数函数拟合，w=log10y,z=x--w=p1z+p2</span></span><br></pre></td></tr></table></figure>
 
@@ -638,7 +638,7 @@ var jiathis_config={
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1017,7 +1017,7 @@ if(canvas.getContext){
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">20.4k</span>
+    <span title="Site words total count">18.9k</span>
   
 </div>
 
@@ -1043,7 +1043,7 @@ if(canvas.getContext){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共20.4k字</span>
+  <span class="post-count">博客全站共18.9k字</span>
 </div>
 
         
