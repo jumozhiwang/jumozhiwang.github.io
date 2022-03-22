@@ -121,7 +121,7 @@ P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为n
 <p>双曲型问题：hyperbolic()函数</p>
 ]]></content>
       <tags>
-        <tag>MATLAB计算</tag>
+        <tag>MATLAB</tag>
       </tags>
   </entry>
   <entry>
@@ -809,7 +809,7 @@ y=2e^{-0.5x}</script><figure class="highlight matlab"><table><tr><td class="code
 <p>矩阵行求和：sum(a’)’</p>
 ]]></content>
       <tags>
-        <tag>绘图</tag>
+        <tag>MATLAB</tag>
       </tags>
   </entry>
 </search>
