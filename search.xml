@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>DAYS</title>
-    <url>/2022/03/22/DAYS/</url>
-    <content><![CDATA[<p>test</p>
-<p>！！！</p>
-]]></content>
-      <tags>
-        <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MATLAB的GUI程序设计</title>
     <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
@@ -228,6 +218,16 @@
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DAYS</title>
+    <url>/2022/03/22/DAYS/</url>
+    <content><![CDATA[<p>test</p>
+<p>！！！</p>
+]]></content>
+      <tags>
+        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
@@ -512,125 +512,6 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><d
       </tags>
   </entry>
   <entry>
-    <title>Matlab绘图</title>
-    <url>/2019/12/28/Matlab%E7%BB%98%E5%9B%BE/</url>
-    <content><![CDATA[<hr>
-<h1 id="图形"><a href="#图形" class="headerlink" title="图形"></a>图形</h1><h2 id="图线色彩和线型"><a href="#图线色彩和线型" class="headerlink" title="图线色彩和线型"></a>图线色彩和线型</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">选项</th>
-<th style="text-align:center">线型</th>
-<th style="text-align:center">选项</th>
-<th style="text-align:center">线型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">b</td>
-<td style="text-align:center">蓝色</td>
-<td style="text-align:center">m</td>
-<td style="text-align:center">品红色</td>
-</tr>
-<tr>
-<td style="text-align:center">g</td>
-<td style="text-align:center">绿色</td>
-<td style="text-align:center">y</td>
-<td style="text-align:center">黄色</td>
-</tr>
-<tr>
-<td style="text-align:center">r</td>
-<td style="text-align:center">红色</td>
-<td style="text-align:center">k</td>
-<td style="text-align:center">黑色</td>
-</tr>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:center">青色</td>
-<td style="text-align:center">w</td>
-<td style="text-align:center">白色</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">点</td>
-<td style="text-align:center">V</td>
-<td style="text-align:center">朝下三角符号</td>
-</tr>
-<tr>
-<td style="text-align:center">O</td>
-<td style="text-align:center">圆圈</td>
-<td style="text-align:center">^</td>
-<td style="text-align:center">朝上三角符号</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">叉号</td>
-<td style="text-align:center">&lt;</td>
-<td style="text-align:center">朝左三角符号</td>
-</tr>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">加号</td>
-<td style="text-align:center">&gt;</td>
-<td style="text-align:center">朝右三角符号</td>
-</tr>
-<tr>
-<td style="text-align:center">X</td>
-<td style="text-align:center">星号</td>
-<td style="text-align:center">p(pentagram)</td>
-<td style="text-align:center">五角星符</td>
-</tr>
-<tr>
-<td style="text-align:center">s(square)</td>
-<td style="text-align:center">方块形</td>
-<td style="text-align:center">h(hexagram)</td>
-<td style="text-align:center">六角形符</td>
-</tr>
-<tr>
-<td style="text-align:center">d(diamond)</td>
-<td style="text-align:center">菱形符</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>e.g.</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=(<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,<span class="built_in">sin</span>(x),<span class="string">'cp'</span>,x,<span class="built_in">cos</span>(x),<span class="string">'g*'</span>)</span><br></pre></td></tr></table></figure></div>
-<h2 id="二维统计分析图"><a href="#二维统计分析图" class="headerlink" title="二维统计分析图"></a>二维统计分析图<img src="/assets/1.jpg" alt="1"></h2><h3 id="条形图，填充图，阶梯图，杆图"><a href="#条形图，填充图，阶梯图，杆图" class="headerlink" title="条形图，填充图，阶梯图，杆图"></a>条形图，填充图，阶梯图，杆图</h3><p>e.g.</p>
-<script type="math/tex; mode=display">
-y=2e^{-0.5x}</script><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="number">0.35</span>:<span class="number">7</span>; </span><br><span class="line">y=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);bar(x,y,<span class="string">'r'</span>);</span><br><span class="line">title(<span class="string">'bar(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); fill(x,y,<span class="string">'b'</span>);</span><br><span class="line">title(<span class="string">'fill(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); stairs(x,y,<span class="string">'c'</span>);</span><br><span class="line">title(<span class="string">'stairs(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);stem(x,y,<span class="string">'m'</span>);</span><br><span class="line">title(<span class="string">'stem(x,y)'</span>)</span><br></pre></td></tr></table></figure></div>
-<h3 id="散点图—scarrer"><a href="#散点图—scarrer" class="headerlink" title="散点图—scarrer()"></a>散点图—scarrer()<img src="/assets/2.jpg" alt="2"></h3><p>scarrer(x,y)</p>
-<p>scarrer(x,y,s,c)</p>
-<p>scarrer(x,y,s)</p>
-<h3 id="误差图—errorbar"><a href="#误差图—errorbar" class="headerlink" title="误差图—errorbar()"></a>误差图—errorbar()</h3><p>errorbar(y,e)</p>
-<p>errorbar(x,y,e)</p>
-<h3 id="面积图—area"><a href="#面积图—area" class="headerlink" title="面积图—area()"></a>面积图—area()</h3><p>area(y)</p>
-<p>area(x,y)</p>
-<h3 id="复数图—plot"><a href="#复数图—plot" class="headerlink" title="复数图—plot()"></a>复数图—plot()</h3><p>plot(z)</p>
-<p>e.g.</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">load seamount</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>),<span class="built_in">scatter</span>(x,y,<span class="number">5</span>,z)</span><br><span class="line">x2=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">30</span>);</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">e=std(y)*<span class="built_in">ones</span>(<span class="built_in">size</span>(x));</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>),errorbar(x,y,e)</span><br><span class="line">y=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>;<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>;<span class="number">5</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">14</span>;<span class="number">8</span>,<span class="number">11</span>,<span class="number">20</span>,<span class="number">20</span>];</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>),area(y)</span><br><span class="line">grid on</span><br><span class="line">set(gca,<span class="string">'layer'</span>,<span class="string">'top'</span>)    <span class="comment">%背景透明</span></span><br><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">z=a+b*<span class="built_in">i</span>;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>),<span class="built_in">plot</span>(z)</span><br></pre></td></tr></table></figure></div>
-<h1 id=""><a href="#" class="headerlink" title=""></a><img src="/assets/3.jpg" alt="3"></h1><p> imread函数用于将图像文件读入MATLAB空间，inwrite函数用于将图像数据和色图数据写入图像文件。调用格式：</p>
-<p>A=imread(fnme)                  %fname为图像文件名</p>
-<p>imwrite(A,fname,fmt)        %fmt为图像文件格式</p>
-<p>image和imagesc函数用于图像显示，还用colormap函数设置图像色图。</p>
-<p>e.g.</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[x,cmap]=imread(<span class="string">'E:\scenery.jpg'</span>);</span><br><span class="line">image(x);colormap(cmap);</span><br><span class="line">axis image off</span><br></pre></td></tr></table></figure></div>
-<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>fix, round, ceil, floor区别</p>
-<p>histogram:统计出现次数</p>
-<p>按列优先</p>
-<p>矩阵行求和：sum(a’)’</p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MATLAB编程</title>
     <url>/2022/02/12/MATLAB%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="MATLAB编程"><a href="#MATLAB编程" class="headerlink" title="MATLAB编程"></a>MATLAB编程</h1><h2 id="一、M文件"><a href="#一、M文件" class="headerlink" title="一、M文件"></a>一、M文件</h2><p>M文件是将处理问题的各种命令融合到一个文件中，该文件以.m为拓展名，然后由MAYLAB系统编译，得出相应的运行结果。M文件有脚本文件和函数文件两种。脚本文件不需要输入参数和输出参数，按照文件中指定的顺序执行命令序列。而函数文件则接受其他数据为输入参数，且可返回数据。</p>
@@ -802,6 +683,125 @@ P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为n
 <p>椭圆形问题：assempde()函数</p>
 <p>抛物型问题：parabolic()函数</p>
 <p>双曲型问题：hyperbolic()函数</p>
+]]></content>
+      <tags>
+        <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Matlab绘图</title>
+    <url>/2019/12/28/Matlab%E7%BB%98%E5%9B%BE/</url>
+    <content><![CDATA[<hr>
+<h1 id="图形"><a href="#图形" class="headerlink" title="图形"></a>图形</h1><h2 id="图线色彩和线型"><a href="#图线色彩和线型" class="headerlink" title="图线色彩和线型"></a>图线色彩和线型</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">线型</th>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">线型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">蓝色</td>
+<td style="text-align:center">m</td>
+<td style="text-align:center">品红色</td>
+</tr>
+<tr>
+<td style="text-align:center">g</td>
+<td style="text-align:center">绿色</td>
+<td style="text-align:center">y</td>
+<td style="text-align:center">黄色</td>
+</tr>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">红色</td>
+<td style="text-align:center">k</td>
+<td style="text-align:center">黑色</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">青色</td>
+<td style="text-align:center">w</td>
+<td style="text-align:center">白色</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">点</td>
+<td style="text-align:center">V</td>
+<td style="text-align:center">朝下三角符号</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td style="text-align:center">圆圈</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center">朝上三角符号</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">叉号</td>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">朝左三角符号</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">加号</td>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">朝右三角符号</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">星号</td>
+<td style="text-align:center">p(pentagram)</td>
+<td style="text-align:center">五角星符</td>
+</tr>
+<tr>
+<td style="text-align:center">s(square)</td>
+<td style="text-align:center">方块形</td>
+<td style="text-align:center">h(hexagram)</td>
+<td style="text-align:center">六角形符</td>
+</tr>
+<tr>
+<td style="text-align:center">d(diamond)</td>
+<td style="text-align:center">菱形符</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>e.g.</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=(<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,<span class="built_in">sin</span>(x),<span class="string">'cp'</span>,x,<span class="built_in">cos</span>(x),<span class="string">'g*'</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="二维统计分析图"><a href="#二维统计分析图" class="headerlink" title="二维统计分析图"></a>二维统计分析图<img src="/assets/1.jpg" alt="1"></h2><h3 id="条形图，填充图，阶梯图，杆图"><a href="#条形图，填充图，阶梯图，杆图" class="headerlink" title="条形图，填充图，阶梯图，杆图"></a>条形图，填充图，阶梯图，杆图</h3><p>e.g.</p>
+<script type="math/tex; mode=display">
+y=2e^{-0.5x}</script><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="number">0.35</span>:<span class="number">7</span>; </span><br><span class="line">y=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);bar(x,y,<span class="string">'r'</span>);</span><br><span class="line">title(<span class="string">'bar(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); fill(x,y,<span class="string">'b'</span>);</span><br><span class="line">title(<span class="string">'fill(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); stairs(x,y,<span class="string">'c'</span>);</span><br><span class="line">title(<span class="string">'stairs(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);stem(x,y,<span class="string">'m'</span>);</span><br><span class="line">title(<span class="string">'stem(x,y)'</span>)</span><br></pre></td></tr></table></figure></div>
+<h3 id="散点图—scarrer"><a href="#散点图—scarrer" class="headerlink" title="散点图—scarrer()"></a>散点图—scarrer()<img src="/assets/2.jpg" alt="2"></h3><p>scarrer(x,y)</p>
+<p>scarrer(x,y,s,c)</p>
+<p>scarrer(x,y,s)</p>
+<h3 id="误差图—errorbar"><a href="#误差图—errorbar" class="headerlink" title="误差图—errorbar()"></a>误差图—errorbar()</h3><p>errorbar(y,e)</p>
+<p>errorbar(x,y,e)</p>
+<h3 id="面积图—area"><a href="#面积图—area" class="headerlink" title="面积图—area()"></a>面积图—area()</h3><p>area(y)</p>
+<p>area(x,y)</p>
+<h3 id="复数图—plot"><a href="#复数图—plot" class="headerlink" title="复数图—plot()"></a>复数图—plot()</h3><p>plot(z)</p>
+<p>e.g.</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">load seamount</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>),<span class="built_in">scatter</span>(x,y,<span class="number">5</span>,z)</span><br><span class="line">x2=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">30</span>);</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">e=std(y)*<span class="built_in">ones</span>(<span class="built_in">size</span>(x));</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>),errorbar(x,y,e)</span><br><span class="line">y=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>;<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>;<span class="number">5</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">14</span>;<span class="number">8</span>,<span class="number">11</span>,<span class="number">20</span>,<span class="number">20</span>];</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>),area(y)</span><br><span class="line">grid on</span><br><span class="line">set(gca,<span class="string">'layer'</span>,<span class="string">'top'</span>)    <span class="comment">%背景透明</span></span><br><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">z=a+b*<span class="built_in">i</span>;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>),<span class="built_in">plot</span>(z)</span><br></pre></td></tr></table></figure></div>
+<h1 id=""><a href="#" class="headerlink" title=""></a><img src="/assets/3.jpg" alt="3"></h1><p> imread函数用于将图像文件读入MATLAB空间，inwrite函数用于将图像数据和色图数据写入图像文件。调用格式：</p>
+<p>A=imread(fnme)                  %fname为图像文件名</p>
+<p>imwrite(A,fname,fmt)        %fmt为图像文件格式</p>
+<p>image和imagesc函数用于图像显示，还用colormap函数设置图像色图。</p>
+<p>e.g.</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[x,cmap]=imread(<span class="string">'E:\scenery.jpg'</span>);</span><br><span class="line">image(x);colormap(cmap);</span><br><span class="line">axis image off</span><br></pre></td></tr></table></figure></div>
+<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>fix, round, ceil, floor区别</p>
+<p>histogram:统计出现次数</p>
+<p>按列优先</p>
+<p>矩阵行求和：sum(a’)’</p>
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
