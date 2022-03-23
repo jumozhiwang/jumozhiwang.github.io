@@ -11,6 +11,226 @@
       </tags>
   </entry>
   <entry>
+    <title>MATLAB的GUI程序设计</title>
+    <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
+<a id="more"></a>
+<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1. 基本知识"></a>1. 基本知识</h2><h3 id="1-1-三个基本元素"><a href="#1-1-三个基本元素" class="headerlink" title="1.1. 三个基本元素"></a>1.1. 三个基本元素</h3><p>​       1.组件： 在 MATLAB GUI 中的每一个项目(按钮，标签，编辑框等)都是一个图形化组件组件。可分为三类： 图形化控件(按钮，编辑框，列表，滑动条等)， 静态元素(窗口和文本字符串)， 菜单和坐标系。图形化控件和静态元素由函数 uicontrol 创建，菜单由函数 uimenu和 uicontextmenu 创建，坐标系经常用于显示图形化数据，由函数 axes 创建。<br>​        2.图象窗口： GUI 的每一个组件都必须安排图象窗口中。以前，我们在画数据图象时，图象窗口会被自动创建。但我们还可以用函数 figure 来创建空图象窗口，空图象窗口经常用于放置各种类型的组件。<br>​        3.响应： 最后，如果用户用鼠标单击或用键盘键入一些信息，那么程序就要有相应的动作。鼠标单击或键入信息是一个事件，如果MATLAB程序运行相应的函数，那么MATLAB函数肯定会有所反应。例如，如果用户单击一按钮，这个事件必然导致相应的 MATLAB 语执行。这些相应的语句被称为响应。只要执行 GUI 的单个图形组件，必须有一个响应。</p>
+<h3 id="1-2-启动GUI开发环境"><a href="#1-2-启动GUI开发环境" class="headerlink" title="1.2. 启动GUI开发环境"></a>1.2. 启动GUI开发环境</h3><p>1）启动操作界面—-输入 “guide”</p>
+<p>2） 新建GUI对话框—提供四个功能板块</p>
+<p>~~Blank GUI(Default):空白的GUI，不含任何控件</p>
+<p>~~GUI with Uicontrols:带用户控件（Uicontrols）的用户界面</p>
+<p>~~GUI with Axes and Menu:带坐标轴和菜单的控件</p>
+<p>~~Modal Qusetion Dialog:带询问对话框的用户界面</p>
+<p>3）得到如图所示界面：Layout编辑器</p>
+<p><img src="/assets/4.PNG" alt="4"></p>
+<p>4）运行GUI—绿色按钮<img src="/assets/image-20191229204859741.png" alt="image-20191229204859741">或快捷键Ctrl+T</p>
+<h3 id="1-3-句柄命令"><a href="#1-3-句柄命令" class="headerlink" title="1.3 句柄命令"></a>1.3 句柄命令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能描述</th>
+<th>函数名</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gca</td>
+<td>获得当前坐标轴对象的句柄</td>
+<td>copyobj</td>
+<td>复制对象</td>
+</tr>
+<tr>
+<td>gcbf</td>
+<td>获得当前正在执行调用的图形对象的句柄</td>
+<td>delete</td>
+<td>删除对象</td>
+</tr>
+<tr>
+<td>gcbo</td>
+<td>获得当前正在执行调用的对象句柄</td>
+<td>findall</td>
+<td>查找所有对象（包括隐藏句柄）</td>
+</tr>
+<tr>
+<td>gcf</td>
+<td>获得当前图形对象的句柄</td>
+<td>findobj</td>
+<td>查找指定句柄</td>
+</tr>
+<tr>
+<td>gco</td>
+<td>获得当前对象的句柄</td>
+<td>get</td>
+<td>查询对象属性值</td>
+</tr>
+<tr>
+<td>allchild</td>
+<td>获得所有子代</td>
+<td>ishandle</td>
+<td>判断是否为句柄</td>
+</tr>
+<tr>
+<td>ancestor</td>
+<td>获得父图形对象</td>
+<td>set</td>
+<td>设置对象属性值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1-4-菜单属性"><a href="#1-4-菜单属性" class="headerlink" title="1.4 菜单属性"></a>1.4 菜单属性</h3><p>创建菜单对象时可使用 uimenu 函数定义属性， set 函数改变属性。下表是MATLAB中菜单属性及属性值，带*的属性是非文件式的，使用需加小心。括号{}内属性值为默认值。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Accelerator</th>
+<th>指定菜单项等价的按键或快捷键，按键顺序：Control—字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BackgroundColor</td>
+<td>uimenu背景色，是一个3元素的RGB向量或MATLAB预先定义的颜色名称。默认的背景色是亮灰色</td>
+</tr>
+<tr>
+<td>Callback</td>
+<td>MATLAB回调字符串。选择菜单项时，回调串传给函数eval，初始值为空矩阵</td>
+</tr>
+<tr>
+<td>Checked</td>
+<td>被选项的校验标记 —- on:校验标记出现在所选项的旁边      {off}:校验标记不显示</td>
+</tr>
+<tr>
+<td>Enable</td>
+<td>菜单使能状态—-{on}:菜单项使能,选择菜单项能将 Callback字符串传给eval；菜单项不使能，菜单标志变灰，选择菜单项            off:不起任何作用</td>
+</tr>
+<tr>
+<td>ForegroundColor</td>
+<td>uimenu前景（文本）色，是一个三元素的RGB向量或 MATLAB预先定义的颜色名称。默认的前景色是黑色</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>含有菜单项标志的文本串。在PC系统中，标记中前面有＆，定义了快捷键，它由Alt - 字符激活</td>
+</tr>
+<tr>
+<td>Position</td>
+<td>Uimenu对象的相对位置。顶层菜单从左到右编号，子菜单从上至下编号</td>
+</tr>
+<tr>
+<td>Separator</td>
+<td>分割符一线模式—-on:分割线在菜单项之上              {off}:不画分割线</td>
+</tr>
+<tr>
+<td>*Visible</td>
+<td>uimenu对象的可视性—-{on}: uimenu对象在屏幕上可见            off: uimenu对象不可见</td>
+</tr>
+<tr>
+<td>ButtonDownFar</td>
+<td>当对象被选择时， MATLAB的回调传给函数eval。初始值为空矩阵</td>
+</tr>
+<tr>
+<td>Clipping</td>
+<td>其他 uimenu对象的句柄</td>
+</tr>
+<tr>
+<td>Interrruptible</td>
+<td>指明ButtonDownFcn和CallBack串是否可中断—-{on}:不可中断      off:可中断</td>
+</tr>
+<tr>
+<td>Parent</td>
+<td>父对象的句柄。若uimenue对象是顶层菜单，则为图形对象；若是子菜单，则为父的uimenu对象句柄</td>
+</tr>
+<tr>
+<td>*Select</td>
+<td>值为[on丨off]</td>
+</tr>
+<tr>
+<td>*Tag</td>
+<td>用户用于标识对象的文本串</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>只读对象辨识符，通常为uimenu</td>
+</tr>
+<tr>
+<td>UserDate</td>
+<td>用户指定的数据，矩阵、字符串等</td>
+</tr>
+<tr>
+<td>Visiable</td>
+<td>控制对象在屏幕上是否可见—-{on} ， off</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-控件"><a href="#2-控件" class="headerlink" title="2. 控件"></a>2. 控件</h2><h3 id="2-1-可选控件"><a href="#2-1-可选控件" class="headerlink" title="2.1 可选控件"></a>2.1 可选控件</h3><p>1）复选框(Check Box)：单个复选框用于在两种状态间切换，多可复选框组成的单选框组，在一组状态中做组合式选择。未选中，Value属性值为0，选中时为1；Style属性值为checkbox</p>
+<p>2）可编辑文本框(Editable text)：输入、修改文本，单行或多行模式。Style属性值为edit</p>
+<p>3）列表框(Lists boxes)：定义可供选择的字符串。Sytle属性值为listbax</p>
+<p>4）下拉列表(Pop-up menus)：显示属性值。Sytle属性值是popupmenu</p>
+<p>5）命令按钮(Push buttons)：执行预定功能或操作。Sytle属性值为pushbutton</p>
+<p>6）单选按钮(Radio buttons)：与复选框相似，进行功能互斥的选择。Sytle属性值为radiobutton</p>
+<p>7）滚动条(Sliders)：可输入指定范围的数量值。Sytle属性值为slideers</p>
+<p>8）静态文本框(Static text)：显示别的控件有关信息，不可改变内容。Sytle属性是text</p>
+<p>9）开关按钮(Toggle Button)：与命令按钮类似，不会弹起。</p>
+<p>10）坐标轴(Axes)：显示图形和图像。</p>
+<h3 id="2-2-控件属性"><a href="#2-2-控件属性" class="headerlink" title="2.2 控件属性"></a>2.2 控件属性</h3><p>可在布局窗口双击控件查看或修改属性，常规属性如下(MATLAB入门到精通P243)</p>
+<p>1）：控件风格和外观属性：BackgroundColor     CData      ForefroundColor    String    Properties</p>
+<p>2）：对象常规信息属性：Enable  Sytle  Tag  TooltipString  UserData   Position   Units   FontAngle   FontName</p>
+<p>3）：控件当前状态属性：ListboxTop    Max    Min     Value</p>
+<p>4）：控件回调函数的执行属性：BusyAction    ButtonDownFcn  CallBack  CeateBack  DeleteFcn   Interruptible</p>
+<h2 id="3-Callback函数"><a href="#3-Callback函数" class="headerlink" title="3. Callback函数"></a>3. Callback函数</h2><p>令菜单具有实际操作功能，生成M文件中子函数。</p>
+<h3 id="3-1-变量传递"><a href="#3-1-变量传递" class="headerlink" title="3.1 变量传递"></a>3.1 变量传递</h3><p>Handles~包含所有对象的句柄结构数组，可</p>
+<ol>
+<li><p>访问GUI数据</p>
+</li>
+<li><p>实现回调函数变量传递<br>handles.current_data=X;   %将句柄结构的一个域设为X<br>guidata(hobject,hanles)    %guidata函数保存该句柄结构<br>X=handles.current_data;   %其他回调函数中重新得到该变量值</p>
+</li>
+</ol>
+<h3 id="3-2-函数编写"><a href="#3-2-函数编写" class="headerlink" title="3.2 函数编写"></a>3.2 函数编写</h3><h4 id="1-响应函数类型"><a href="#1-响应函数类型" class="headerlink" title="1~响应函数类型"></a>1~响应函数类型</h4><ol>
+<li>Opening function（打开函数）：访问GUI之前实现某些操作</li>
+<li>Output function（输出函数）：将某个变量传递给另一个GUI。Varargout包含输出参数(默认一 个)的元胞数组     组，添加命令：varargout{2}=handles.second_output;创建另外的输出参数</li>
+<li>Callbacks（回调函数）：回调命令由所选控件的标签属性决定</li>
+<li>hObject图像或者是回凋对象的句柄</li>
+<li>handles具有句柄或是用户数据的结构</li>
+</ol>
+<p>命令：guidata(hObject,handles)——在函数最后阶段进行更新数据的保存</p>
+<h4 id="2-响应函数语法、参数与关联"><a href="#2-响应函数语法、参数与关联" class="headerlink" title="2~响应函数语法、参数与关联"></a>2~响应函数语法、参数与关联</h4><p>1）名称：控件标签(Tag属性)+下划线+函数属性</p>
+<p>2）关联：指定每个控件对应的响应函数，用户通过属性编辑器将其他响应属性设置为%automatic。</p>
+<h2 id="4-创建GUI"><a href="#4-创建GUI" class="headerlink" title="4. 创建GUI"></a>4. 创建GUI</h2><p>1）：guide命令打开GUI图形用户界面设计向导—-建立需要类型文件</p>
+<p>2）：添加组件，&lt;复制&gt;，&lt;工具&gt;—-&lt;对其对象&gt;，合适调整</p>
+<p>3）：设置控件属性</p>
+<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</p>
+<p>4）：保存用户图形界面</p>
+<p>5）：编写程序代码</p>
+<p>6）：为图形用户界面添加标题——-添加&lt;静态文本&gt;</p>
+<p>7）：运行图形用户界面</p>
+<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure></div>
+<p>改变按钮背景—-代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure></div>
+<h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.实例解析"></a>5.实例解析</h2><p>1.简单声音播放器</p>
+<p>播放&lt;按钮&gt;CellBack函数内容:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure></div>
+<p>&lt;关闭&gt;按钮callback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure></div>
+<p>2.滑条界面</p>
+<p>移动滑块对应数值显示在框中，输入指定范围数字滑块移动到对应位置</p>
+<p>&lt;滑块&gt;cellback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure></div>
+<p>&lt;文本框&gt;cellback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure></div>
+<p>3.建立多个子菜单</p>
+<p>根据&lt;标记&gt;点击&lt;查看&gt;可得到m文件中对应位置，然后添加对应代码</p>
+<p><img src="/assets/6.PNG" alt="7"><img src="/assets/7.PNG" alt="6"></p>
+]]></content>
+      <tags>
+        <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MATLAB的GUI设计</title>
     <url>/2019/12/29/MATLAB%E7%9A%84GUI%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p>title: MATLAB的GUI设计<br>date: 2019-12-29 18:34:02<br>tags: GUI设计</p>
@@ -292,279 +512,6 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><d
       </tags>
   </entry>
   <entry>
-    <title>MATLAB的GUI程序设计</title>
-    <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
-<a id="more"></a>
-<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1. 基本知识"></a>1. 基本知识</h2><h3 id="1-1-三个基本元素"><a href="#1-1-三个基本元素" class="headerlink" title="1.1. 三个基本元素"></a>1.1. 三个基本元素</h3><p>​       1.组件： 在 MATLAB GUI 中的每一个项目(按钮，标签，编辑框等)都是一个图形化组件组件。可分为三类： 图形化控件(按钮，编辑框，列表，滑动条等)， 静态元素(窗口和文本字符串)， 菜单和坐标系。图形化控件和静态元素由函数 uicontrol 创建，菜单由函数 uimenu和 uicontextmenu 创建，坐标系经常用于显示图形化数据，由函数 axes 创建。<br>​        2.图象窗口： GUI 的每一个组件都必须安排图象窗口中。以前，我们在画数据图象时，图象窗口会被自动创建。但我们还可以用函数 figure 来创建空图象窗口，空图象窗口经常用于放置各种类型的组件。<br>​        3.响应： 最后，如果用户用鼠标单击或用键盘键入一些信息，那么程序就要有相应的动作。鼠标单击或键入信息是一个事件，如果MATLAB程序运行相应的函数，那么MATLAB函数肯定会有所反应。例如，如果用户单击一按钮，这个事件必然导致相应的 MATLAB 语执行。这些相应的语句被称为响应。只要执行 GUI 的单个图形组件，必须有一个响应。</p>
-<h3 id="1-2-启动GUI开发环境"><a href="#1-2-启动GUI开发环境" class="headerlink" title="1.2. 启动GUI开发环境"></a>1.2. 启动GUI开发环境</h3><p>1）启动操作界面—-输入 “guide”</p>
-<p>2） 新建GUI对话框—提供四个功能板块</p>
-<p>~~Blank GUI(Default):空白的GUI，不含任何控件</p>
-<p>~~GUI with Uicontrols:带用户控件（Uicontrols）的用户界面</p>
-<p>~~GUI with Axes and Menu:带坐标轴和菜单的控件</p>
-<p>~~Modal Qusetion Dialog:带询问对话框的用户界面</p>
-<p>3）得到如图所示界面：Layout编辑器</p>
-<p><img src="/assets/4.PNG" alt="4"></p>
-<p>4）运行GUI—绿色按钮<img src="/assets/image-20191229204859741.png" alt="image-20191229204859741">或快捷键Ctrl+T</p>
-<h3 id="1-3-句柄命令"><a href="#1-3-句柄命令" class="headerlink" title="1.3 句柄命令"></a>1.3 句柄命令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>功能描述</th>
-<th>函数名</th>
-<th>功能描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gca</td>
-<td>获得当前坐标轴对象的句柄</td>
-<td>copyobj</td>
-<td>复制对象</td>
-</tr>
-<tr>
-<td>gcbf</td>
-<td>获得当前正在执行调用的图形对象的句柄</td>
-<td>delete</td>
-<td>删除对象</td>
-</tr>
-<tr>
-<td>gcbo</td>
-<td>获得当前正在执行调用的对象句柄</td>
-<td>findall</td>
-<td>查找所有对象（包括隐藏句柄）</td>
-</tr>
-<tr>
-<td>gcf</td>
-<td>获得当前图形对象的句柄</td>
-<td>findobj</td>
-<td>查找指定句柄</td>
-</tr>
-<tr>
-<td>gco</td>
-<td>获得当前对象的句柄</td>
-<td>get</td>
-<td>查询对象属性值</td>
-</tr>
-<tr>
-<td>allchild</td>
-<td>获得所有子代</td>
-<td>ishandle</td>
-<td>判断是否为句柄</td>
-</tr>
-<tr>
-<td>ancestor</td>
-<td>获得父图形对象</td>
-<td>set</td>
-<td>设置对象属性值</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="1-4-菜单属性"><a href="#1-4-菜单属性" class="headerlink" title="1.4 菜单属性"></a>1.4 菜单属性</h3><p>创建菜单对象时可使用 uimenu 函数定义属性， set 函数改变属性。下表是MATLAB中菜单属性及属性值，带*的属性是非文件式的，使用需加小心。括号{}内属性值为默认值。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Accelerator</th>
-<th>指定菜单项等价的按键或快捷键，按键顺序：Control—字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BackgroundColor</td>
-<td>uimenu背景色，是一个3元素的RGB向量或MATLAB预先定义的颜色名称。默认的背景色是亮灰色</td>
-</tr>
-<tr>
-<td>Callback</td>
-<td>MATLAB回调字符串。选择菜单项时，回调串传给函数eval，初始值为空矩阵</td>
-</tr>
-<tr>
-<td>Checked</td>
-<td>被选项的校验标记 —- on:校验标记出现在所选项的旁边      {off}:校验标记不显示</td>
-</tr>
-<tr>
-<td>Enable</td>
-<td>菜单使能状态—-{on}:菜单项使能,选择菜单项能将 Callback字符串传给eval；菜单项不使能，菜单标志变灰，选择菜单项            off:不起任何作用</td>
-</tr>
-<tr>
-<td>ForegroundColor</td>
-<td>uimenu前景（文本）色，是一个三元素的RGB向量或 MATLAB预先定义的颜色名称。默认的前景色是黑色</td>
-</tr>
-<tr>
-<td>Label</td>
-<td>含有菜单项标志的文本串。在PC系统中，标记中前面有＆，定义了快捷键，它由Alt - 字符激活</td>
-</tr>
-<tr>
-<td>Position</td>
-<td>Uimenu对象的相对位置。顶层菜单从左到右编号，子菜单从上至下编号</td>
-</tr>
-<tr>
-<td>Separator</td>
-<td>分割符一线模式—-on:分割线在菜单项之上              {off}:不画分割线</td>
-</tr>
-<tr>
-<td>*Visible</td>
-<td>uimenu对象的可视性—-{on}: uimenu对象在屏幕上可见            off: uimenu对象不可见</td>
-</tr>
-<tr>
-<td>ButtonDownFar</td>
-<td>当对象被选择时， MATLAB的回调传给函数eval。初始值为空矩阵</td>
-</tr>
-<tr>
-<td>Clipping</td>
-<td>其他 uimenu对象的句柄</td>
-</tr>
-<tr>
-<td>Interrruptible</td>
-<td>指明ButtonDownFcn和CallBack串是否可中断—-{on}:不可中断      off:可中断</td>
-</tr>
-<tr>
-<td>Parent</td>
-<td>父对象的句柄。若uimenue对象是顶层菜单，则为图形对象；若是子菜单，则为父的uimenu对象句柄</td>
-</tr>
-<tr>
-<td>*Select</td>
-<td>值为[on丨off]</td>
-</tr>
-<tr>
-<td>*Tag</td>
-<td>用户用于标识对象的文本串</td>
-</tr>
-<tr>
-<td>Type</td>
-<td>只读对象辨识符，通常为uimenu</td>
-</tr>
-<tr>
-<td>UserDate</td>
-<td>用户指定的数据，矩阵、字符串等</td>
-</tr>
-<tr>
-<td>Visiable</td>
-<td>控制对象在屏幕上是否可见—-{on} ， off</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="2-控件"><a href="#2-控件" class="headerlink" title="2. 控件"></a>2. 控件</h2><h3 id="2-1-可选控件"><a href="#2-1-可选控件" class="headerlink" title="2.1 可选控件"></a>2.1 可选控件</h3><p>1）复选框(Check Box)：单个复选框用于在两种状态间切换，多可复选框组成的单选框组，在一组状态中做组合式选择。未选中，Value属性值为0，选中时为1；Style属性值为checkbox</p>
-<p>2）可编辑文本框(Editable text)：输入、修改文本，单行或多行模式。Style属性值为edit</p>
-<p>3）列表框(Lists boxes)：定义可供选择的字符串。Sytle属性值为listbax</p>
-<p>4）下拉列表(Pop-up menus)：显示属性值。Sytle属性值是popupmenu</p>
-<p>5）命令按钮(Push buttons)：执行预定功能或操作。Sytle属性值为pushbutton</p>
-<p>6）单选按钮(Radio buttons)：与复选框相似，进行功能互斥的选择。Sytle属性值为radiobutton</p>
-<p>7）滚动条(Sliders)：可输入指定范围的数量值。Sytle属性值为slideers</p>
-<p>8）静态文本框(Static text)：显示别的控件有关信息，不可改变内容。Sytle属性是text</p>
-<p>9）开关按钮(Toggle Button)：与命令按钮类似，不会弹起。</p>
-<p>10）坐标轴(Axes)：显示图形和图像。</p>
-<h3 id="2-2-控件属性"><a href="#2-2-控件属性" class="headerlink" title="2.2 控件属性"></a>2.2 控件属性</h3><p>可在布局窗口双击控件查看或修改属性，常规属性如下(MATLAB入门到精通P243)</p>
-<p>1）：控件风格和外观属性：BackgroundColor     CData      ForefroundColor    String    Properties</p>
-<p>2）：对象常规信息属性：Enable  Sytle  Tag  TooltipString  UserData   Position   Units   FontAngle   FontName</p>
-<p>3）：控件当前状态属性：ListboxTop    Max    Min     Value</p>
-<p>4）：控件回调函数的执行属性：BusyAction    ButtonDownFcn  CallBack  CeateBack  DeleteFcn   Interruptible</p>
-<h2 id="3-Callback函数"><a href="#3-Callback函数" class="headerlink" title="3. Callback函数"></a>3. Callback函数</h2><p>令菜单具有实际操作功能，生成M文件中子函数。</p>
-<h3 id="3-1-变量传递"><a href="#3-1-变量传递" class="headerlink" title="3.1 变量传递"></a>3.1 变量传递</h3><p>Handles~包含所有对象的句柄结构数组，可</p>
-<ol>
-<li><p>访问GUI数据</p>
-</li>
-<li><p>实现回调函数变量传递<br>handles.current_data=X;   %将句柄结构的一个域设为X<br>guidata(hobject,hanles)    %guidata函数保存该句柄结构<br>X=handles.current_data;   %其他回调函数中重新得到该变量值</p>
-</li>
-</ol>
-<h3 id="3-2-函数编写"><a href="#3-2-函数编写" class="headerlink" title="3.2 函数编写"></a>3.2 函数编写</h3><h4 id="1-响应函数类型"><a href="#1-响应函数类型" class="headerlink" title="1~响应函数类型"></a>1~响应函数类型</h4><ol>
-<li>Opening function（打开函数）：访问GUI之前实现某些操作</li>
-<li>Output function（输出函数）：将某个变量传递给另一个GUI。Varargout包含输出参数(默认一 个)的元胞数组     组，添加命令：varargout{2}=handles.second_output;创建另外的输出参数</li>
-<li>Callbacks（回调函数）：回调命令由所选控件的标签属性决定</li>
-<li>hObject图像或者是回凋对象的句柄</li>
-<li>handles具有句柄或是用户数据的结构</li>
-</ol>
-<p>命令：guidata(hObject,handles)——在函数最后阶段进行更新数据的保存</p>
-<h4 id="2-响应函数语法、参数与关联"><a href="#2-响应函数语法、参数与关联" class="headerlink" title="2~响应函数语法、参数与关联"></a>2~响应函数语法、参数与关联</h4><p>1）名称：控件标签(Tag属性)+下划线+函数属性</p>
-<p>2）关联：指定每个控件对应的响应函数，用户通过属性编辑器将其他响应属性设置为%automatic。</p>
-<h2 id="4-创建GUI"><a href="#4-创建GUI" class="headerlink" title="4. 创建GUI"></a>4. 创建GUI</h2><p>1）：guide命令打开GUI图形用户界面设计向导—-建立需要类型文件</p>
-<p>2）：添加组件，&lt;复制&gt;，&lt;工具&gt;—-&lt;对其对象&gt;，合适调整</p>
-<p>3）：设置控件属性</p>
-<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</p>
-<p>4）：保存用户图形界面</p>
-<p>5）：编写程序代码</p>
-<p>6）：为图形用户界面添加标题——-添加&lt;静态文本&gt;</p>
-<p>7）：运行图形用户界面</p>
-<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure></div>
-<p>改变按钮背景—-代码</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure></div>
-<h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.实例解析"></a>5.实例解析</h2><p>1.简单声音播放器</p>
-<p>播放&lt;按钮&gt;CellBack函数内容:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure></div>
-<p>&lt;关闭&gt;按钮callback函数内容：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure></div>
-<p>2.滑条界面</p>
-<p>移动滑块对应数值显示在框中，输入指定范围数字滑块移动到对应位置</p>
-<p>&lt;滑块&gt;cellback函数内容：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure></div>
-<p>&lt;文本框&gt;cellback函数内容：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure></div>
-<p>3.建立多个子菜单</p>
-<p>根据&lt;标记&gt;点击&lt;查看&gt;可得到m文件中对应位置，然后添加对应代码</p>
-<p><img src="/assets/6.PNG" alt="7"><img src="/assets/7.PNG" alt="6"></p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MATLAB编程</title>
-    <url>/2022/02/12/MATLAB%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="MATLAB编程"><a href="#MATLAB编程" class="headerlink" title="MATLAB编程"></a>MATLAB编程</h1><h2 id="一、M文件"><a href="#一、M文件" class="headerlink" title="一、M文件"></a>一、M文件</h2><p>M文件是将处理问题的各种命令融合到一个文件中，该文件以.m为拓展名，然后由MAYLAB系统编译，得出相应的运行结果。M文件有脚本文件和函数文件两种。脚本文件不需要输入参数和输出参数，按照文件中指定的顺序执行命令序列。而函数文件则接受其他数据为输入参数，且可返回数据。</p>
-<p>MATLAB脚本(MATLAB scripts)：</p>
-<p>简单执行一系列MATLAB语句，需多次运行的文件</p>
-<p>不能接受输入参数，也不返回输出结果</p>
-<p>将变量保存在基本(Base)工作空间，这是多个脚本和命令窗口建立的变量的共享空间。</p>
-<p>MTALAB函数(MATLAB functions)：</p>
-<p>有函数定义语句——function，主要用来写应用程序</p>
-<p>能够接受输入参数，也能返回输出结果</p>
-<p>有自己单独的工作空间，变量保存于此</p>
-<h3 id="1-1、M文件编辑器"><a href="#1-1、M文件编辑器" class="headerlink" title="1-1、M文件编辑器"></a>1-1、M文件编辑器</h3><p>M文件不仅可以用来编辑M文件，还可对M文件进行交互性调试。而且，M文件编辑器还可用于阅读和编辑其他ASCII码文件。打开M文件编辑器：</p>
-<p>单击常用工具栏上的“新建”图标。</p>
-<p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
-<p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure></div>
-<p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
-<p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
-<p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
-<p><strong>4.注释</strong>：以%开始的注释可出现在函数任何位置，也可在语句右边。若注释行很多，可使用注释块操作符—— %{……%}</p>
-<p><strong>5.函数体</strong>：函数体是函数和脚本中计算和处理数据的主体，可包含进行计算和赋值的语句、函数调用、循环和流控制语句，以及注释语句。空行等。</p>
-<h3 id="1-2、脚本式M文件"><a href="#1-2、脚本式M文件" class="headerlink" title="1-2、脚本式M文件"></a>1-2、脚本式M文件</h3><p>对较多命令进行重复输入、调试等用户可以将需要重复输入的所有命令按顺序放到M文件，每次运行只要输入文件名或单击”运行“按钮，或F5快捷键。脚本式文件的运行相当于在命令窗口依次输入运行命令。不需要预先定义变量，命令文件中变量都是全局变量。</p>
-<h3 id="1-3、函数式M文件"><a href="#1-3、函数式M文件" class="headerlink" title="1-3、函数式M文件"></a>1-3、函数式M文件</h3><p>函数式命令文件一般要自带变量，且有返回结果，也可不带变量，此时文件中一般会使用一些全局变量来实现与外界和其他函数之间的数据交换。以关键词function开始，实质为用户向MATLAB函数库中添加自定义子函数。</p>
-<h2 id="二、流程控制"><a href="#二、流程控制" class="headerlink" title="二、流程控制"></a>二、流程控制</h2><p>MATLAB基本程序为顺序结构，但不能满足程序设计需要，需使用流程控制语句。包括判断语句，循环语句，分支语句等。</p>
-<h3 id="2-1、顺序结构"><a href="#2-1、顺序结构" class="headerlink" title="2-1、顺序结构"></a>2-1、顺序结构</h3><p>1、if语句</p>
-<p><code>if···end</code>             <code>if···else···end</code>               <code>if···elseif···else···end</code></p>
-<p>2、switch语句</p>
-<p><code>switch···case···end</code></p>
-<p>3、for循环（嵌套）</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>4、while循环</p>
-<p><code>while 表达式    执行语句      end</code></p>
-<p>5、continue命令——-break命令</p>
-<p>跳过进行下一次循环———-根据终止条件跳出循环</p>
-<p>6、return命令</p>
-<p>使得当前调用的函数正常退出   <code>return</code></p>
-<h3 id="2-2、人机交互命令"><a href="#2-2、人机交互命令" class="headerlink" title="2-2、人机交互命令"></a>2-2、人机交互命令</h3><p>1、输入提示命令input</p>
-<p><code>user_entry = input(&#39;prompt&#39;)</code>            <code>user_entry = input(&#39;prompt&#39;,&#39;s&#39;)</code></p>
-<p>2、请求键盘输入命令keyboard</p>
-<p>如keyboard命令被放在M文件中，将终止文件的继续执行，将控制权交给键盘。可通过在提示符前显示K表征这种特殊状态，M文件中使用该命令对程序调控及修改变量都方便。为终止keyboard模式，可键入命令return，然后按回车键。</p>
-<p>3、pause命令</p>
-<p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure></div>
-<p>4、echo语句</p>
-<p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure></div>
-<h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Matlab绘图</title>
     <url>/2019/12/28/Matlab%E7%BB%98%E5%9B%BE/</url>
     <content><![CDATA[<hr>
@@ -678,6 +625,59 @@ y=2e^{-0.5x}</script><div class="highlight-wrap"autocomplete="off" autocorrect="
 <p>histogram:统计出现次数</p>
 <p>按列优先</p>
 <p>矩阵行求和：sum(a’)’</p>
+]]></content>
+      <tags>
+        <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB编程</title>
+    <url>/2022/02/12/MATLAB%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="MATLAB编程"><a href="#MATLAB编程" class="headerlink" title="MATLAB编程"></a>MATLAB编程</h1><h2 id="一、M文件"><a href="#一、M文件" class="headerlink" title="一、M文件"></a>一、M文件</h2><p>M文件是将处理问题的各种命令融合到一个文件中，该文件以.m为拓展名，然后由MAYLAB系统编译，得出相应的运行结果。M文件有脚本文件和函数文件两种。脚本文件不需要输入参数和输出参数，按照文件中指定的顺序执行命令序列。而函数文件则接受其他数据为输入参数，且可返回数据。</p>
+<p>MATLAB脚本(MATLAB scripts)：</p>
+<p>简单执行一系列MATLAB语句，需多次运行的文件</p>
+<p>不能接受输入参数，也不返回输出结果</p>
+<p>将变量保存在基本(Base)工作空间，这是多个脚本和命令窗口建立的变量的共享空间。</p>
+<p>MTALAB函数(MATLAB functions)：</p>
+<p>有函数定义语句——function，主要用来写应用程序</p>
+<p>能够接受输入参数，也能返回输出结果</p>
+<p>有自己单独的工作空间，变量保存于此</p>
+<h3 id="1-1、M文件编辑器"><a href="#1-1、M文件编辑器" class="headerlink" title="1-1、M文件编辑器"></a>1-1、M文件编辑器</h3><p>M文件不仅可以用来编辑M文件，还可对M文件进行交互性调试。而且，M文件编辑器还可用于阅读和编辑其他ASCII码文件。打开M文件编辑器：</p>
+<p>单击常用工具栏上的“新建”图标。</p>
+<p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
+<p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
+<p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
+<p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
+<p><strong>4.注释</strong>：以%开始的注释可出现在函数任何位置，也可在语句右边。若注释行很多，可使用注释块操作符—— %{……%}</p>
+<p><strong>5.函数体</strong>：函数体是函数和脚本中计算和处理数据的主体，可包含进行计算和赋值的语句、函数调用、循环和流控制语句，以及注释语句。空行等。</p>
+<h3 id="1-2、脚本式M文件"><a href="#1-2、脚本式M文件" class="headerlink" title="1-2、脚本式M文件"></a>1-2、脚本式M文件</h3><p>对较多命令进行重复输入、调试等用户可以将需要重复输入的所有命令按顺序放到M文件，每次运行只要输入文件名或单击”运行“按钮，或F5快捷键。脚本式文件的运行相当于在命令窗口依次输入运行命令。不需要预先定义变量，命令文件中变量都是全局变量。</p>
+<h3 id="1-3、函数式M文件"><a href="#1-3、函数式M文件" class="headerlink" title="1-3、函数式M文件"></a>1-3、函数式M文件</h3><p>函数式命令文件一般要自带变量，且有返回结果，也可不带变量，此时文件中一般会使用一些全局变量来实现与外界和其他函数之间的数据交换。以关键词function开始，实质为用户向MATLAB函数库中添加自定义子函数。</p>
+<h2 id="二、流程控制"><a href="#二、流程控制" class="headerlink" title="二、流程控制"></a>二、流程控制</h2><p>MATLAB基本程序为顺序结构，但不能满足程序设计需要，需使用流程控制语句。包括判断语句，循环语句，分支语句等。</p>
+<h3 id="2-1、顺序结构"><a href="#2-1、顺序结构" class="headerlink" title="2-1、顺序结构"></a>2-1、顺序结构</h3><p>1、if语句</p>
+<p><code>if···end</code>             <code>if···else···end</code>               <code>if···elseif···else···end</code></p>
+<p>2、switch语句</p>
+<p><code>switch···case···end</code></p>
+<p>3、for循环（嵌套）</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>4、while循环</p>
+<p><code>while 表达式    执行语句      end</code></p>
+<p>5、continue命令——-break命令</p>
+<p>跳过进行下一次循环———-根据终止条件跳出循环</p>
+<p>6、return命令</p>
+<p>使得当前调用的函数正常退出   <code>return</code></p>
+<h3 id="2-2、人机交互命令"><a href="#2-2、人机交互命令" class="headerlink" title="2-2、人机交互命令"></a>2-2、人机交互命令</h3><p>1、输入提示命令input</p>
+<p><code>user_entry = input(&#39;prompt&#39;)</code>            <code>user_entry = input(&#39;prompt&#39;,&#39;s&#39;)</code></p>
+<p>2、请求键盘输入命令keyboard</p>
+<p>如keyboard命令被放在M文件中，将终止文件的继续执行，将控制权交给键盘。可通过在提示符前显示K表征这种特殊状态，M文件中使用该命令对程序调控及修改变量都方便。为终止keyboard模式，可键入命令return，然后按回车键。</p>
+<p>3、pause命令</p>
+<p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure></div>
+<p>4、echo语句</p>
+<p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
