@@ -1,223 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>MATLAB的GUI程序设计</title>
-    <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
-<a id="more"></a>
-<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1. 基本知识"></a>1. 基本知识</h2><h3 id="1-1-三个基本元素"><a href="#1-1-三个基本元素" class="headerlink" title="1.1. 三个基本元素"></a>1.1. 三个基本元素</h3><p>​       1.组件： 在 MATLAB GUI 中的每一个项目(按钮，标签，编辑框等)都是一个图形化组件组件。可分为三类： 图形化控件(按钮，编辑框，列表，滑动条等)， 静态元素(窗口和文本字符串)， 菜单和坐标系。图形化控件和静态元素由函数 uicontrol 创建，菜单由函数 uimenu和 uicontextmenu 创建，坐标系经常用于显示图形化数据，由函数 axes 创建。<br>​        2.图象窗口： GUI 的每一个组件都必须安排图象窗口中。以前，我们在画数据图象时，图象窗口会被自动创建。但我们还可以用函数 figure 来创建空图象窗口，空图象窗口经常用于放置各种类型的组件。<br>​        3.响应： 最后，如果用户用鼠标单击或用键盘键入一些信息，那么程序就要有相应的动作。鼠标单击或键入信息是一个事件，如果MATLAB程序运行相应的函数，那么MATLAB函数肯定会有所反应。例如，如果用户单击一按钮，这个事件必然导致相应的 MATLAB 语执行。这些相应的语句被称为响应。只要执行 GUI 的单个图形组件，必须有一个响应。</p>
-<h3 id="1-2-启动GUI开发环境"><a href="#1-2-启动GUI开发环境" class="headerlink" title="1.2. 启动GUI开发环境"></a>1.2. 启动GUI开发环境</h3><p>1）启动操作界面—-输入 “guide”</p>
-<p>2） 新建GUI对话框—提供四个功能板块</p>
-<p>~~Blank GUI(Default):空白的GUI，不含任何控件</p>
-<p>~~GUI with Uicontrols:带用户控件（Uicontrols）的用户界面</p>
-<p>~~GUI with Axes and Menu:带坐标轴和菜单的控件</p>
-<p>~~Modal Qusetion Dialog:带询问对话框的用户界面</p>
-<p>3）得到如图所示界面：Layout编辑器</p>
-<p><img src="/assets/4.PNG" alt="4"></p>
-<p>4）运行GUI—绿色按钮<img src="/assets/image-20191229204859741.png" alt="image-20191229204859741">或快捷键Ctrl+T</p>
-<h3 id="1-3-句柄命令"><a href="#1-3-句柄命令" class="headerlink" title="1.3 句柄命令"></a>1.3 句柄命令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>功能描述</th>
-<th>函数名</th>
-<th>功能描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gca</td>
-<td>获得当前坐标轴对象的句柄</td>
-<td>copyobj</td>
-<td>复制对象</td>
-</tr>
-<tr>
-<td>gcbf</td>
-<td>获得当前正在执行调用的图形对象的句柄</td>
-<td>delete</td>
-<td>删除对象</td>
-</tr>
-<tr>
-<td>gcbo</td>
-<td>获得当前正在执行调用的对象句柄</td>
-<td>findall</td>
-<td>查找所有对象（包括隐藏句柄）</td>
-</tr>
-<tr>
-<td>gcf</td>
-<td>获得当前图形对象的句柄</td>
-<td>findobj</td>
-<td>查找指定句柄</td>
-</tr>
-<tr>
-<td>gco</td>
-<td>获得当前对象的句柄</td>
-<td>get</td>
-<td>查询对象属性值</td>
-</tr>
-<tr>
-<td>allchild</td>
-<td>获得所有子代</td>
-<td>ishandle</td>
-<td>判断是否为句柄</td>
-</tr>
-<tr>
-<td>ancestor</td>
-<td>获得父图形对象</td>
-<td>set</td>
-<td>设置对象属性值</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="1-4-菜单属性"><a href="#1-4-菜单属性" class="headerlink" title="1.4 菜单属性"></a>1.4 菜单属性</h3><p>创建菜单对象时可使用 uimenu 函数定义属性， set 函数改变属性。下表是MATLAB中菜单属性及属性值，带*的属性是非文件式的，使用需加小心。括号{}内属性值为默认值。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Accelerator</th>
-<th>指定菜单项等价的按键或快捷键，按键顺序：Control—字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BackgroundColor</td>
-<td>uimenu背景色，是一个3元素的RGB向量或MATLAB预先定义的颜色名称。默认的背景色是亮灰色</td>
-</tr>
-<tr>
-<td>Callback</td>
-<td>MATLAB回调字符串。选择菜单项时，回调串传给函数eval，初始值为空矩阵</td>
-</tr>
-<tr>
-<td>Checked</td>
-<td>被选项的校验标记 —- on:校验标记出现在所选项的旁边      {off}:校验标记不显示</td>
-</tr>
-<tr>
-<td>Enable</td>
-<td>菜单使能状态—-{on}:菜单项使能,选择菜单项能将 Callback字符串传给eval；菜单项不使能，菜单标志变灰，选择菜单项            off:不起任何作用</td>
-</tr>
-<tr>
-<td>ForegroundColor</td>
-<td>uimenu前景（文本）色，是一个三元素的RGB向量或 MATLAB预先定义的颜色名称。默认的前景色是黑色</td>
-</tr>
-<tr>
-<td>Label</td>
-<td>含有菜单项标志的文本串。在PC系统中，标记中前面有＆，定义了快捷键，它由Alt - 字符激活</td>
-</tr>
-<tr>
-<td>Position</td>
-<td>Uimenu对象的相对位置。顶层菜单从左到右编号，子菜单从上至下编号</td>
-</tr>
-<tr>
-<td>Separator</td>
-<td>分割符一线模式—-on:分割线在菜单项之上              {off}:不画分割线</td>
-</tr>
-<tr>
-<td>*Visible</td>
-<td>uimenu对象的可视性—-{on}: uimenu对象在屏幕上可见            off: uimenu对象不可见</td>
-</tr>
-<tr>
-<td>ButtonDownFar</td>
-<td>当对象被选择时， MATLAB的回调传给函数eval。初始值为空矩阵</td>
-</tr>
-<tr>
-<td>Clipping</td>
-<td>其他 uimenu对象的句柄</td>
-</tr>
-<tr>
-<td>Interrruptible</td>
-<td>指明ButtonDownFcn和CallBack串是否可中断—-{on}:不可中断      off:可中断</td>
-</tr>
-<tr>
-<td>Parent</td>
-<td>父对象的句柄。若uimenue对象是顶层菜单，则为图形对象；若是子菜单，则为父的uimenu对象句柄</td>
-</tr>
-<tr>
-<td>*Select</td>
-<td>值为[on丨off]</td>
-</tr>
-<tr>
-<td>*Tag</td>
-<td>用户用于标识对象的文本串</td>
-</tr>
-<tr>
-<td>Type</td>
-<td>只读对象辨识符，通常为uimenu</td>
-</tr>
-<tr>
-<td>UserDate</td>
-<td>用户指定的数据，矩阵、字符串等</td>
-</tr>
-<tr>
-<td>Visiable</td>
-<td>控制对象在屏幕上是否可见—-{on} ， off</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="2-控件"><a href="#2-控件" class="headerlink" title="2. 控件"></a>2. 控件</h2><h3 id="2-1-可选控件"><a href="#2-1-可选控件" class="headerlink" title="2.1 可选控件"></a>2.1 可选控件</h3><p>1）复选框(Check Box)：单个复选框用于在两种状态间切换，多可复选框组成的单选框组，在一组状态中做组合式选择。未选中，Value属性值为0，选中时为1；Style属性值为checkbox</p>
-<p>2）可编辑文本框(Editable text)：输入、修改文本，单行或多行模式。Style属性值为edit</p>
-<p>3）列表框(Lists boxes)：定义可供选择的字符串。Sytle属性值为listbax</p>
-<p>4）下拉列表(Pop-up menus)：显示属性值。Sytle属性值是popupmenu</p>
-<p>5）命令按钮(Push buttons)：执行预定功能或操作。Sytle属性值为pushbutton</p>
-<p>6）单选按钮(Radio buttons)：与复选框相似，进行功能互斥的选择。Sytle属性值为radiobutton</p>
-<p>7）滚动条(Sliders)：可输入指定范围的数量值。Sytle属性值为slideers</p>
-<p>8）静态文本框(Static text)：显示别的控件有关信息，不可改变内容。Sytle属性是text</p>
-<p>9）开关按钮(Toggle Button)：与命令按钮类似，不会弹起。</p>
-<p>10）坐标轴(Axes)：显示图形和图像。</p>
-<h3 id="2-2-控件属性"><a href="#2-2-控件属性" class="headerlink" title="2.2 控件属性"></a>2.2 控件属性</h3><p>可在布局窗口双击控件查看或修改属性，常规属性如下(MATLAB入门到精通P243)</p>
-<p>1）：控件风格和外观属性：BackgroundColor     CData      ForefroundColor    String    Properties</p>
-<p>2）：对象常规信息属性：Enable  Sytle  Tag  TooltipString  UserData   Position   Units   FontAngle   FontName</p>
-<p>3）：控件当前状态属性：ListboxTop    Max    Min     Value</p>
-<p>4）：控件回调函数的执行属性：BusyAction    ButtonDownFcn  CallBack  CeateBack  DeleteFcn   Interruptible</p>
-<h2 id="3-Callback函数"><a href="#3-Callback函数" class="headerlink" title="3. Callback函数"></a>3. Callback函数</h2><p>令菜单具有实际操作功能，生成M文件中子函数。</p>
-<h3 id="3-1-变量传递"><a href="#3-1-变量传递" class="headerlink" title="3.1 变量传递"></a>3.1 变量传递</h3><p>Handles~包含所有对象的句柄结构数组，可</p>
-<ol>
-<li><p>访问GUI数据</p>
-</li>
-<li><p>实现回调函数变量传递<br>handles.current_data=X;   %将句柄结构的一个域设为X<br>guidata(hobject,hanles)    %guidata函数保存该句柄结构<br>X=handles.current_data;   %其他回调函数中重新得到该变量值</p>
-</li>
-</ol>
-<h3 id="3-2-函数编写"><a href="#3-2-函数编写" class="headerlink" title="3.2 函数编写"></a>3.2 函数编写</h3><h4 id="1-响应函数类型"><a href="#1-响应函数类型" class="headerlink" title="1~响应函数类型"></a>1~响应函数类型</h4><ol>
-<li>Opening function（打开函数）：访问GUI之前实现某些操作</li>
-<li>Output function（输出函数）：将某个变量传递给另一个GUI。Varargout包含输出参数(默认一 个)的元胞数组     组，添加命令：varargout{2}=handles.second_output;创建另外的输出参数</li>
-<li>Callbacks（回调函数）：回调命令由所选控件的标签属性决定</li>
-<li>hObject图像或者是回凋对象的句柄</li>
-<li>handles具有句柄或是用户数据的结构</li>
-</ol>
-<p>命令：guidata(hObject,handles)——在函数最后阶段进行更新数据的保存</p>
-<h4 id="2-响应函数语法、参数与关联"><a href="#2-响应函数语法、参数与关联" class="headerlink" title="2~响应函数语法、参数与关联"></a>2~响应函数语法、参数与关联</h4><p>1）名称：控件标签(Tag属性)+下划线+函数属性</p>
-<p>2）关联：指定每个控件对应的响应函数，用户通过属性编辑器将其他响应属性设置为%automatic。</p>
-<h2 id="4-创建GUI"><a href="#4-创建GUI" class="headerlink" title="4. 创建GUI"></a>4. 创建GUI</h2><p>1）：guide命令打开GUI图形用户界面设计向导—-建立需要类型文件</p>
-<p>2）：添加组件，&lt;复制&gt;，&lt;工具&gt;—-&lt;对其对象&gt;，合适调整</p>
-<p>3）：设置控件属性</p>
-<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</FontSize.></HorizontalAlignment.></string.></p>
-<p>4）：保存用户图形界面</p>
-<p>5）：编写程序代码</p>
-<p>6）：为图形用户界面添加标题——-添加&lt;静态文本&gt;</p>
-<p>7）：运行图形用户界面</p>
-<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</CreateFcn.></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure>
-<p>改变按钮背景—-代码</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure>
-<h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.实例解析"></a>5.实例解析</h2><p>1.简单声音播放器</p>
-<p>播放&lt;按钮&gt;CellBack函数内容:</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure>
-<p>&lt;关闭&gt;按钮callback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure>
-<p>2.滑条界面</p>
-<p>移动滑块对应数值显示在框中，输入指定范围数字滑块移动到对应位置</p>
-<p>&lt;滑块&gt;cellback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure>
-<p>&lt;文本框&gt;cellback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure>
-<p>3.建立多个子菜单</p>
-<p>根据&lt;标记&gt;点击&lt;查看&gt;可得到m文件中对应位置，然后添加对应代码</p>
-<p><img src="/assets/6.PNG" alt="7"><img src="/assets/7.PNG" alt="6"></p>
+    <title>DAYS</title>
+    <url>/2022/03/22/DAYS/</url>
+    <content><![CDATA[<p>test</p>
+<p>！！！</p>
 ]]></content>
       <tags>
-        <tag>MATLAB</tag>
+        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
@@ -413,99 +203,309 @@
 <h2 id="4-创建GUI"><a href="#4-创建GUI" class="headerlink" title="4. 创建GUI"></a>4. 创建GUI</h2><p>1）：guide命令打开GUI图形用户界面设计向导—-建立需要类型文件</p>
 <p>2）：添加组件，&lt;复制&gt;，&lt;工具&gt;—-&lt;对其对象&gt;，合适调整</p>
 <p>3）：设置控件属性</p>
-<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</FontSize.></HorizontalAlignment.></string.></p>
+<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</p>
 <p>4）：保存用户图形界面</p>
 <p>5）：编写程序代码</p>
 <p>6）：为图形用户界面添加标题——-添加&lt;静态文本&gt;</p>
 <p>7）：运行图形用户界面</p>
-<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</CreateFcn.></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure>
+<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure></div>
 <p>改变按钮背景—-代码</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure></div>
 <h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.实例解析"></a>5.实例解析</h2><p>1.简单声音播放器</p>
 <p>播放&lt;按钮&gt;CellBack函数内容:</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure></div>
 <p>&lt;关闭&gt;按钮callback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure></div>
 <p>2.滑条界面</p>
 <p>移动滑块对应数值显示在框中，输入指定范围数字滑块移动到对应位置</p>
 <p>&lt;滑块&gt;cellback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure></div>
 <p>&lt;文本框&gt;cellback函数内容：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure></div>
 <p>3.建立多个子菜单</p>
 <p>根据&lt;标记&gt;点击&lt;查看&gt;可得到m文件中对应位置，然后添加对应代码</p>
 <p><img src="/assets/6.PNG" alt="7"><img src="/assets/7.PNG" alt="6"></p>
 ]]></content>
   </entry>
   <entry>
-    <title>DAYS</title>
-    <url>/2022/03/22/DAYS/</url>
-    <content><![CDATA[<p>test</p>
-<p>！！！</p>
-]]></content>
-      <tags>
-        <tag>diary</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MATLAB符号计算</title>
     <url>/2020/02/09/MATLAB%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97/</url>
     <content><![CDATA[<h1 id="符号计算"><a href="#符号计算" class="headerlink" title="符号计算"></a>符号计算</h1><h2 id="一、符号变量、表达式及符号方程"><a href="#一、符号变量、表达式及符号方程" class="headerlink" title="一、符号变量、表达式及符号方程"></a>一、符号变量、表达式及符号方程</h2><p>进行符号运算前，先定义符号对象，然后利用符号对象构建表达式，最后进行符号计算。</p>
 <h3 id="1、创建符号变量与表达式"><a href="#1、创建符号变量与表达式" class="headerlink" title="1、创建符号变量与表达式"></a>1、创建符号变量与表达式</h3><p>1、sym函数</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">S = sym(A)   <span class="comment">% 把数字、字符串或表达式A转换为符号对象S</span></span><br><span class="line">x = sym(<span class="string">'x'</span>)  <span class="comment">%以x为名创建符号变量，结果储存到x</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'real'</span>)  <span class="comment">%限定x表示实型符号变量</span></span><br><span class="line">k = sym(<span class="string">'k'</span>,<span class="string">'positive'</span>)   <span class="comment">%限定x表示正的实型符号变量</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'clear'</span>)   <span class="comment">%无附件条件设x为纯形式变量</span></span><br><span class="line">S = sym(A,flag)   <span class="comment">%将数值标量或者矩阵转换为符号形式，参数flag是定义转换符号对象应符合的格式</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">S = sym(A)   <span class="comment">% 把数字、字符串或表达式A转换为符号对象S</span></span><br><span class="line">x = sym(<span class="string">'x'</span>)  <span class="comment">%以x为名创建符号变量，结果储存到x</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'real'</span>)  <span class="comment">%限定x表示实型符号变量</span></span><br><span class="line">k = sym(<span class="string">'k'</span>,<span class="string">'positive'</span>)   <span class="comment">%限定x表示正的实型符号变量</span></span><br><span class="line">x = sym(<span class="string">'x'</span>,<span class="string">'clear'</span>)   <span class="comment">%无附件条件设x为纯形式变量</span></span><br><span class="line">S = sym(A,flag)   <span class="comment">%将数值标量或者矩阵转换为符号形式，参数flag是定义转换符号对象应符合的格式</span></span><br></pre></td></tr></table></figure></div>
 <p>【例1-1】sym函数定义符号表达式</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=sym(<span class="string">'a'</span>),b=sym(<span class="string">'b'</span>),c=sym(<span class="string">'c'</span>),d=sym(<span class="string">'d'</span>),x=sym(<span class="string">'x'</span>);</span><br><span class="line">f=a*x^<span class="number">2</span>+b*x+c,g=sym(<span class="string">'a*x^2+b*x+c'</span>)</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">a=sym(<span class="string">'a'</span>),b=sym(<span class="string">'b'</span>),c=sym(<span class="string">'c'</span>),d=sym(<span class="string">'d'</span>),x=sym(<span class="string">'x'</span>);</span><br><span class="line">f=a*x^<span class="number">2</span>+b*x+c,g=sym(<span class="string">'a*x^2+b*x+c'</span>)</span><br></pre></td></tr></table></figure></div>
 <p>2、syms函数      可同时将多个变量创建为符号对象</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms arg1 arg2...      <span class="comment">%等同于arg1=sym('arg1');arg2=sym('arg2');...</span></span><br><span class="line">syms arg1 arg2...<span class="built_in">real</span>   <span class="comment">%等同于arg1=sym('srg1','real');arg2=sym('arg2','real');...</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms arg1 arg2...      <span class="comment">%等同于arg1=sym('arg1');arg2=sym('arg2');...</span></span><br><span class="line">syms arg1 arg2...<span class="built_in">real</span>   <span class="comment">%等同于arg1=sym('srg1','real');arg2=sym('arg2','real');...</span></span><br></pre></td></tr></table></figure></div>
 <h3 id="2-运算符和基本函数"><a href="#2-运算符和基本函数" class="headerlink" title="2.运算符和基本函数"></a>2.运算符和基本函数</h3><p>基础运算符：+、-、*、/、^、等</p>
 <p>关系运算符：’==’ ‘~=’  表示等于、不等于</p>
 <p>三角、双曲函数：除了atan2函数只用于数值计算，其余都可用于符号计算</p>
 <p>指数、对数函数：指数函数均可用，对数只能用 log函数，不能用 log2 和 log10</p>
 <p>复数函数与矩阵代数：符号计算与数值计算基本相同</p>
 <h2 id="二、符号微积分"><a href="#二、符号微积分" class="headerlink" title="二、符号微积分"></a>二、符号微积分</h2><h3 id="1、符号求导与微分"><a href="#1、符号求导与微分" class="headerlink" title="1、符号求导与微分"></a>1、符号求导与微分</h3><p>已知diff函数可实现函数求导与求微分，实现一元函数求导和多元函数求偏导。当输入参数为符号表达式时，diff函数还可用于实现符号微分，调用语法如下</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">diff(S)    <span class="comment">%实现表达式S的求导，自变量可通过函数 symvar查看</span></span><br><span class="line">diff(S,<span class="string">'v'</span>)   <span class="comment">%表达式对指定变量v的求导   还可写为 diff(S,sym('v'))</span></span><br><span class="line">diff(S,n)     <span class="comment">%S的n阶导</span></span><br><span class="line">diff(S,<span class="string">'v'</span>,n)   <span class="comment">%S对v的n阶导</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">diff(S)    <span class="comment">%实现表达式S的求导，自变量可通过函数 symvar查看</span></span><br><span class="line">diff(S,<span class="string">'v'</span>)   <span class="comment">%表达式对指定变量v的求导   还可写为 diff(S,sym('v'))</span></span><br><span class="line">diff(S,n)     <span class="comment">%S的n阶导</span></span><br><span class="line">diff(S,<span class="string">'v'</span>,n)   <span class="comment">%S对v的n阶导</span></span><br></pre></td></tr></table></figure></div>
 <p>【例2-1】符号矩阵求导</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms a x</span><br><span class="line">A = [<span class="built_in">cos</span>(a*x),<span class="built_in">sin</span>(a*x);-<span class="built_in">sin</span>(a*x),<span class="built_in">cos</span>(a*x)]</span><br><span class="line">diff(A)=</span><br><span class="line">[ -a*<span class="built_in">sin</span>(a*x), a*<span class="built_in">cos</span>(a*x)]</span><br><span class="line">[ -a*<span class="built_in">cos</span>(a*x), -a*<span class="built_in">sin</span>(a*x)]</span><br></pre></td></tr></table></figure>
-<h3 id="2、符号求极限"><a href="#2、符号求极限" class="headerlink" title="2、符号求极限"></a>2、符号求极限</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">limit(F,x,a)     <span class="comment">% x趋近于a时表达式F的极限</span></span><br><span class="line">limit(F,a)      <span class="comment">% F中自变量趋近于a时F的极限</span></span><br><span class="line">limit(F)       <span class="comment">% F中自变量趋近于0时F的极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'right'</span>)    <span class="comment">% x从右侧趋近于a时F极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'left'</span>)      <span class="comment">% 左侧</span></span><br></pre></td></tr></table></figure>
-<h3 id="3、符号积分"><a href="#3、符号积分" class="headerlink" title="3、符号积分"></a>3、符号积分</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">int（S）          <span class="comment">%求表达式s的不定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（S，v）       <span class="comment">%求表达式S对自变量v的不定积分。</span></span><br><span class="line">int（S，a，b）     <span class="comment">%求表达式s在区间［a，b］上的定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（s，v，a，b）   <span class="comment">%求表达式在区间［a，b］上的定积分，自变量为v</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms a x</span><br><span class="line">A = [<span class="built_in">cos</span>(a*x),<span class="built_in">sin</span>(a*x);-<span class="built_in">sin</span>(a*x),<span class="built_in">cos</span>(a*x)]</span><br><span class="line">diff(A)=</span><br><span class="line">[ -a*<span class="built_in">sin</span>(a*x), a*<span class="built_in">cos</span>(a*x)]</span><br><span class="line">[ -a*<span class="built_in">cos</span>(a*x), -a*<span class="built_in">sin</span>(a*x)]</span><br></pre></td></tr></table></figure></div>
+<h3 id="2、符号求极限"><a href="#2、符号求极限" class="headerlink" title="2、符号求极限"></a>2、符号求极限</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">limit(F,x,a)     <span class="comment">% x趋近于a时表达式F的极限</span></span><br><span class="line">limit(F,a)      <span class="comment">% F中自变量趋近于a时F的极限</span></span><br><span class="line">limit(F)       <span class="comment">% F中自变量趋近于0时F的极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'right'</span>)    <span class="comment">% x从右侧趋近于a时F极限</span></span><br><span class="line">limit(F,x,a,<span class="string">'left'</span>)      <span class="comment">% 左侧</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="3、符号积分"><a href="#3、符号积分" class="headerlink" title="3、符号积分"></a>3、符号积分</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">int（S）          <span class="comment">%求表达式s的不定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（S，v）       <span class="comment">%求表达式S对自变量v的不定积分。</span></span><br><span class="line">int（S，a，b）     <span class="comment">%求表达式s在区间［a，b］上的定积分，自变量由 symvar函数查看。</span></span><br><span class="line">int（s，v，a，b）   <span class="comment">%求表达式在区间［a，b］上的定积分，自变量为v</span></span><br></pre></td></tr></table></figure></div>
 <p>【例3-1】</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms x z ；</span><br><span class="line">A＝［<span class="built_in">exp</span>（x）,<span class="built_in">exp</span>（z*x）, <span class="built_in">sin</span> （z）， <span class="built_in">cos</span> （z）］创建符号矩阵表达式</span><br><span class="line">A = </span><br><span class="line">[ <span class="built_in">exp</span>（x）， <span class="built_in">exp</span>（x*z）］</span><br><span class="line">[<span class="built_in">sin</span>（ z），  <span class="built_in">cos</span> （z）］</span><br></pre></td></tr></table></figure>
-<h3 id="4、级数求和"><a href="#4、级数求和" class="headerlink" title="4、级数求和"></a>4、级数求和</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">symsum(s)     <span class="comment">%计算s从0到k-1的和</span></span><br><span class="line">symsum(s,v)    <span class="comment">%计算表达式s从0到v-1的和</span></span><br><span class="line">symsum(s,a,b)    <span class="comment">%计算自变量从a到b之间s的和</span></span><br><span class="line">symsum(s,v,a,b)    <span class="comment">%计算v从a到b之间的s的和</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms x z ；</span><br><span class="line">A＝［<span class="built_in">exp</span>（x）,<span class="built_in">exp</span>（z*x）, <span class="built_in">sin</span> （z）， <span class="built_in">cos</span> （z）］创建符号矩阵表达式</span><br><span class="line">A = </span><br><span class="line">[ <span class="built_in">exp</span>（x）， <span class="built_in">exp</span>（x*z）］</span><br><span class="line">[<span class="built_in">sin</span>（ z），  <span class="built_in">cos</span> （z）］</span><br></pre></td></tr></table></figure></div>
+<h3 id="4、级数求和"><a href="#4、级数求和" class="headerlink" title="4、级数求和"></a>4、级数求和</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">symsum(s)     <span class="comment">%计算s从0到k-1的和</span></span><br><span class="line">symsum(s,v)    <span class="comment">%计算表达式s从0到v-1的和</span></span><br><span class="line">symsum(s,a,b)    <span class="comment">%计算自变量从a到b之间s的和</span></span><br><span class="line">symsum(s,v,a,b)    <span class="comment">%计算v从a到b之间的s的和</span></span><br></pre></td></tr></table></figure></div>
 <p>【例4-1】级数求和</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms k n x</span><br><span class="line">symsum(<span class="number">1</span>/<span class="number">2</span>^k,<span class="number">1</span>,<span class="built_in">inf</span>)    <span class="comment">%求表达式1/2^k从1到无穷的和</span></span><br><span class="line">s2 = symsum(x^k,k,<span class="number">0</span>,<span class="built_in">inf</span>)    <span class="comment">%级数求和可以得出分段函数表达式</span></span><br><span class="line">s2 = piecewise([<span class="number">1</span> &lt;= x,Inf][<span class="built_in">abs</span>(x)&lt;<span class="number">1</span>,<span class="number">-1</span>/(x<span class="number">-1</span>)])</span><br></pre></td></tr></table></figure>
-<h3 id="5、Taylor级数"><a href="#5、Taylor级数" class="headerlink" title="5、Taylor级数"></a>5、Taylor级数</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">taylor(f)     <span class="comment">%返回f的5阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v)   <span class="comment">%计算f的关于符号变量v的n-1阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v,a)    <span class="comment">%根据指定变量v，阶数n，计算f在a的级数，a可以是数值、符号或字符串</span></span><br></pre></td></tr></table></figure>
-<h2 id="三、符号表达式的化简与替换"><a href="#三、符号表达式的化简与替换" class="headerlink" title="三、符号表达式的化简与替换"></a>三、符号表达式的化简与替换</h2><h3 id="1、合并符号表达式同类项"><a href="#1、合并符号表达式同类项" class="headerlink" title="1、合并符号表达式同类项"></a>1、合并符号表达式同类项</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">R= collect(S)    <span class="comment">%按默认变量x的次数合并系数</span></span><br><span class="line">R= collect(S,v)   <span class="comment">%按指定变量v进行合并符号表达式同类项运算</span></span><br><span class="line"></span><br><span class="line">expand(S)         <span class="comment">%对符号表达式进行展开</span></span><br><span class="line"></span><br><span class="line">horner(f)          <span class="comment">%对符号表达式f进行horner分解，分解为嵌套形式的多项式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">factor</span>(f)         <span class="comment">%因式分解，n为正整数，返回值为n的质数分解式；n为多项式或整数矩阵，分解矩阵每一                          个1元素。若整数矩阵中一个元素位数超过16位，必须首先使用函数sym创建该元素</span></span><br><span class="line"></span><br><span class="line">simplify(S)       <span class="comment">%使用MuPAD化简规则对符号表达式矩阵每个元素化简</span></span><br><span class="line">simplify(S,n)      <span class="comment">%使用正整数n控制简化过程中尝试次数，默认为50</span></span><br><span class="line"></span><br><span class="line">r=simple(S)      <span class="comment">%以长度最短为目标对符号表达式简化</span></span><br><span class="line">[r,how]=simple(S)   <span class="comment">%r为简化后形式，how为简化方法</span></span><br><span class="line"></span><br><span class="line">pretty(B)     <span class="comment">%用习惯的书写方式显示符号表达式</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms k n x</span><br><span class="line">symsum(<span class="number">1</span>/<span class="number">2</span>^k,<span class="number">1</span>,<span class="built_in">inf</span>)    <span class="comment">%求表达式1/2^k从1到无穷的和</span></span><br><span class="line">s2 = symsum(x^k,k,<span class="number">0</span>,<span class="built_in">inf</span>)    <span class="comment">%级数求和可以得出分段函数表达式</span></span><br><span class="line">s2 = piecewise([<span class="number">1</span> &lt;= x,Inf][<span class="built_in">abs</span>(x)&lt;<span class="number">1</span>,<span class="number">-1</span>/(x<span class="number">-1</span>)])</span><br></pre></td></tr></table></figure></div>
+<h3 id="5、Taylor级数"><a href="#5、Taylor级数" class="headerlink" title="5、Taylor级数"></a>5、Taylor级数</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">taylor(f)     <span class="comment">%返回f的5阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v)   <span class="comment">%计算f的关于符号变量v的n-1阶麦克劳林近似多项式</span></span><br><span class="line">taylor(f,n,v,a)    <span class="comment">%根据指定变量v，阶数n，计算f在a的级数，a可以是数值、符号或字符串</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="三、符号表达式的化简与替换"><a href="#三、符号表达式的化简与替换" class="headerlink" title="三、符号表达式的化简与替换"></a>三、符号表达式的化简与替换</h2><h3 id="1、合并符号表达式同类项"><a href="#1、合并符号表达式同类项" class="headerlink" title="1、合并符号表达式同类项"></a>1、合并符号表达式同类项</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">R= collect(S)    <span class="comment">%按默认变量x的次数合并系数</span></span><br><span class="line">R= collect(S,v)   <span class="comment">%按指定变量v进行合并符号表达式同类项运算</span></span><br><span class="line"></span><br><span class="line">expand(S)         <span class="comment">%对符号表达式进行展开</span></span><br><span class="line"></span><br><span class="line">horner(f)          <span class="comment">%对符号表达式f进行horner分解，分解为嵌套形式的多项式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">factor</span>(f)         <span class="comment">%因式分解，n为正整数，返回值为n的质数分解式；n为多项式或整数矩阵，分解矩阵每一                          个1元素。若整数矩阵中一个元素位数超过16位，必须首先使用函数sym创建该元素</span></span><br><span class="line"></span><br><span class="line">simplify(S)       <span class="comment">%使用MuPAD化简规则对符号表达式矩阵每个元素化简</span></span><br><span class="line">simplify(S,n)      <span class="comment">%使用正整数n控制简化过程中尝试次数，默认为50</span></span><br><span class="line"></span><br><span class="line">r=simple(S)      <span class="comment">%以长度最短为目标对符号表达式简化</span></span><br><span class="line">[r,how]=simple(S)   <span class="comment">%r为简化后形式，how为简化方法</span></span><br><span class="line"></span><br><span class="line">pretty(B)     <span class="comment">%用习惯的书写方式显示符号表达式</span></span><br></pre></td></tr></table></figure></div>
 <h3 id="2、符号表达式的替换"><a href="#2、符号表达式的替换" class="headerlink" title="2、符号表达式的替换"></a>2、符号表达式的替换</h3><p>符号结果显冗长，子表达式出现多处可用新变量替换。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[Y,SIGMA]=subexpr(X,SIGMA)      <span class="comment">%指定变量SIGMA的值替代符号表达式中重复出现字符串，Y为替换结果</span></span><br><span class="line">[Y,SIGMA]=subexpr(X,<span class="string">'SIGMA'</span>)    <span class="comment">%第二输入为字符或者字符串</span></span><br><span class="line"></span><br><span class="line">R=subs(S)         <span class="comment">%用工作空间中变量替换S中所有符号变量</span></span><br><span class="line">R=subs(S,new)      <span class="comment">%用新符号变量new替换S中默认变量</span></span><br><span class="line">R=subs(S,old,new)   <span class="comment">%用new替换old</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[Y,SIGMA]=subexpr(X,SIGMA)      <span class="comment">%指定变量SIGMA的值替代符号表达式中重复出现字符串，Y为替换结果</span></span><br><span class="line">[Y,SIGMA]=subexpr(X,<span class="string">'SIGMA'</span>)    <span class="comment">%第二输入为字符或者字符串</span></span><br><span class="line"></span><br><span class="line">R=subs(S)         <span class="comment">%用工作空间中变量替换S中所有符号变量</span></span><br><span class="line">R=subs(S,new)      <span class="comment">%用新符号变量new替换S中默认变量</span></span><br><span class="line">R=subs(S,old,new)   <span class="comment">%用new替换old</span></span><br></pre></td></tr></table></figure></div>
 <p>【例2-1】替换</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">subs(<span class="built_in">cos</span>(a)+<span class="built_in">sin</span>(b),&#123;a,b&#125;,&#123;sym(<span class="string">'alpha'</span>),<span class="number">2</span>&#125;)</span><br><span class="line"><span class="built_in">ans</span> = <span class="built_in">sin</span>(<span class="number">2</span>) + <span class="built_in">cos</span>(alpha)             <span class="comment">%多变量替换</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">subs(<span class="built_in">cos</span>(a)+<span class="built_in">sin</span>(b),&#123;a,b&#125;,&#123;sym(<span class="string">'alpha'</span>),<span class="number">2</span>&#125;)</span><br><span class="line"><span class="built_in">ans</span> = <span class="built_in">sin</span>(<span class="number">2</span>) + <span class="built_in">cos</span>(alpha)             <span class="comment">%多变量替换</span></span><br></pre></td></tr></table></figure></div>
 <h2 id="四、符号可变精度计算"><a href="#四、符号可变精度计算" class="headerlink" title="四、符号可变精度计算"></a>四、符号可变精度计算</h2><p>数值计算受计算机字长限制，每次数值操作可能有截断误差，因此任何一次数值计算无论什么算法都可能产生累积误差。MATLAB的符号计算工具提供3个不同类型计算精度：</p>
 <p>数值类型：MATLAB浮点数计算</p>
 <p>有理数类型：MuPAD软件中精确符号计算</p>
 <p>VPA类型：MuPAD软件中任意精度计算</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">digits(D)   %设置数值精度位数D</span><br><span class="line">D&#x3D;digits     %返回当前数值精度</span><br><span class="line">R&#x3D;vpa(s)      %显示符号表达式s在当前精度下的值</span><br><span class="line">vpa(s,D)     %显示符号表达式s在精度D下的值</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line">digits(D)   %设置数值精度位数D</span><br><span class="line">D&#x3D;digits     %返回当前数值精度</span><br><span class="line">R&#x3D;vpa(s)      %显示符号表达式s在当前精度下的值</span><br><span class="line">vpa(s,D)     %显示符号表达式s在精度D下的值</span><br></pre></td></tr></table></figure></div>
 <h2 id="五、符号线性代数"><a href="#五、符号线性代数" class="headerlink" title="五、符号线性代数"></a>五、符号线性代数</h2><h3 id="1、基础代数运算"><a href="#1、基础代数运算" class="headerlink" title="1、基础代数运算"></a>1、基础代数运算</h3><h2 id="六、符号方程求解"><a href="#六、符号方程求解" class="headerlink" title="六、符号方程求解"></a>六、符号方程求解</h2><h3 id="1、求代数方程符号解"><a href="#1、求代数方程符号解" class="headerlink" title="1、求代数方程符号解"></a>1、求代数方程符号解</h3><p>代数方程包括线性，非线性和超越方程等，求解函数为solve。方程不存在符号解时，solve给出数值解。调用语法为：solve(S)——-求解S=0时符号变量的值。求解指定符号变量b可用：b = solve(S,b)</p>
 <p><code>s=solve(&#39;cos(2*x)+sin(x)=1&#39;)</code>求解f(x)=q(x)的方程</p>
-<h3 id="2、求代数方程组的符号解"><a href="#2、求代数方程组的符号解" class="headerlink" title="2、求代数方程组的符号解"></a>2、求代数方程组的符号解</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms x y alpha         <span class="comment">%创建必须的符号对象</span></span><br><span class="line">[x,y] = solve(x^<span class="number">2</span>*y^<span class="number">2</span>, x-y/<span class="number">2</span>-alpha)      <span class="comment">%解方程组</span></span><br><span class="line">esql = <span class="string">'x^2*y^2=1, x-y/2-alpha'</span>;   <span class="comment">%创建方程组</span></span><br><span class="line">[x,y] = solve(esql)</span><br><span class="line">S = solve(<span class="string">'u^2-v^2 = a^2'</span>,<span class="string">'u + v = 1'</span>,<span class="string">'a^2-2*a=3'</span>)</span><br><span class="line">S =                 <span class="comment">%返回一个结果的架构数组</span></span><br><span class="line">  包含以下字段的 struct:        <span class="comment">% S.a查看相应结果</span></span><br><span class="line">    a: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    u: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    v: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br></pre></td></tr></table></figure>
+<h3 id="2、求代数方程组的符号解"><a href="#2、求代数方程组的符号解" class="headerlink" title="2、求代数方程组的符号解"></a>2、求代数方程组的符号解</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms x y alpha         <span class="comment">%创建必须的符号对象</span></span><br><span class="line">[x,y] = solve(x^<span class="number">2</span>*y^<span class="number">2</span>, x-y/<span class="number">2</span>-alpha)      <span class="comment">%解方程组</span></span><br><span class="line">esql = <span class="string">'x^2*y^2=1, x-y/2-alpha'</span>;   <span class="comment">%创建方程组</span></span><br><span class="line">[x,y] = solve(esql)</span><br><span class="line">S = solve(<span class="string">'u^2-v^2 = a^2'</span>,<span class="string">'u + v = 1'</span>,<span class="string">'a^2-2*a=3'</span>)</span><br><span class="line">S =                 <span class="comment">%返回一个结果的架构数组</span></span><br><span class="line">  包含以下字段的 struct:        <span class="comment">% S.a查看相应结果</span></span><br><span class="line">    a: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    u: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br><span class="line">    v: [<span class="number">2</span>×<span class="number">1</span> sym]</span><br></pre></td></tr></table></figure></div>
 <h3 id="3、求微分方程符号解"><a href="#3、求微分方程符号解" class="headerlink" title="3、求微分方程符号解"></a>3、求微分方程符号解</h3><p>函数dsolve可计算常微分方程的符号解。常微分方程由包含表达微分的字母D的符号表达式表示。符号D2,D3……DN分别对应第2，第3……第N阶导数。D2y等同于表达式d²y/dt²，默认自变量为t。</p>
 <p>符号变量的名字不能包含字母D</p>
 <p>初始条件由附加方程指定，若没有指定初始条件，结果将包括积分常数项C1、C2等</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">r = dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)  <span class="comment">%eq...指定常微分方程，v代表自变量，cond...设置初始条件</span></span><br><span class="line">r = dsolve(<span class="string">'eq1'</span>,<span class="string">'eq2'</span>,...,<span class="string">'cond1'</span>,<span class="string">'cond2'</span>...,<span class="string">'v'</span>)</span><br><span class="line">dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">r = dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)  <span class="comment">%eq...指定常微分方程，v代表自变量，cond...设置初始条件</span></span><br><span class="line">r = dsolve(<span class="string">'eq1'</span>,<span class="string">'eq2'</span>,...,<span class="string">'cond1'</span>,<span class="string">'cond2'</span>...,<span class="string">'v'</span>)</span><br><span class="line">dsolve(<span class="string">'eq1,eq2,...'</span>,<span class="string">'cond1,cond2...'</span>,<span class="string">'v'</span>)</span><br></pre></td></tr></table></figure></div>
 <p>微分方程组类似方程组求解</p>
 <h2 id="七、符号积分变换"><a href="#七、符号积分变换" class="headerlink" title="七、符号积分变换"></a>七、符号积分变换</h2><h3 id="1、Fourier变换及其反变换"><a href="#1、Fourier变换及其反变换" class="headerlink" title="1、Fourier变换及其反变换"></a>1、Fourier变换及其反变换</h3><p>函数 f(x) 的傅里叶变换的定义式为：</p>
 <script type="math/tex; mode=display">
 F[f](w)=\int_{-\infty}^{\infty}{f(x)e^{-iwx}}dx</script><p>傅里叶反变换的定义式为：</p>
 <script type="math/tex; mode=display">
-F^{-1}[f](x)=\frac{1}{2π}\int_{-\infty}^{\infty}{f(x)e^{iwx}}du</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">F = fourier(f,u,v)       <span class="comment">%时域函数f的傅里叶变换F，f以u为自变量的时域函数，F以频率v为自变量的频域函数</span></span><br><span class="line">f = ifourier(F,u,v)      <span class="comment">%傅里叶反函数</span></span><br></pre></td></tr></table></figure>
+F^{-1}[f](x)=\frac{1}{2π}\int_{-\infty}^{\infty}{f(x)e^{iwx}}du</script><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">F = fourier(f,u,v)       <span class="comment">%时域函数f的傅里叶变换F，f以u为自变量的时域函数，F以频率v为自变量的频域函数</span></span><br><span class="line">f = ifourier(F,u,v)      <span class="comment">%傅里叶反函数</span></span><br></pre></td></tr></table></figure></div>
 <p>【例1-1】傅里叶变换</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms x</span><br><span class="line">f = <span class="built_in">exp</span>(-x^<span class="number">2</span>);</span><br><span class="line">fourier(f) = <span class="built_in">pi</span>^(<span class="number">1</span>/<span class="number">2</span>)/<span class="built_in">exp</span>(w^<span class="number">2</span>/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">syms x</span><br><span class="line">f = <span class="built_in">exp</span>(-x^<span class="number">2</span>);</span><br><span class="line">fourier(f) = <span class="built_in">pi</span>^(<span class="number">1</span>/<span class="number">2</span>)/<span class="built_in">exp</span>(w^<span class="number">2</span>/<span class="number">4</span>)</span><br></pre></td></tr></table></figure></div>
 <h3 id="2、Laplace变换及其反变换"><a href="#2、Laplace变换及其反变换" class="headerlink" title="2、Laplace变换及其反变换"></a>2、Laplace变换及其反变换</h3><p>Laplace变换的定义式为</p>
 <script type="math/tex; mode=display">
 L[f](s)=\int_{0}^{\infty}{f(t)e^{-ts}}dt</script><p>Laplace反变换的定义式为</p>
 <script type="math/tex; mode=display">
-L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">L = laplace(F,w,z)        <span class="comment">%时域函数F的拉普拉斯变换L，F以w为自变量的时域函数，L以频率z为自变量的频域函数</span></span><br><span class="line">F = ilaplace(L,y,x)       <span class="comment">%拉普拉斯反函数</span></span><br></pre></td></tr></table></figure>
-<h3 id="3、Z变换"><a href="#3、Z变换" class="headerlink" title="3、Z变换"></a>3、Z变换</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">F &#x3D; ztrans(f,k,w)       %时域函数f的ztrans变换F，f以k为自变量的时域函数，F以频率w为自变量的频域函数</span><br><span class="line">f &#x3D; iztrans(F,w,k)       %Z反变换</span><br></pre></td></tr></table></figure>
+L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">L = laplace(F,w,z)        <span class="comment">%时域函数F的拉普拉斯变换L，F以w为自变量的时域函数，L以频率z为自变量的频域函数</span></span><br><span class="line">F = ilaplace(L,y,x)       <span class="comment">%拉普拉斯反函数</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="3、Z变换"><a href="#3、Z变换" class="headerlink" title="3、Z变换"></a>3、Z变换</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line">F &#x3D; ztrans(f,k,w)       %时域函数f的ztrans变换F，f以k为自变量的时域函数，F以频率w为自变量的频域函数</span><br><span class="line">f &#x3D; iztrans(F,w,k)       %Z反变换</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <tags>
+        <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB的GUI程序设计</title>
+    <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
+<a id="more"></a>
+<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1. 基本知识"></a>1. 基本知识</h2><h3 id="1-1-三个基本元素"><a href="#1-1-三个基本元素" class="headerlink" title="1.1. 三个基本元素"></a>1.1. 三个基本元素</h3><p>​       1.组件： 在 MATLAB GUI 中的每一个项目(按钮，标签，编辑框等)都是一个图形化组件组件。可分为三类： 图形化控件(按钮，编辑框，列表，滑动条等)， 静态元素(窗口和文本字符串)， 菜单和坐标系。图形化控件和静态元素由函数 uicontrol 创建，菜单由函数 uimenu和 uicontextmenu 创建，坐标系经常用于显示图形化数据，由函数 axes 创建。<br>​        2.图象窗口： GUI 的每一个组件都必须安排图象窗口中。以前，我们在画数据图象时，图象窗口会被自动创建。但我们还可以用函数 figure 来创建空图象窗口，空图象窗口经常用于放置各种类型的组件。<br>​        3.响应： 最后，如果用户用鼠标单击或用键盘键入一些信息，那么程序就要有相应的动作。鼠标单击或键入信息是一个事件，如果MATLAB程序运行相应的函数，那么MATLAB函数肯定会有所反应。例如，如果用户单击一按钮，这个事件必然导致相应的 MATLAB 语执行。这些相应的语句被称为响应。只要执行 GUI 的单个图形组件，必须有一个响应。</p>
+<h3 id="1-2-启动GUI开发环境"><a href="#1-2-启动GUI开发环境" class="headerlink" title="1.2. 启动GUI开发环境"></a>1.2. 启动GUI开发环境</h3><p>1）启动操作界面—-输入 “guide”</p>
+<p>2） 新建GUI对话框—提供四个功能板块</p>
+<p>~~Blank GUI(Default):空白的GUI，不含任何控件</p>
+<p>~~GUI with Uicontrols:带用户控件（Uicontrols）的用户界面</p>
+<p>~~GUI with Axes and Menu:带坐标轴和菜单的控件</p>
+<p>~~Modal Qusetion Dialog:带询问对话框的用户界面</p>
+<p>3）得到如图所示界面：Layout编辑器</p>
+<p><img src="/assets/4.PNG" alt="4"></p>
+<p>4）运行GUI—绿色按钮<img src="/assets/image-20191229204859741.png" alt="image-20191229204859741">或快捷键Ctrl+T</p>
+<h3 id="1-3-句柄命令"><a href="#1-3-句柄命令" class="headerlink" title="1.3 句柄命令"></a>1.3 句柄命令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能描述</th>
+<th>函数名</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gca</td>
+<td>获得当前坐标轴对象的句柄</td>
+<td>copyobj</td>
+<td>复制对象</td>
+</tr>
+<tr>
+<td>gcbf</td>
+<td>获得当前正在执行调用的图形对象的句柄</td>
+<td>delete</td>
+<td>删除对象</td>
+</tr>
+<tr>
+<td>gcbo</td>
+<td>获得当前正在执行调用的对象句柄</td>
+<td>findall</td>
+<td>查找所有对象（包括隐藏句柄）</td>
+</tr>
+<tr>
+<td>gcf</td>
+<td>获得当前图形对象的句柄</td>
+<td>findobj</td>
+<td>查找指定句柄</td>
+</tr>
+<tr>
+<td>gco</td>
+<td>获得当前对象的句柄</td>
+<td>get</td>
+<td>查询对象属性值</td>
+</tr>
+<tr>
+<td>allchild</td>
+<td>获得所有子代</td>
+<td>ishandle</td>
+<td>判断是否为句柄</td>
+</tr>
+<tr>
+<td>ancestor</td>
+<td>获得父图形对象</td>
+<td>set</td>
+<td>设置对象属性值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1-4-菜单属性"><a href="#1-4-菜单属性" class="headerlink" title="1.4 菜单属性"></a>1.4 菜单属性</h3><p>创建菜单对象时可使用 uimenu 函数定义属性， set 函数改变属性。下表是MATLAB中菜单属性及属性值，带*的属性是非文件式的，使用需加小心。括号{}内属性值为默认值。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Accelerator</th>
+<th>指定菜单项等价的按键或快捷键，按键顺序：Control—字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BackgroundColor</td>
+<td>uimenu背景色，是一个3元素的RGB向量或MATLAB预先定义的颜色名称。默认的背景色是亮灰色</td>
+</tr>
+<tr>
+<td>Callback</td>
+<td>MATLAB回调字符串。选择菜单项时，回调串传给函数eval，初始值为空矩阵</td>
+</tr>
+<tr>
+<td>Checked</td>
+<td>被选项的校验标记 —- on:校验标记出现在所选项的旁边      {off}:校验标记不显示</td>
+</tr>
+<tr>
+<td>Enable</td>
+<td>菜单使能状态—-{on}:菜单项使能,选择菜单项能将 Callback字符串传给eval；菜单项不使能，菜单标志变灰，选择菜单项            off:不起任何作用</td>
+</tr>
+<tr>
+<td>ForegroundColor</td>
+<td>uimenu前景（文本）色，是一个三元素的RGB向量或 MATLAB预先定义的颜色名称。默认的前景色是黑色</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>含有菜单项标志的文本串。在PC系统中，标记中前面有＆，定义了快捷键，它由Alt - 字符激活</td>
+</tr>
+<tr>
+<td>Position</td>
+<td>Uimenu对象的相对位置。顶层菜单从左到右编号，子菜单从上至下编号</td>
+</tr>
+<tr>
+<td>Separator</td>
+<td>分割符一线模式—-on:分割线在菜单项之上              {off}:不画分割线</td>
+</tr>
+<tr>
+<td>*Visible</td>
+<td>uimenu对象的可视性—-{on}: uimenu对象在屏幕上可见            off: uimenu对象不可见</td>
+</tr>
+<tr>
+<td>ButtonDownFar</td>
+<td>当对象被选择时， MATLAB的回调传给函数eval。初始值为空矩阵</td>
+</tr>
+<tr>
+<td>Clipping</td>
+<td>其他 uimenu对象的句柄</td>
+</tr>
+<tr>
+<td>Interrruptible</td>
+<td>指明ButtonDownFcn和CallBack串是否可中断—-{on}:不可中断      off:可中断</td>
+</tr>
+<tr>
+<td>Parent</td>
+<td>父对象的句柄。若uimenue对象是顶层菜单，则为图形对象；若是子菜单，则为父的uimenu对象句柄</td>
+</tr>
+<tr>
+<td>*Select</td>
+<td>值为[on丨off]</td>
+</tr>
+<tr>
+<td>*Tag</td>
+<td>用户用于标识对象的文本串</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>只读对象辨识符，通常为uimenu</td>
+</tr>
+<tr>
+<td>UserDate</td>
+<td>用户指定的数据，矩阵、字符串等</td>
+</tr>
+<tr>
+<td>Visiable</td>
+<td>控制对象在屏幕上是否可见—-{on} ， off</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-控件"><a href="#2-控件" class="headerlink" title="2. 控件"></a>2. 控件</h2><h3 id="2-1-可选控件"><a href="#2-1-可选控件" class="headerlink" title="2.1 可选控件"></a>2.1 可选控件</h3><p>1）复选框(Check Box)：单个复选框用于在两种状态间切换，多可复选框组成的单选框组，在一组状态中做组合式选择。未选中，Value属性值为0，选中时为1；Style属性值为checkbox</p>
+<p>2）可编辑文本框(Editable text)：输入、修改文本，单行或多行模式。Style属性值为edit</p>
+<p>3）列表框(Lists boxes)：定义可供选择的字符串。Sytle属性值为listbax</p>
+<p>4）下拉列表(Pop-up menus)：显示属性值。Sytle属性值是popupmenu</p>
+<p>5）命令按钮(Push buttons)：执行预定功能或操作。Sytle属性值为pushbutton</p>
+<p>6）单选按钮(Radio buttons)：与复选框相似，进行功能互斥的选择。Sytle属性值为radiobutton</p>
+<p>7）滚动条(Sliders)：可输入指定范围的数量值。Sytle属性值为slideers</p>
+<p>8）静态文本框(Static text)：显示别的控件有关信息，不可改变内容。Sytle属性是text</p>
+<p>9）开关按钮(Toggle Button)：与命令按钮类似，不会弹起。</p>
+<p>10）坐标轴(Axes)：显示图形和图像。</p>
+<h3 id="2-2-控件属性"><a href="#2-2-控件属性" class="headerlink" title="2.2 控件属性"></a>2.2 控件属性</h3><p>可在布局窗口双击控件查看或修改属性，常规属性如下(MATLAB入门到精通P243)</p>
+<p>1）：控件风格和外观属性：BackgroundColor     CData      ForefroundColor    String    Properties</p>
+<p>2）：对象常规信息属性：Enable  Sytle  Tag  TooltipString  UserData   Position   Units   FontAngle   FontName</p>
+<p>3）：控件当前状态属性：ListboxTop    Max    Min     Value</p>
+<p>4）：控件回调函数的执行属性：BusyAction    ButtonDownFcn  CallBack  CeateBack  DeleteFcn   Interruptible</p>
+<h2 id="3-Callback函数"><a href="#3-Callback函数" class="headerlink" title="3. Callback函数"></a>3. Callback函数</h2><p>令菜单具有实际操作功能，生成M文件中子函数。</p>
+<h3 id="3-1-变量传递"><a href="#3-1-变量传递" class="headerlink" title="3.1 变量传递"></a>3.1 变量传递</h3><p>Handles~包含所有对象的句柄结构数组，可</p>
+<ol>
+<li><p>访问GUI数据</p>
+</li>
+<li><p>实现回调函数变量传递<br>handles.current_data=X;   %将句柄结构的一个域设为X<br>guidata(hobject,hanles)    %guidata函数保存该句柄结构<br>X=handles.current_data;   %其他回调函数中重新得到该变量值</p>
+</li>
+</ol>
+<h3 id="3-2-函数编写"><a href="#3-2-函数编写" class="headerlink" title="3.2 函数编写"></a>3.2 函数编写</h3><h4 id="1-响应函数类型"><a href="#1-响应函数类型" class="headerlink" title="1~响应函数类型"></a>1~响应函数类型</h4><ol>
+<li>Opening function（打开函数）：访问GUI之前实现某些操作</li>
+<li>Output function（输出函数）：将某个变量传递给另一个GUI。Varargout包含输出参数(默认一 个)的元胞数组     组，添加命令：varargout{2}=handles.second_output;创建另外的输出参数</li>
+<li>Callbacks（回调函数）：回调命令由所选控件的标签属性决定</li>
+<li>hObject图像或者是回凋对象的句柄</li>
+<li>handles具有句柄或是用户数据的结构</li>
+</ol>
+<p>命令：guidata(hObject,handles)——在函数最后阶段进行更新数据的保存</p>
+<h4 id="2-响应函数语法、参数与关联"><a href="#2-响应函数语法、参数与关联" class="headerlink" title="2~响应函数语法、参数与关联"></a>2~响应函数语法、参数与关联</h4><p>1）名称：控件标签(Tag属性)+下划线+函数属性</p>
+<p>2）关联：指定每个控件对应的响应函数，用户通过属性编辑器将其他响应属性设置为%automatic。</p>
+<h2 id="4-创建GUI"><a href="#4-创建GUI" class="headerlink" title="4. 创建GUI"></a>4. 创建GUI</h2><p>1）：guide命令打开GUI图形用户界面设计向导—-建立需要类型文件</p>
+<p>2）：添加组件，&lt;复制&gt;，&lt;工具&gt;—-&lt;对其对象&gt;，合适调整</p>
+<p>3）：设置控件属性</p>
+<p>​          文本框—-<string.>设置文字 ;    <HorizontalAlignment.>设置文字左右对齐      <FontSize.>设置字体大小</p>
+<p>4）：保存用户图形界面</p>
+<p>5）：编写程序代码</p>
+<p>6）：为图形用户界面添加标题——-添加&lt;静态文本&gt;</p>
+<p>7）：运行图形用户界面</p>
+<p>附：添加背景图片  &lt;检查器&gt;—-<CreateFcn.> —-添加代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">ha=axes(<span class="string">'units'</span>,<span class="string">'normalized'</span>,<span class="string">'pos'</span>,[<span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>]);</span><br><span class="line">uistack(ha,<span class="string">'down'</span>);</span><br><span class="line">ii=imread(<span class="string">'background.png'</span>);        <span class="comment">%照片background.png为背景</span></span><br><span class="line">image(ii);</span><br><span class="line">colormap gray</span><br><span class="line">set(ha,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'on'</span>);</span><br></pre></td></tr></table></figure></div>
+<p>改变按钮背景—-代码</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">I=imread(<span class="string">'buttoncdata.bmp'</span>);</span><br><span class="line">set(handles.pushbutton1,<span class="string">'cdata'</span>,I);</span><br></pre></td></tr></table></figure></div>
+<h2 id="5-实例解析"><a href="#5-实例解析" class="headerlink" title="5.实例解析"></a>5.实例解析</h2><p>1.简单声音播放器</p>
+<p>播放&lt;按钮&gt;CellBack函数内容:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[y,f,b]=wavread(<span class="string">'loff'</span>)     <span class="comment">%读入声音文件loff.wav</span></span><br><span class="line">sound(y,f,d)                <span class="comment">%由声卡播放声音</span></span><br></pre></td></tr></table></figure></div>
+<p>&lt;关闭&gt;按钮callback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">close(gcbf)</span><br></pre></td></tr></table></figure></div>
+<p>2.滑条界面</p>
+<p>移动滑块对应数值显示在框中，输入指定范围数字滑块移动到对应位置</p>
+<p>&lt;滑块&gt;cellback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">val=get(handles.slider1,<span class="string">'value'</span>);</span><br><span class="line">set(handles.edit1,<span class="string">'string'</span>,num2str(val))</span><br></pre></td></tr></table></figure></div>
+<p>&lt;文本框&gt;cellback函数内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">str=get(handles.edit1,<span class="string">'string'</span>);</span><br><span class="line">set(handles.slider1,<span class="string">'value'</span>,str2num(str))</span><br></pre></td></tr></table></figure></div>
+<p>3.建立多个子菜单</p>
+<p>根据&lt;标记&gt;点击&lt;查看&gt;可得到m文件中对应位置，然后添加对应代码</p>
+<p><img src="/assets/6.PNG" alt="7"><img src="/assets/7.PNG" alt="6"></p>
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
@@ -527,7 +527,7 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><f
 <p>单击常用工具栏上的“新建”图标。</p>
 <p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
 <p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure></div>
 <p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
 <p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
 <p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
@@ -541,7 +541,7 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><f
 <p>2、switch语句</p>
 <p><code>switch···case···end</code></p>
 <p>3、for循环（嵌套）</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
 <p>4、while循环</p>
 <p><code>while 表达式    执行语句      end</code></p>
 <p>5、continue命令——-break命令</p>
@@ -554,135 +554,11 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><f
 <p>如keyboard命令被放在M文件中，将终止文件的继续执行，将控制权交给键盘。可通过在提示符前显示K表征这种特殊状态，M文件中使用该命令对程序调控及修改变量都方便。为终止keyboard模式，可键入命令return，然后按回车键。</p>
 <p>3、pause命令</p>
 <p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure></div>
 <p>4、echo语句</p>
 <p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure></div>
 <h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MATLAB计算</title>
-    <url>/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/</url>
-    <content><![CDATA[<h1 id="MATLAB计算"><a href="#MATLAB计算" class="headerlink" title="MATLAB计算"></a>MATLAB计算</h1><p>关于matlab的数值计算以及符号计算问题。</p>
-<a id="more"></a>
-<h2 id="一、因式分解"><a href="#一、因式分解" class="headerlink" title="一、因式分解"></a>一、因式分解</h2><h3 id="1-矩阵基础计算"><a href="#1-矩阵基础计算" class="headerlink" title="1.矩阵基础计算"></a>1.矩阵基础计算</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">2</span>; <span class="number">1</span>; <span class="number">4</span>]; c= <span class="number">3</span>; b=c*a     <span class="comment">% b=[6; 3; 12],数量乘法</span></span><br><span class="line">y=a'                       <span class="comment">%转置</span></span><br><span class="line">d=C.'               <span class="comment">%转置复数矩阵不计算元素共轭值</span></span><br><span class="line">A.^K  A^k           <span class="comment">%数组A每个元素k次方     K个矩阵A相乘</span></span><br><span class="line">k.^A  k^A           <span class="comment">%K为底，A元素为幂       矩的阵幂</span></span><br><span class="line">A.*B                <span class="comment">%数组相乘而不是矩阵</span></span><br><span class="line">A\B   B/A           <span class="comment">%AX=B的解       XA=B的解</span></span><br><span class="line">A./B=B./A           <span class="comment">%数组元素与元素匹配相除</span></span><br><span class="line">C = A +(-) B        <span class="comment">%向量相加减（长度，类型都相同）</span></span><br><span class="line">A=[A; B]  T=[R, S]  <span class="comment">%矩阵合并</span></span><br><span class="line">Y=<span class="built_in">exp</span>(x); Z=x.^<span class="number">2</span>    <span class="comment">%向量的乘方必须在幂运算符前（^）前加上句（.）</span></span><br><span class="line"><span class="built_in">linspace</span>(a,b,n)     <span class="comment">%创建了 a、b 之间含有 n 个等差元素的向量,无n默认100</span></span><br><span class="line"><span class="built_in">logspace</span>(a,b,n)     <span class="comment">%创建 n 个对数值相隔相同的行向量</span></span><br><span class="line">norm(x)             <span class="comment">%求向量范数</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-行列式、逆和秩"><a href="#2-行列式、逆和秩" class="headerlink" title="2.行列式、逆和秩"></a>2.行列式、逆和秩</h3><p>逆矩阵: AB=BA=E    伪逆矩阵：BA=E ,AB!=E</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">det(A)    <span class="comment">%矩阵行列式值--必须为方阵    det(A^-1)=1/det(A)</span></span><br><span class="line">rank(A)    <span class="comment">%矩阵秩</span></span><br><span class="line">inv(A)     <span class="comment">%方阵A的逆矩阵B=A^-1  INF表示矩阵值为0，不存在逆矩阵</span></span><br><span class="line">pinv(A)    <span class="comment">%矩阵伪逆</span></span><br><span class="line">trance(A)   <span class="comment">%矩阵迹，即对角线元素和</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-矩阵分解"><a href="#3-矩阵分解" class="headerlink" title="3.矩阵分解"></a>3.矩阵分解</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">R=chol(A)       <span class="comment">%cholesky分解:A=R'R, A是对称且正定的   Ax=b--R'Rx=b---x=R\(R'\b)</span></span><br><span class="line">[L,U]=lu(A)     <span class="comment">% L单位对角线的下三角矩阵  U上三角矩阵  Ax=b---x=U\(L\b)</span></span><br><span class="line">[Q,R]=qr(A)     <span class="comment">%正交矩阵A，Q单位正交矩阵，R上三角矩阵  </span></span><br><span class="line">[Q1,R1]=gradelete(Q,R,<span class="built_in">j</span>)   <span class="comment">%去掉A的j列后矩阵QR分解</span></span><br><span class="line">[Q1,R1]=qrinset(Q,R,b,<span class="built_in">j</span>)   <span class="comment">%在A的j列前插入列向量b，然后QR分解</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-矩阵特征值和奇异值"><a href="#4-矩阵特征值和奇异值" class="headerlink" title="4.矩阵特征值和奇异值"></a>4.矩阵特征值和奇异值</h3><p>n阶方阵A，数λ和向量X，AX=λA成立，λ为A特征值，X为A特征向量。（A-λI)X有非0解X———丨A-λI丨=0</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">E=eig（A)                         <span class="comment">%矩阵A全部特征值构成E</span></span><br><span class="line">[V,D]=eig(A)                      <span class="comment">%矩阵A全部特征值构成对角矩阵D，A特征向量构成V列向量</span></span><br><span class="line">[V,D]=eig(A,<span class="string">'nobalance'</span>)          <span class="comment">%同上</span></span><br></pre></td></tr></table></figure>
-<p>两矢量u，v,常熟s，矩阵A满足：Av=su,A’u=sv;  s为奇异值—-对角方阵∑，U,V为奇异矢量</p>
-<p>AV=U∑   A’U=V∑      U,V正交—-A=U∑V’      奇异值分解 <code>[U,S,V]=svd(A)</code></p>
-<h2 id="二、概率统计"><a href="#二、概率统计" class="headerlink" title="二、概率统计"></a>二、概率统计</h2><h3 id="1-基本分析函数"><a href="#1-基本分析函数" class="headerlink" title="1.基本分析函数"></a>1.基本分析函数</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">B=sum(A)      B=sum(A,dim)      <span class="comment">%向量元素和或矩阵各列元素和   矩阵第dim维元素和</span></span><br><span class="line"></span><br><span class="line">B=cumsum(A)                     <span class="comment">%向量元素积和或矩阵各列元素积和  </span></span><br><span class="line">B=cumsum(A,dim)                  <span class="comment">% dim=1列方向求积和 dim=2行方向求积和</span></span><br><span class="line"></span><br><span class="line">B=prod(A)    B=prod(A,dim)        <span class="comment">%向量积或矩阵列元素积       矩阵第dim维元素积</span></span><br><span class="line"></span><br><span class="line">B=cumprod(A)  B=cumprod(A,dim)     <span class="comment">%累积乘积   dim=1列方向 dim=2 行方向</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sort</span>(A)    B=<span class="built_in">sort</span>(A,mode)       <span class="comment">%默认升序排序   mode为'ascend'表升序,'descend'表降序</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sortrows</span>(A)  B=<span class="built_in">sortrows</span>(A,column)   <span class="comment">%按行对A升序排序   基于向量column指定列排序 负号表降序</span></span><br><span class="line"></span><br><span class="line">C=<span class="built_in">max</span>(A) C=<span class="built_in">min</span>(A)                 <span class="comment">%返回向量最大元素或矩阵各列向量最大值（最小）</span></span><br><span class="line"></span><br><span class="line">M=<span class="built_in">mean</span>(A)                        <span class="comment">%平均值</span></span><br><span class="line">M=median(A)                      <span class="comment">%中值</span></span><br><span class="line">S=std(A)   S=std(A,flag)         <span class="comment">%标准差（falg取1/0表示两种方法）</span></span><br><span class="line">V=var(X)   V=var(X,<span class="number">1</span>)            <span class="comment">%方差（两种方法）</span></span><br><span class="line">C=cov(X)   C=cov(x,y)            <span class="comment">%协方差</span></span><br><span class="line"></span><br><span class="line">[r,p]=corrcoef(X)   [r,p]=corrcoef(x,y)      <span class="comment">%矩阵相关系数</span></span><br></pre></td></tr></table></figure>
-<h3 id="2、概率函数、分布函数、逆分布函数和随机数"><a href="#2、概率函数、分布函数、逆分布函数和随机数" class="headerlink" title="2、概率函数、分布函数、逆分布函数和随机数"></a>2、概率函数、分布函数、逆分布函数和随机数</h3><p>PMF(probability mass function)               <strong>概率质量函数</strong>       离散变量<br>PDF Probability density function             <strong>概率密度函数</strong>        连续变量<br>CDF(cumulative distribution function)    <strong>累积分布函数 </strong>       F(X)=P(X&lt;=x)</p>
-<p>Bernoulli distribution                                <strong>伯努利分布</strong>           也称为两点分布或者0-1分布</p>
-<script type="math/tex; mode=display">
-概率质量函数:P(x)=p^x(1-p)^{1-x}=\begin{cases} p，x=1\\ q， x=0\end{cases}</script><script type="math/tex; mode=display">
-期望值:E(x)=\sum{xP(x)}=0\cdot q+1\cdot p=p</script><script type="math/tex; mode=display">
-方差:Var(x)=E[(x-E(X)^2)]=\sum{(x-p)^2}P(x)=pq</script><p>Binomial distribution                   <strong>二项分布 </strong>           n次伯努利实验，成功概率为p，成功x次概率表示为</p>
-<script type="math/tex; mode=display">
-P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为np，方差为npq。matlab中关于二项分布三个常用指令如下</p>
-<p>Poisson distribution                      <strong>泊松分布</strong>           描述单位时间内随机事件发生的次数的概率分布，计λ为单位时间（或单位面积）内随机事件的平均发生率。期望和方差均为 λ。当二项分布n很大p很小时，泊松分布可作二项分布的近似，λ=np</p>
-<script type="math/tex; mode=display">
-概率质量函数：P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}</script><p>standard normal distribution           <strong>正态分布</strong>            期望值μ=0，即曲线图象对称轴为Y轴，标准差σ=1条件下的正态分布，记为N(0，1)。正态分布关于平均数对称。</p>
-<p>uniform distribution                         <strong>均匀分布</strong>            在相同长度间隔的分布概率相等，由两个参数a，b定义。</p>
-<script type="math/tex; mode=display">
-概率质量函数:f(x)=\begin{cases} \frac{1}{b-a},a<x<b\\ 0,else\end{cases}</script><script type="math/tex; mode=display">
-概率累积分布函数：F(x)=\begin{cases}0,x<a \\ \frac{x-a}{b-a},a\leq x\leq b \\ 1,x>b \end{cases}</script><p>chi-square distribution                     <strong>χ²分布</strong>            若n个相互独立的随机变量ξ₁，ξ₂，…,ξn ，均服从标准正态分布，则这n个服从标准正态分布的随机变量的平方和构成一新的随机变量，其分布规律称为卡方分布。</p>
-<p>F-distribution                             <strong>F分布</strong>                    （看不太懂）</p>
-<p>t-distribution                              <strong>t分布</strong>                  用于根据小样本来估计呈正态分布且方差未知的总体的均值。如果总体方差已知（例如在样本数量足够多时），则应该用正态分布来估计总体均值。</p>
-<p>常见分布的相关函数</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">分布名称</th>
-<th style="text-align:center">概率密度函数</th>
-<th style="text-align:center">累积分布函数</th>
-<th style="text-align:center">逆累积分布函数</th>
-<th style="text-align:center">随机数发生器</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">二项分布</td>
-<td style="text-align:center">binopdf</td>
-<td style="text-align:center">binocdf</td>
-<td style="text-align:center">binoinv</td>
-<td style="text-align:center">binornd</td>
-</tr>
-<tr>
-<td style="text-align:center">泊松分布</td>
-<td style="text-align:center">poisspdf</td>
-<td style="text-align:center">poisscdf</td>
-<td style="text-align:center">poissinv</td>
-<td style="text-align:center">poissrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">正态分布</td>
-<td style="text-align:center">normpdf</td>
-<td style="text-align:center">normcdf</td>
-<td style="text-align:center">norminv</td>
-<td style="text-align:center">normrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">均匀分布</td>
-<td style="text-align:center">unifpdf</td>
-<td style="text-align:center">unifcdf</td>
-<td style="text-align:center">unifinv</td>
-<td style="text-align:center">unifrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">X^2分布</td>
-<td style="text-align:center">chi2pdf</td>
-<td style="text-align:center">chi2cdf</td>
-<td style="text-align:center">chi2inv</td>
-<td style="text-align:center">chi2rnd</td>
-</tr>
-<tr>
-<td style="text-align:center">F分布</td>
-<td style="text-align:center">fpdf</td>
-<td style="text-align:center">fcdf</td>
-<td style="text-align:center">finv</td>
-<td style="text-align:center">frnd</td>
-</tr>
-<tr>
-<td style="text-align:center">t分布</td>
-<td style="text-align:center">tpdf</td>
-<td style="text-align:center">tcdf</td>
-<td style="text-align:center">tinv</td>
-<td style="text-align:center">trnd</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>​                                                        .<img src="/assets/20161207224852700.png" alt="img"></p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">N=<span class="number">100</span>;p=<span class="number">0.2</span>;k=<span class="number">0</span>:N;</span><br><span class="line">pk=binopdf(k,N,p);</span><br><span class="line">ck=binocdf(k,N,p);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);h=plotyy(k,pk,k,ck);</span><br><span class="line">text(<span class="number">55</span>,<span class="number">0.07</span>,<span class="string">'p=0.2'</span>);title(<span class="string">'二项分布'</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">20</span>;y1=poisspdf(x,<span class="number">2.5</span>);y2=poisspdf(x,<span class="number">5</span>);y3=poisspdf(x,<span class="number">10</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="built_in">plot</span>(x,y1,<span class="string">'r*'</span>,x,y2,<span class="string">'b-'</span>,x,y3,<span class="string">'g&lt;'</span>);</span><br><span class="line">title(<span class="string">'Poisson分布'</span>);</span><br><span class="line"></span><br><span class="line">x3=<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>;n=normpdf(x3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="built_in">plot</span>(x3,n);grid;</span><br><span class="line">title(<span class="string">'标准正态分布'</span>);</span><br><span class="line"></span><br><span class="line">x4=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">30</span>;</span><br><span class="line">z=chi2pdf(x4,<span class="number">1</span>);</span><br><span class="line">z1=chi2pdf(x4,<span class="number">4</span>);</span><br><span class="line">z2=chi2pdf(x4,<span class="number">10</span>);</span><br><span class="line">z3=chi2pdf(x4,<span class="number">20</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);<span class="built_in">plot</span>(x4,z,<span class="string">'r-'</span>,x4,z1,<span class="string">'-.b'</span>,x4,z2,<span class="string">':k'</span>,x4,z3,<span class="string">'--g'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'自由度为1'</span>,<span class="string">'自由度为4'</span>,<span class="string">'自由度为10'</span>,<span class="string">'自由度为20'</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0.2</span>]);title(<span class="string">'卡方分布'</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/assets/disburition.jpg" alt="disburition"></p>
-<h2 id="三、数值求导与积分"><a href="#三、数值求导与积分" class="headerlink" title="三、数值求导与积分"></a>三、数值求导与积分</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Y=diff(X)              <span class="comment">%X相邻元素间一阶差分</span></span><br><span class="line">FX=gradient(F)         <span class="comment">%向量F的一维数值梯度</span></span><br><span class="line">[FX,FY]=gradient(F)     <span class="comment">%矩阵F的二维梯度x和y部分</span></span><br><span class="line"></span><br><span class="line">q=quad(fun,,a,b)          <span class="comment">%函数fun在a到b区间数值积分----Simpson方法，，精度高</span></span><br><span class="line">q=quadl(fun,,a,b)         <span class="comment">%函数fun在a到b区间数值积分----Lobatto方法，，精度较高</span></span><br><span class="line">T=trapz(y)                <span class="comment">%计算向量或者矩阵每列的积分----梯形法，，速度快，精度差</span></span><br><span class="line">Z=cumtrapz(X,Y)           <span class="comment">%求Y对X的积分             ----梯形法</span></span><br><span class="line"></span><br><span class="line">q=dblquad(fun,xmin,xmax,ymin,ymax)        <span class="comment">%二重积分</span></span><br><span class="line">q=triplequad(fun,xmin,xmax,ymin,ymax,zmin,zmax)     <span class="comment">%三重积分</span></span><br></pre></td></tr></table></figure>
-<h2 id="四、插值"><a href="#四、插值" class="headerlink" title="四、插值"></a>四、插值</h2><p>插值指在已知数据之间计算估计值的过程。<br>一维数据插值常用函数interp1，一般的语法格式为：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">yi=interp1(x,y,xi,method)      <span class="comment">%xi为插值点向量或数组，method为插值方法</span></span><br><span class="line">method=<span class="string">'nearest'</span>       <span class="comment">%邻近点插值----速度最快，平滑性最差</span></span><br><span class="line">method=<span class="string">'linear'</span>        <span class="comment">%线性插值-----两个数据点连接直线（默认），运算时间长，占内存多</span></span><br><span class="line">method=<span class="string">'spline'</span>    <span class="comment">%三次样条插值----通过数据点拟合三次样条曲线，时间最长，占内存较少平滑性好</span></span><br><span class="line">method=<span class="string">'pchip'</span>or <span class="string">'cubic'</span>   <span class="comment">%分段立方Hermite插值方法</span></span><br></pre></td></tr></table></figure>
-<p>二维插值主要用于图形图像处理和三维曲线拟合等领域。由函数interp2实现，一般语法为：zi=interp2(x,y,z,xi,yi,method)</p>
-<p>三维插值函数interp3和n维插值函数interpn，其调用方式一般格式为：zi=interp3(x,y,z/v,xi,yi,zi,method)</p>
-<p>样条插值：根据已知数据点找一组拟合多项式，拟合过程数据组每个相邻样点对用三次多项式去拟合曲线。为保证拟合的唯一性，对三次多项式在样点处一阶、二阶导数加以约束。一般格式为</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">yy=spline(x,y,xx)   <span class="comment">%根据样点数据(x,y)，求xx对应三次样条插值</span></span><br><span class="line">pp=spline(x,y)      <span class="comment">%从样点数据(x,y),求xx对应三次样条插值</span></span><br></pre></td></tr></table></figure>
-<p>e.g.</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">strmod=&#123;<span class="string">'nearest'</span>,<span class="string">'linear'</span>,<span class="string">'spline'</span>,<span class="string">'cubic'</span>&#125;;</span><br><span class="line">strlb=&#123;<span class="string">'(a)method=nearest'</span>,<span class="string">'(b)method=linear'</span>,<span class="string">'(c)method=spline'</span>,<span class="string">'(d)method=cubic'</span>&#125;;</span><br><span class="line">x1=<span class="number">1</span>:<span class="number">10</span>;y1=<span class="built_in">cos</span>(x1);xi1=<span class="number">0</span>:<span class="number">0.25</span>:<span class="number">10</span>;</span><br><span class="line">[x2,y2,z2]=peaks(<span class="number">6</span>);</span><br><span class="line">[xi2,yi2]=<span class="built_in">meshgrid</span>(<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>);</span><br><span class="line">[x3,y3,z3,v3]=flow(<span class="number">8</span>);</span><br><span class="line">[xi3,yi3,zi3]=<span class="built_in">meshgrid</span>(<span class="number">0.1</span>:<span class="number">0.25</span>:<span class="number">10</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">yi1=interp1(x1,y1,xi1,strmod&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">i</span>)</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">'ro'</span>,xi1,yi1,<span class="string">'b'</span>),xlabel(strlb(<span class="built_in">i</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);mesh(x2,y2,z2);title(<span class="string">'原始数据'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">8</span></span><br><span class="line">zi2=interp2(x2,y2,x2,xi2,yi2,strmod&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">j</span>);mesh(xi2,yi2,zi2);title(strlb&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>);slice(x3,y3,z3,v3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);title(<span class="string">'插值前'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">10</span>:<span class="number">12</span></span><br><span class="line">vi3=interp3(x3,y3,z3,v3,xi3,yi3,zi3,strmod&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,k);slice(xi3,yi3,zi3,vi3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);xlabel(strlb&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><img src="/assets/9-1578887741457.jpg" alt="9"></p>
-<h2 id="五、曲线拟合"><a href="#五、曲线拟合" class="headerlink" title="五、曲线拟合"></a>五、曲线拟合</h2><p>​       曲线拟合用于求与一组数据最吻合的函数，用polyfit函数实现，该函数采用最小二乘法计算，使拟合函数多项式在各数据点处偏差的平方之和达最小。调用格式如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">p=polyfit(x,y,n)         <span class="comment">% P(1)*X^N + P(2)*X^(N-1) +...+ P(N)*X + P(N+1)即为该函数</span></span><br><span class="line">[p,s]=polyfit(x,y,n)     <span class="comment">% s为拟合多项式有关误差估计的结构数组</span></span><br><span class="line">p=polyfit(x,<span class="built_in">log10</span>(y),<span class="number">1</span>)  <span class="comment">% y=b(10)^mx指数函数拟合，w=log10y,z=x--w=p1z+p2</span></span><br></pre></td></tr></table></figure>
-<h2 id="六、Fourier分析"><a href="#六、Fourier分析" class="headerlink" title="六、Fourier分析"></a>六、Fourier分析</h2><p>对于离散数据，频谱分析的计算基础是离散傅里叶变换（DFT),调用如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Y=fft(X)        <span class="comment">%对数据X作一维快速离散傅里叶变换  ifft--傅里叶反变换</span></span><br><span class="line">Y=fft2(X)       <span class="comment">%二位快速傅里叶变换,相对于fft(fft(X)')'  --- ifft2</span></span><br><span class="line">Y=fftshift(X)   <span class="comment">%把变换结果Y（频域数据）中的直流分量（频率为0处值）移到中间位置---ifftshift</span></span><br></pre></td></tr></table></figure>
-<h2 id="七、微分方程"><a href="#七、微分方程" class="headerlink" title="七、微分方程"></a>七、微分方程</h2><h3 id="1、常微分方程"><a href="#1、常微分方程" class="headerlink" title="1、常微分方程"></a>1、常微分方程</h3><p>​      对广泛的、非线性性的一般常微分方程，通常不存在初等函数解析解。由于实际问题求解的需要，求近似的数值解成为解决问题的重要手段。常见求数值解的方法有欧拉折线法，阿当姆斯法，龙格—库塔法与吉尔法等。数值解不受方程类型限制，即可求任何形式常微分方程特解。龙格—库塔法精度较高，计算量适中，所以使用较广泛。调用语法如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[t,y]=ode23(filename,tspan,y0)      <span class="comment">%二阶、三阶龙格——库塔法计算</span></span><br><span class="line">[t,y]=ode45(filename,tspan,y0)      <span class="comment">%四阶、五阶龙格——库塔法计算</span></span><br><span class="line"><span class="comment">%filename是定义f(t,y)的函数文件名，Tspan的形式为[t0,f0],表示求解区间，y0是初始状态列向量</span></span><br></pre></td></tr></table></figure>
-<h3 id="2、偏微分方程"><a href="#2、偏微分方程" class="headerlink" title="2、偏微分方程"></a>2、偏微分方程</h3><p>MATLAB提供一个专门用于求解偏微分方程（PDE）的工具箱PDE Toolbox。本节介绍一些简单、经典的偏微分方程并给出求解方法：</p>
-<p>椭圆形问题：assempde()函数</p>
-<p>抛物型问题：parabolic()函数</p>
-<p>双曲型问题：hyperbolic()函数</p>
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
@@ -778,10 +654,10 @@ P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为n
 </table>
 </div>
 <p>e.g.</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x=(<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,<span class="built_in">sin</span>(x),<span class="string">'cp'</span>,x,<span class="built_in">cos</span>(x),<span class="string">'g*'</span>)</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=(<span class="number">0</span>:<span class="number">0.1</span>:<span class="number">2</span>*<span class="built_in">pi</span>);</span><br><span class="line"><span class="built_in">plot</span>(x,<span class="built_in">sin</span>(x),<span class="string">'cp'</span>,x,<span class="built_in">cos</span>(x),<span class="string">'g*'</span>)</span><br></pre></td></tr></table></figure></div>
 <h2 id="二维统计分析图"><a href="#二维统计分析图" class="headerlink" title="二维统计分析图"></a>二维统计分析图<img src="/assets/1.jpg" alt="1"></h2><h3 id="条形图，填充图，阶梯图，杆图"><a href="#条形图，填充图，阶梯图，杆图" class="headerlink" title="条形图，填充图，阶梯图，杆图"></a>条形图，填充图，阶梯图，杆图</h3><p>e.g.</p>
 <script type="math/tex; mode=display">
-y=2e^{-0.5x}</script><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="number">0.35</span>:<span class="number">7</span>; </span><br><span class="line">y=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);bar(x,y,<span class="string">'r'</span>);</span><br><span class="line">title(<span class="string">'bar(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); fill(x,y,<span class="string">'b'</span>);</span><br><span class="line">title(<span class="string">'fill(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); stairs(x,y,<span class="string">'c'</span>);</span><br><span class="line">title(<span class="string">'stairs(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);stem(x,y,<span class="string">'m'</span>);</span><br><span class="line">title(<span class="string">'stem(x,y)'</span>)</span><br></pre></td></tr></table></figure>
+y=2e^{-0.5x}</script><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>:<span class="number">0.35</span>:<span class="number">7</span>; </span><br><span class="line">y=<span class="number">2</span>*<span class="built_in">exp</span>(<span class="number">-0.5</span>*x);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);bar(x,y,<span class="string">'r'</span>);</span><br><span class="line">title(<span class="string">'bar(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); fill(x,y,<span class="string">'b'</span>);</span><br><span class="line">title(<span class="string">'fill(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); stairs(x,y,<span class="string">'c'</span>);</span><br><span class="line">title(<span class="string">'stairs(x,y)'</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);stem(x,y,<span class="string">'m'</span>);</span><br><span class="line">title(<span class="string">'stem(x,y)'</span>)</span><br></pre></td></tr></table></figure></div>
 <h3 id="散点图—scarrer"><a href="#散点图—scarrer" class="headerlink" title="散点图—scarrer()"></a>散点图—scarrer()<img src="/assets/2.jpg" alt="2"></h3><p>scarrer(x,y)</p>
 <p>scarrer(x,y,s,c)</p>
 <p>scarrer(x,y,s)</p>
@@ -791,17 +667,141 @@ y=2e^{-0.5x}</script><figure class="highlight matlab"><table><tr><td class="code
 <p>area(x,y)</p>
 <h3 id="复数图—plot"><a href="#复数图—plot" class="headerlink" title="复数图—plot()"></a>复数图—plot()</h3><p>plot(z)</p>
 <p>e.g.</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">load seamount</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>),<span class="built_in">scatter</span>(x,y,<span class="number">5</span>,z)</span><br><span class="line">x2=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">30</span>);</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">e=std(y)*<span class="built_in">ones</span>(<span class="built_in">size</span>(x));</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>),errorbar(x,y,e)</span><br><span class="line">y=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>;<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>;<span class="number">5</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">14</span>;<span class="number">8</span>,<span class="number">11</span>,<span class="number">20</span>,<span class="number">20</span>];</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>),area(y)</span><br><span class="line">grid on</span><br><span class="line">set(gca,<span class="string">'layer'</span>,<span class="string">'top'</span>)    <span class="comment">%背景透明</span></span><br><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">z=a+b*<span class="built_in">i</span>;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>),<span class="built_in">plot</span>(z)</span><br></pre></td></tr></table></figure>
-<h1 id><a href="#" class="headerlink" title></a><img src="/assets/3.jpg" alt="3"></h1><p> imread函数用于将图像文件读入MATLAB空间，inwrite函数用于将图像数据和色图数据写入图像文件。调用格式：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">load seamount</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>),<span class="built_in">scatter</span>(x,y,<span class="number">5</span>,z)</span><br><span class="line">x2=<span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">pi</span>,<span class="number">30</span>);</span><br><span class="line">y=<span class="built_in">sin</span>(x);</span><br><span class="line">e=std(y)*<span class="built_in">ones</span>(<span class="built_in">size</span>(x));</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>),errorbar(x,y,e)</span><br><span class="line">y=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>;<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>;<span class="number">5</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">14</span>;<span class="number">8</span>,<span class="number">11</span>,<span class="number">20</span>,<span class="number">20</span>];</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>),area(y)</span><br><span class="line">grid on</span><br><span class="line">set(gca,<span class="string">'layer'</span>,<span class="string">'top'</span>)    <span class="comment">%背景透明</span></span><br><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">z=a+b*<span class="built_in">i</span>;</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>),<span class="built_in">plot</span>(z)</span><br></pre></td></tr></table></figure></div>
+<h1 id=""><a href="#" class="headerlink" title=""></a><img src="/assets/3.jpg" alt="3"></h1><p> imread函数用于将图像文件读入MATLAB空间，inwrite函数用于将图像数据和色图数据写入图像文件。调用格式：</p>
 <p>A=imread(fnme)                  %fname为图像文件名</p>
 <p>imwrite(A,fname,fmt)        %fmt为图像文件格式</p>
 <p>image和imagesc函数用于图像显示，还用colormap函数设置图像色图。</p>
 <p>e.g.</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[x,cmap]=imread(<span class="string">'E:\scenery.jpg'</span>);</span><br><span class="line">image(x);colormap(cmap);</span><br><span class="line">axis image off</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[x,cmap]=imread(<span class="string">'E:\scenery.jpg'</span>);</span><br><span class="line">image(x);colormap(cmap);</span><br><span class="line">axis image off</span><br></pre></td></tr></table></figure></div>
 <h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>fix, round, ceil, floor区别</p>
 <p>histogram:统计出现次数</p>
 <p>按列优先</p>
 <p>矩阵行求和：sum(a’)’</p>
+]]></content>
+      <tags>
+        <tag>MATLAB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB计算</title>
+    <url>/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/</url>
+    <content><![CDATA[<h1 id="MATLAB计算"><a href="#MATLAB计算" class="headerlink" title="MATLAB计算"></a>MATLAB计算</h1><p>关于matlab的数值计算以及符号计算问题。</p>
+<a id="more"></a>
+<h2 id="一、因式分解"><a href="#一、因式分解" class="headerlink" title="一、因式分解"></a>一、因式分解</h2><h3 id="1-矩阵基础计算"><a href="#1-矩阵基础计算" class="headerlink" title="1.矩阵基础计算"></a>1.矩阵基础计算</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">2</span>; <span class="number">1</span>; <span class="number">4</span>]; c= <span class="number">3</span>; b=c*a     <span class="comment">% b=[6; 3; 12],数量乘法</span></span><br><span class="line">y=a'                       <span class="comment">%转置</span></span><br><span class="line">d=C.'               <span class="comment">%转置复数矩阵不计算元素共轭值</span></span><br><span class="line">A.^K  A^k           <span class="comment">%数组A每个元素k次方     K个矩阵A相乘</span></span><br><span class="line">k.^A  k^A           <span class="comment">%K为底，A元素为幂       矩的阵幂</span></span><br><span class="line">A.*B                <span class="comment">%数组相乘而不是矩阵</span></span><br><span class="line">A\B   B/A           <span class="comment">%AX=B的解       XA=B的解</span></span><br><span class="line">A./B=B./A           <span class="comment">%数组元素与元素匹配相除</span></span><br><span class="line">C = A +(-) B        <span class="comment">%向量相加减（长度，类型都相同）</span></span><br><span class="line">A=[A; B]  T=[R, S]  <span class="comment">%矩阵合并</span></span><br><span class="line">Y=<span class="built_in">exp</span>(x); Z=x.^<span class="number">2</span>    <span class="comment">%向量的乘方必须在幂运算符前（^）前加上句（.）</span></span><br><span class="line"><span class="built_in">linspace</span>(a,b,n)     <span class="comment">%创建了 a、b 之间含有 n 个等差元素的向量,无n默认100</span></span><br><span class="line"><span class="built_in">logspace</span>(a,b,n)     <span class="comment">%创建 n 个对数值相隔相同的行向量</span></span><br><span class="line">norm(x)             <span class="comment">%求向量范数</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2-行列式、逆和秩"><a href="#2-行列式、逆和秩" class="headerlink" title="2.行列式、逆和秩"></a>2.行列式、逆和秩</h3><p>逆矩阵: AB=BA=E    伪逆矩阵：BA=E ,AB!=E</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">det(A)    <span class="comment">%矩阵行列式值--必须为方阵    det(A^-1)=1/det(A)</span></span><br><span class="line">rank(A)    <span class="comment">%矩阵秩</span></span><br><span class="line">inv(A)     <span class="comment">%方阵A的逆矩阵B=A^-1  INF表示矩阵值为0，不存在逆矩阵</span></span><br><span class="line">pinv(A)    <span class="comment">%矩阵伪逆</span></span><br><span class="line">trance(A)   <span class="comment">%矩阵迹，即对角线元素和</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="3-矩阵分解"><a href="#3-矩阵分解" class="headerlink" title="3.矩阵分解"></a>3.矩阵分解</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">R=chol(A)       <span class="comment">%cholesky分解:A=R'R, A是对称且正定的   Ax=b--R'Rx=b---x=R\(R'\b)</span></span><br><span class="line">[L,U]=lu(A)     <span class="comment">% L单位对角线的下三角矩阵  U上三角矩阵  Ax=b---x=U\(L\b)</span></span><br><span class="line">[Q,R]=qr(A)     <span class="comment">%正交矩阵A，Q单位正交矩阵，R上三角矩阵  </span></span><br><span class="line">[Q1,R1]=gradelete(Q,R,<span class="built_in">j</span>)   <span class="comment">%去掉A的j列后矩阵QR分解</span></span><br><span class="line">[Q1,R1]=qrinset(Q,R,b,<span class="built_in">j</span>)   <span class="comment">%在A的j列前插入列向量b，然后QR分解</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="4-矩阵特征值和奇异值"><a href="#4-矩阵特征值和奇异值" class="headerlink" title="4.矩阵特征值和奇异值"></a>4.矩阵特征值和奇异值</h3><p>n阶方阵A，数λ和向量X，AX=λA成立，λ为A特征值，X为A特征向量。（A-λI)X有非0解X———丨A-λI丨=0</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">E=eig（A)                         <span class="comment">%矩阵A全部特征值构成E</span></span><br><span class="line">[V,D]=eig(A)                      <span class="comment">%矩阵A全部特征值构成对角矩阵D，A特征向量构成V列向量</span></span><br><span class="line">[V,D]=eig(A,<span class="string">'nobalance'</span>)          <span class="comment">%同上</span></span><br></pre></td></tr></table></figure></div>
+<p>两矢量u，v,常熟s，矩阵A满足：Av=su,A’u=sv;  s为奇异值—-对角方阵∑，U,V为奇异矢量</p>
+<p>AV=U∑   A’U=V∑      U,V正交—-A=U∑V’      奇异值分解 <code>[U,S,V]=svd(A)</code></p>
+<h2 id="二、概率统计"><a href="#二、概率统计" class="headerlink" title="二、概率统计"></a>二、概率统计</h2><h3 id="1-基本分析函数"><a href="#1-基本分析函数" class="headerlink" title="1.基本分析函数"></a>1.基本分析函数</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">B=sum(A)      B=sum(A,dim)      <span class="comment">%向量元素和或矩阵各列元素和   矩阵第dim维元素和</span></span><br><span class="line"></span><br><span class="line">B=cumsum(A)                     <span class="comment">%向量元素积和或矩阵各列元素积和  </span></span><br><span class="line">B=cumsum(A,dim)                  <span class="comment">% dim=1列方向求积和 dim=2行方向求积和</span></span><br><span class="line"></span><br><span class="line">B=prod(A)    B=prod(A,dim)        <span class="comment">%向量积或矩阵列元素积       矩阵第dim维元素积</span></span><br><span class="line"></span><br><span class="line">B=cumprod(A)  B=cumprod(A,dim)     <span class="comment">%累积乘积   dim=1列方向 dim=2 行方向</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sort</span>(A)    B=<span class="built_in">sort</span>(A,mode)       <span class="comment">%默认升序排序   mode为'ascend'表升序,'descend'表降序</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sortrows</span>(A)  B=<span class="built_in">sortrows</span>(A,column)   <span class="comment">%按行对A升序排序   基于向量column指定列排序 负号表降序</span></span><br><span class="line"></span><br><span class="line">C=<span class="built_in">max</span>(A) C=<span class="built_in">min</span>(A)                 <span class="comment">%返回向量最大元素或矩阵各列向量最大值（最小）</span></span><br><span class="line"></span><br><span class="line">M=<span class="built_in">mean</span>(A)                        <span class="comment">%平均值</span></span><br><span class="line">M=median(A)                      <span class="comment">%中值</span></span><br><span class="line">S=std(A)   S=std(A,flag)         <span class="comment">%标准差（falg取1/0表示两种方法）</span></span><br><span class="line">V=var(X)   V=var(X,<span class="number">1</span>)            <span class="comment">%方差（两种方法）</span></span><br><span class="line">C=cov(X)   C=cov(x,y)            <span class="comment">%协方差</span></span><br><span class="line"></span><br><span class="line">[r,p]=corrcoef(X)   [r,p]=corrcoef(x,y)      <span class="comment">%矩阵相关系数</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2、概率函数、分布函数、逆分布函数和随机数"><a href="#2、概率函数、分布函数、逆分布函数和随机数" class="headerlink" title="2、概率函数、分布函数、逆分布函数和随机数"></a>2、概率函数、分布函数、逆分布函数和随机数</h3><p>PMF(probability mass function)               <strong>概率质量函数</strong>       离散变量<br>PDF Probability density function             <strong>概率密度函数</strong>        连续变量<br>CDF(cumulative distribution function)    <strong>累积分布函数 </strong>       F(X)=P(X&lt;=x)</p>
+<p>Bernoulli distribution                                <strong>伯努利分布</strong>           也称为两点分布或者0-1分布</p>
+<script type="math/tex; mode=display">
+概率质量函数:P(x)=p^x(1-p)^{1-x}=\begin{cases} p，x=1\\ q， x=0\end{cases}</script><script type="math/tex; mode=display">
+期望值:E(x)=\sum{xP(x)}=0\cdot q+1\cdot p=p</script><script type="math/tex; mode=display">
+方差:Var(x)=E[(x-E(X)^2)]=\sum{(x-p)^2}P(x)=pq</script><p>Binomial distribution                   <strong>二项分布 </strong>           n次伯努利实验，成功概率为p，成功x次概率表示为</p>
+<script type="math/tex; mode=display">
+P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为np，方差为npq。matlab中关于二项分布三个常用指令如下</p>
+<p>Poisson distribution                      <strong>泊松分布</strong>           描述单位时间内随机事件发生的次数的概率分布，计λ为单位时间（或单位面积）内随机事件的平均发生率。期望和方差均为 λ。当二项分布n很大p很小时，泊松分布可作二项分布的近似，λ=np</p>
+<script type="math/tex; mode=display">
+概率质量函数：P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}</script><p>standard normal distribution           <strong>正态分布</strong>            期望值μ=0，即曲线图象对称轴为Y轴，标准差σ=1条件下的正态分布，记为N(0，1)。正态分布关于平均数对称。</p>
+<p>uniform distribution                         <strong>均匀分布</strong>            在相同长度间隔的分布概率相等，由两个参数a，b定义。</p>
+<script type="math/tex; mode=display">
+概率质量函数:f(x)=\begin{cases} \frac{1}{b-a},a<x<b\\ 0,else\end{cases}</script><script type="math/tex; mode=display">
+概率累积分布函数：F(x)=\begin{cases}0,x<a \\ \frac{x-a}{b-a},a\leq x\leq b \\ 1,x>b \end{cases}</script><p>chi-square distribution                     <strong>χ²分布</strong>            若n个相互独立的随机变量ξ₁，ξ₂，…,ξn ，均服从标准正态分布，则这n个服从标准正态分布的随机变量的平方和构成一新的随机变量，其分布规律称为卡方分布。</p>
+<p>F-distribution                             <strong>F分布</strong>                    （看不太懂）</p>
+<p>t-distribution                              <strong>t分布</strong>                  用于根据小样本来估计呈正态分布且方差未知的总体的均值。如果总体方差已知（例如在样本数量足够多时），则应该用正态分布来估计总体均值。</p>
+<p>常见分布的相关函数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">分布名称</th>
+<th style="text-align:center">概率密度函数</th>
+<th style="text-align:center">累积分布函数</th>
+<th style="text-align:center">逆累积分布函数</th>
+<th style="text-align:center">随机数发生器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">二项分布</td>
+<td style="text-align:center">binopdf</td>
+<td style="text-align:center">binocdf</td>
+<td style="text-align:center">binoinv</td>
+<td style="text-align:center">binornd</td>
+</tr>
+<tr>
+<td style="text-align:center">泊松分布</td>
+<td style="text-align:center">poisspdf</td>
+<td style="text-align:center">poisscdf</td>
+<td style="text-align:center">poissinv</td>
+<td style="text-align:center">poissrnd</td>
+</tr>
+<tr>
+<td style="text-align:center">正态分布</td>
+<td style="text-align:center">normpdf</td>
+<td style="text-align:center">normcdf</td>
+<td style="text-align:center">norminv</td>
+<td style="text-align:center">normrnd</td>
+</tr>
+<tr>
+<td style="text-align:center">均匀分布</td>
+<td style="text-align:center">unifpdf</td>
+<td style="text-align:center">unifcdf</td>
+<td style="text-align:center">unifinv</td>
+<td style="text-align:center">unifrnd</td>
+</tr>
+<tr>
+<td style="text-align:center">X^2分布</td>
+<td style="text-align:center">chi2pdf</td>
+<td style="text-align:center">chi2cdf</td>
+<td style="text-align:center">chi2inv</td>
+<td style="text-align:center">chi2rnd</td>
+</tr>
+<tr>
+<td style="text-align:center">F分布</td>
+<td style="text-align:center">fpdf</td>
+<td style="text-align:center">fcdf</td>
+<td style="text-align:center">finv</td>
+<td style="text-align:center">frnd</td>
+</tr>
+<tr>
+<td style="text-align:center">t分布</td>
+<td style="text-align:center">tpdf</td>
+<td style="text-align:center">tcdf</td>
+<td style="text-align:center">tinv</td>
+<td style="text-align:center">trnd</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                        .<img src="/assets/20161207224852700.png" alt="img"></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">N=<span class="number">100</span>;p=<span class="number">0.2</span>;k=<span class="number">0</span>:N;</span><br><span class="line">pk=binopdf(k,N,p);</span><br><span class="line">ck=binocdf(k,N,p);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);h=plotyy(k,pk,k,ck);</span><br><span class="line">text(<span class="number">55</span>,<span class="number">0.07</span>,<span class="string">'p=0.2'</span>);title(<span class="string">'二项分布'</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">20</span>;y1=poisspdf(x,<span class="number">2.5</span>);y2=poisspdf(x,<span class="number">5</span>);y3=poisspdf(x,<span class="number">10</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="built_in">plot</span>(x,y1,<span class="string">'r*'</span>,x,y2,<span class="string">'b-'</span>,x,y3,<span class="string">'g&lt;'</span>);</span><br><span class="line">title(<span class="string">'Poisson分布'</span>);</span><br><span class="line"></span><br><span class="line">x3=<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>;n=normpdf(x3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="built_in">plot</span>(x3,n);grid;</span><br><span class="line">title(<span class="string">'标准正态分布'</span>);</span><br><span class="line"></span><br><span class="line">x4=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">30</span>;</span><br><span class="line">z=chi2pdf(x4,<span class="number">1</span>);</span><br><span class="line">z1=chi2pdf(x4,<span class="number">4</span>);</span><br><span class="line">z2=chi2pdf(x4,<span class="number">10</span>);</span><br><span class="line">z3=chi2pdf(x4,<span class="number">20</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);<span class="built_in">plot</span>(x4,z,<span class="string">'r-'</span>,x4,z1,<span class="string">'-.b'</span>,x4,z2,<span class="string">':k'</span>,x4,z3,<span class="string">'--g'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'自由度为1'</span>,<span class="string">'自由度为4'</span>,<span class="string">'自由度为10'</span>,<span class="string">'自由度为20'</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0.2</span>]);title(<span class="string">'卡方分布'</span>);</span><br></pre></td></tr></table></figure></div>
+<p><img src="/assets/disburition.jpg" alt="disburition"></p>
+<h2 id="三、数值求导与积分"><a href="#三、数值求导与积分" class="headerlink" title="三、数值求导与积分"></a>三、数值求导与积分</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=diff(X)              <span class="comment">%X相邻元素间一阶差分</span></span><br><span class="line">FX=gradient(F)         <span class="comment">%向量F的一维数值梯度</span></span><br><span class="line">[FX,FY]=gradient(F)     <span class="comment">%矩阵F的二维梯度x和y部分</span></span><br><span class="line"></span><br><span class="line">q=quad(fun,,a,b)          <span class="comment">%函数fun在a到b区间数值积分----Simpson方法，，精度高</span></span><br><span class="line">q=quadl(fun,,a,b)         <span class="comment">%函数fun在a到b区间数值积分----Lobatto方法，，精度较高</span></span><br><span class="line">T=trapz(y)                <span class="comment">%计算向量或者矩阵每列的积分----梯形法，，速度快，精度差</span></span><br><span class="line">Z=cumtrapz(X,Y)           <span class="comment">%求Y对X的积分             ----梯形法</span></span><br><span class="line"></span><br><span class="line">q=dblquad(fun,xmin,xmax,ymin,ymax)        <span class="comment">%二重积分</span></span><br><span class="line">q=triplequad(fun,xmin,xmax,ymin,ymax,zmin,zmax)     <span class="comment">%三重积分</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="四、插值"><a href="#四、插值" class="headerlink" title="四、插值"></a>四、插值</h2><p>插值指在已知数据之间计算估计值的过程。<br>一维数据插值常用函数interp1，一般的语法格式为：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yi=interp1(x,y,xi,method)      <span class="comment">%xi为插值点向量或数组，method为插值方法</span></span><br><span class="line">method=<span class="string">'nearest'</span>       <span class="comment">%邻近点插值----速度最快，平滑性最差</span></span><br><span class="line">method=<span class="string">'linear'</span>        <span class="comment">%线性插值-----两个数据点连接直线（默认），运算时间长，占内存多</span></span><br><span class="line">method=<span class="string">'spline'</span>    <span class="comment">%三次样条插值----通过数据点拟合三次样条曲线，时间最长，占内存较少平滑性好</span></span><br><span class="line">method=<span class="string">'pchip'</span>or <span class="string">'cubic'</span>   <span class="comment">%分段立方Hermite插值方法</span></span><br></pre></td></tr></table></figure></div>
+<p>二维插值主要用于图形图像处理和三维曲线拟合等领域。由函数interp2实现，一般语法为：zi=interp2(x,y,z,xi,yi,method)</p>
+<p>三维插值函数interp3和n维插值函数interpn，其调用方式一般格式为：zi=interp3(x,y,z/v,xi,yi,zi,method)</p>
+<p>样条插值：根据已知数据点找一组拟合多项式，拟合过程数据组每个相邻样点对用三次多项式去拟合曲线。为保证拟合的唯一性，对三次多项式在样点处一阶、二阶导数加以约束。一般格式为</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yy=spline(x,y,xx)   <span class="comment">%根据样点数据(x,y)，求xx对应三次样条插值</span></span><br><span class="line">pp=spline(x,y)      <span class="comment">%从样点数据(x,y),求xx对应三次样条插值</span></span><br></pre></td></tr></table></figure></div>
+<p>e.g.</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">strmod=&#123;<span class="string">'nearest'</span>,<span class="string">'linear'</span>,<span class="string">'spline'</span>,<span class="string">'cubic'</span>&#125;;</span><br><span class="line">strlb=&#123;<span class="string">'(a)method=nearest'</span>,<span class="string">'(b)method=linear'</span>,<span class="string">'(c)method=spline'</span>,<span class="string">'(d)method=cubic'</span>&#125;;</span><br><span class="line">x1=<span class="number">1</span>:<span class="number">10</span>;y1=<span class="built_in">cos</span>(x1);xi1=<span class="number">0</span>:<span class="number">0.25</span>:<span class="number">10</span>;</span><br><span class="line">[x2,y2,z2]=peaks(<span class="number">6</span>);</span><br><span class="line">[xi2,yi2]=<span class="built_in">meshgrid</span>(<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>);</span><br><span class="line">[x3,y3,z3,v3]=flow(<span class="number">8</span>);</span><br><span class="line">[xi3,yi3,zi3]=<span class="built_in">meshgrid</span>(<span class="number">0.1</span>:<span class="number">0.25</span>:<span class="number">10</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">yi1=interp1(x1,y1,xi1,strmod&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">i</span>)</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">'ro'</span>,xi1,yi1,<span class="string">'b'</span>),xlabel(strlb(<span class="built_in">i</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);mesh(x2,y2,z2);title(<span class="string">'原始数据'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">8</span></span><br><span class="line">zi2=interp2(x2,y2,x2,xi2,yi2,strmod&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">j</span>);mesh(xi2,yi2,zi2);title(strlb&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>);slice(x3,y3,z3,v3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);title(<span class="string">'插值前'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">10</span>:<span class="number">12</span></span><br><span class="line">vi3=interp3(x3,y3,z3,v3,xi3,yi3,zi3,strmod&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,k);slice(xi3,yi3,zi3,vi3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);xlabel(strlb&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="/assets/9-1578887741457.jpg" alt="9"></p>
+<h2 id="五、曲线拟合"><a href="#五、曲线拟合" class="headerlink" title="五、曲线拟合"></a>五、曲线拟合</h2><p>​       曲线拟合用于求与一组数据最吻合的函数，用polyfit函数实现，该函数采用最小二乘法计算，使拟合函数多项式在各数据点处偏差的平方之和达最小。调用格式如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">p=polyfit(x,y,n)         <span class="comment">% P(1)*X^N + P(2)*X^(N-1) +...+ P(N)*X + P(N+1)即为该函数</span></span><br><span class="line">[p,s]=polyfit(x,y,n)     <span class="comment">% s为拟合多项式有关误差估计的结构数组</span></span><br><span class="line">p=polyfit(x,<span class="built_in">log10</span>(y),<span class="number">1</span>)  <span class="comment">% y=b(10)^mx指数函数拟合，w=log10y,z=x--w=p1z+p2</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="六、Fourier分析"><a href="#六、Fourier分析" class="headerlink" title="六、Fourier分析"></a>六、Fourier分析</h2><p>对于离散数据，频谱分析的计算基础是离散傅里叶变换（DFT),调用如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=fft(X)        <span class="comment">%对数据X作一维快速离散傅里叶变换  ifft--傅里叶反变换</span></span><br><span class="line">Y=fft2(X)       <span class="comment">%二位快速傅里叶变换,相对于fft(fft(X)')'  --- ifft2</span></span><br><span class="line">Y=fftshift(X)   <span class="comment">%把变换结果Y（频域数据）中的直流分量（频率为0处值）移到中间位置---ifftshift</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="七、微分方程"><a href="#七、微分方程" class="headerlink" title="七、微分方程"></a>七、微分方程</h2><h3 id="1、常微分方程"><a href="#1、常微分方程" class="headerlink" title="1、常微分方程"></a>1、常微分方程</h3><p>​      对广泛的、非线性性的一般常微分方程，通常不存在初等函数解析解。由于实际问题求解的需要，求近似的数值解成为解决问题的重要手段。常见求数值解的方法有欧拉折线法，阿当姆斯法，龙格—库塔法与吉尔法等。数值解不受方程类型限制，即可求任何形式常微分方程特解。龙格—库塔法精度较高，计算量适中，所以使用较广泛。调用语法如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[t,y]=ode23(filename,tspan,y0)      <span class="comment">%二阶、三阶龙格——库塔法计算</span></span><br><span class="line">[t,y]=ode45(filename,tspan,y0)      <span class="comment">%四阶、五阶龙格——库塔法计算</span></span><br><span class="line"><span class="comment">%filename是定义f(t,y)的函数文件名，Tspan的形式为[t0,f0],表示求解区间，y0是初始状态列向量</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2、偏微分方程"><a href="#2、偏微分方程" class="headerlink" title="2、偏微分方程"></a>2、偏微分方程</h3><p>MATLAB提供一个专门用于求解偏微分方程（PDE）的工具箱PDE Toolbox。本节介绍一些简单、经典的偏微分方程并给出求解方法：</p>
+<p>椭圆形问题：assempde()函数</p>
+<p>抛物型问题：parabolic()函数</p>
+<p>双曲型问题：hyperbolic()函数</p>
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
