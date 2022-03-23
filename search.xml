@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>DAYS</title>
+    <url>/2022/03/22/DAYS/</url>
+    <content><![CDATA[<p>test</p>
+<p>！！！</p>
+]]></content>
+      <tags>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MATLAB的GUI程序设计</title>
     <url>/2020/03/22/MATLAB%E7%9A%84GUI%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<h1 id="MATLAB的GUI程序设计"><a href="#MATLAB的GUI程序设计" class="headerlink" title="MATLAB的GUI程序设计"></a>MATLAB的GUI程序设计</h1><p>图形用户界面(Graphical User Intervaces)是包含图像对象和文本的用户界面，介绍GUI的基本元素。</p>
@@ -218,16 +228,6 @@
 ]]></content>
       <tags>
         <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DAYS</title>
-    <url>/2022/03/22/DAYS/</url>
-    <content><![CDATA[<p>test</p>
-<p>！！！</p>
-]]></content>
-      <tags>
-        <tag>diary</tag>
       </tags>
   </entry>
   <entry>
