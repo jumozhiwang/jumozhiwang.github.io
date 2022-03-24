@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-03-22T15:09:45.654Z</updated>
+  <updated>2022-03-24T16:43:34.927Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>verilog 语言</title>
+    <link href="http://yoursite.com/2022/03/24/verilog-%E8%AF%AD%E8%A8%80/"/>
+    <id>http://yoursite.com/2022/03/24/verilog-%E8%AF%AD%E8%A8%80/</id>
+    <published>2022-03-24T14:58:44.000Z</published>
+    <updated>2022-03-24T16:43:34.927Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Verilog-HDL"><a href="#Verilog-HDL" class="headerlink" title="Verilog HDL"></a>Verilog HDL</h1><p>参考:《Adcanced Digital Design with the Verilog HDL》 Second Edition by Michael D.Ciletti</p><a id="more"></a><h2 id="Verilog基础"><a href="#Verilog基础" class="headerlink" title="Verilog基础"></a>Verilog基础</h2><p>狄摩根(DeMorgan)定理：</p><script type="math/tex; mode=display">(A+B+C+...)'=A'\cdot B' \cdot C' \cdot...</script><p>香农(Shannon)公式：</p><script type="math/tex; mode=display">f(x_1,x_2,...,x_i,x_{i+1},...,x_n)=x_i \cdot f_{xi}+x_{i'}\cdot f_{xi'}=(x_i+f_{xi'})\cdot(f_{i'}+f_{xi})\\f_{xi}=f(x_1,x_2,...,x_{i-1},1,x_{i+1},...,x_n)\\f_{xi'}=f(x_1,x_2,...,x_{i-1},0,x_{i+1},...,x_n)</script><p>其中布尔函数$\ f $的微分为：$\ \partial f / \partial x_i=f_{xi}\oplus f_{xi’}$ </p><p>静态冒险：由不同扇出路径上的不同传播时延造成。对于同步时序电路，通过延长时钟周期消除。</p><p>两级电路消除静态1冒险：用质蕴涵项覆盖函数积之和形式的卡诺图中相邻单元所有1格。</p><p>两级电路消除静态0冒险：覆盖无静态1冒险函数积之和形式中所有相邻的0格。</p><p>多级电路中静态冒险：将输出表达式的多级描述转换成“瞬态输出函数”的积之和形式$f_{tof}$。变量与其反变量的乘积($aa’$)揭示了哪个输入中含有静态0冒险，变量与其反变量之和($a+a’$)揭示了哪个输入中含有静态1冒险。然后化为两级电路消除冒险。</p><p>动态冒险：多条重新汇聚路径所导致的的多个静态冒险的结果。不存在静态冒险，也就不存在动态冒险，因此通过消除静态冒险消除。</p><p>Multiplexers(多路复用器)           Demultiplexers(多路解复用器)</p><p>Encoders(编码器)                             Decoder(译码器)</p><p>Synchronous sequential circuit(同步时序电路)                             Asynchronous sequential circuit(异步时序电路)</p><p>Latches(锁存器)                         Filp-Flops(触发器)</p><h2 id="Verilog语言结构"><a href="#Verilog语言结构" class="headerlink" title="Verilog语言结构"></a>Verilog语言结构</h2><p>一般结构为：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> name (<span class="keyword">output</span>,<span class="keyword">input</span>)</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Verilog-HDL&quot;&gt;&lt;a href=&quot;#Verilog-HDL&quot; class=&quot;headerlink&quot; title=&quot;Verilog HDL&quot;&gt;&lt;/a&gt;Verilog HDL&lt;/h1&gt;&lt;p&gt;参考:《Adcanced Digital Design with the Verilog HDL》 Second Edition by Michael D.Ciletti&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="http://yoursite.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="verilog" scheme="http://yoursite.com/tags/verilog/"/>
+    
+  </entry>
   
   <entry>
     <title>DAYS</title>
