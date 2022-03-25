@@ -1856,7 +1856,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffb4;
+  background: #9a9542;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3153,6 +3153,12 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+code {
+  color: #ce8349;
+  background: #21252b;
+  opacity: 0.8;
+  margin: 2px;
 }
 .highlight,
 pre {
