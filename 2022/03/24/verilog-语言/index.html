@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="LSP&#39;s Home">
 <meta property="og:description" content="Verilog HDL参考:《Adcanced Digital Design with the Verilog HDL》 Second Edition by Michael D.Ciletti">
 <meta property="article:published_time" content="2022-03-24T14:58:44.000Z">
-<meta property="article:modified_time" content="2022-03-25T03:03:20.128Z">
+<meta property="article:modified_time" content="2022-03-26T07:33:42.934Z">
 <meta property="article:author" content="tangxingfeng">
 <meta property="article:tag" content="verilog">
 <meta name="twitter:card" content="summary">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  439
+                  801
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -443,12 +443,62 @@ f_{xi'}=f(x_1,x_2,...,x_{i-1},0,x_{i+1},...,x_n)</script><p>其中布尔函数$\
 <p>两级电路消除静态0冒险：覆盖无静态1冒险函数积之和形式中所有相邻的0格。</p>
 <p>多级电路中静态冒险：将输出表达式的多级描述转换成“瞬态输出函数”的积之和形式$f_{tof}$。变量与其反变量的乘积($aa’$)揭示了哪个输入中含有静态0冒险，变量与其反变量之和($a+a’$)揭示了哪个输入中含有静态1冒险。然后化为两级电路消除冒险。</p>
 <p>动态冒险：多条重新汇聚路径所导致的的多个静态冒险的结果。不存在静态冒险，也就不存在动态冒险，因此通过消除静态冒险消除。</p>
-<p>Multiplexers(多路复用器)           Demultiplexers(多路解复用器)</p>
-<p>Encoders(编码器)                             Decoder(译码器)</p>
-<p>Synchronous sequential circuit(同步时序电路)                             Asynchronous sequential circuit(异步时序电路)</p>
-<p>Latches(锁存器)                         Filp-Flops(触发器)</p>
-<h2 id="Verilog语言结构"><a href="#Verilog语言结构" class="headerlink" title="Verilog语言结构"></a>Verilog语言结构</h2><p>一般结构为：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> name (<span class="keyword">output</span>,<span class="keyword">input</span>)</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+<p>Multiplexers(多路复用器)</p>
+<p>Demultiplexers(多路解复用器)</p>
+<p>Encoders(编码器)</p>
+<p>Decoder(译码器)</p>
+<p>Synchronous sequential circuit(同步时序电路)</p>
+<p>Asynchronous sequential circuit(异步时序电路)</p>
+<p>Latches(锁存器)</p>
+<p>Filp-Flops(触发器)</p>
+<h2 id="Verilog语言结构"><a href="#Verilog语言结构" class="headerlink" title="Verilog语言结构"></a>Verilog语言结构</h2><h3 id="模块结构"><a href="#模块结构" class="headerlink" title="模块结构"></a>模块结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> name (<span class="keyword">output</span>,<span class="keyword">input</span>);</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+<p>逻辑门：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">与</th>
+<th style="text-align:center">与非</th>
+<th style="text-align:center">或</th>
+<th style="text-align:center">或非</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">and</td>
+<td style="text-align:center">nand</td>
+<td style="text-align:center">or</td>
+<td style="text-align:center">nor</td>
+</tr>
+<tr>
+<td style="text-align:center">异或</td>
+<td style="text-align:center">异或非（同或）</td>
+<td style="text-align:center">缓冲器</td>
+<td style="text-align:center">反相器</td>
+</tr>
+<tr>
+<td style="text-align:center">xor</td>
+<td style="text-align:center">xnor</td>
+<td style="text-align:center">buf</td>
+<td style="text-align:center">not</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 模块嵌套—&gt;自顶向下</p>
+<p>Verilog矢量：规定区间最左端为最高位，若选取部分在原区间外，返回值x。</p>
+<p>逻辑==x==意味着未知值，逻辑==z==意味着高阻</p>
+<p>未声明的标识符默认为==wire==类型</p>
+<p>*当三态门使能信号无效时会产生一个z值，而当两个相反输入驱动wire信号时，会产生x值。</p>
+<h3 id="测试模块"><a href="#测试模块" class="headerlink" title="测试模块"></a>测试模块</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> a,b;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Time Out</span></span><br><span class="line">    #<span class="number">100</span> <span class="built_in">$finish</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Stimulus patterns</span></span><br><span class="line">    #<span class="number">10</span> a=b;b=<span class="number">0</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> a=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>由关键词==initial==定义，通过填充关键词==begin…end==之间语句完成。</p>
+<p>关键词==reg==声明测试的输入，待测输出则可定义为wire型。</p>
+<p>*Verilog仿真器对所有wire变量赋予z值初始值，对reg变量赋予初始值x。</p>
+<p><strong>定长数</strong>：指定了储存数值的位宽的数。例：8’ha表示十六进制数a以8位方式0000_1010储存。</p>
+<p>二进制(binary)、十进制(decimal)、八进制(octal)、十六进制(hexadecimal)；默认为十进制。</p>
+<p>首行中的<code>timescale 1ns/1ps</code>指示仿真器用ps的精确度说明具有ns单位的数字时间变量。</p>
+<h3 id="UPD结构"><a href="#UPD结构" class="headerlink" title="UPD结构"></a>UPD结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">primitive</span> latch_rp(<span class="keyword">output</span> <span class="keyword">reg</span> q_out,<span class="keyword">input</span> enable,data);</span><br><span class="line">    <span class="keyword">table</span></span><br><span class="line"><span class="comment">//    enable         data          state        q_out/next_state</span></span><br><span class="line">        <span class="number">1</span>              <span class="number">1</span>       :     ?       :        <span class="number">1</span>;</span><br><span class="line">        <span class="number">1</span>              <span class="number">0</span>       :     ?       :        <span class="number">0</span>;</span><br><span class="line">        <span class="number">0</span>              ?       :     ?       :        -;</span><br><span class="line">        x              <span class="number">0</span>       :     <span class="number">0</span>       :        -;</span><br><span class="line">        x              <span class="number">1</span>       :     <span class="number">1</span>       :        -;</span><br><span class="line">    <span class="keyword">endtable</span></span><br><span class="line"><span class="keyword">endprimitive</span></span><br></pre></td></tr></table></figure></div>
+<p>关键词==primitive…endprimitive==进行模块化封装UPD真值表</p>
 
       
     </div>
@@ -688,7 +738,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Verilog-HDL"><span class="nav-number">1.</span> <span class="nav-text">Verilog HDL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog基础"><span class="nav-number">1.1.</span> <span class="nav-text">Verilog基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog语言结构"><span class="nav-number">1.2.</span> <span class="nav-text">Verilog语言结构</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Verilog-HDL"><span class="nav-number">1.</span> <span class="nav-text">Verilog HDL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog基础"><span class="nav-number">1.1.</span> <span class="nav-text">Verilog基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verilog语言结构"><span class="nav-number">1.2.</span> <span class="nav-text">Verilog语言结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">模块结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试模块"><span class="nav-number">1.2.2.</span> <span class="nav-text">测试模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPD结构"><span class="nav-number">1.2.3.</span> <span class="nav-text">UPD结构</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -992,7 +1042,7 @@ if(canvas.getContext){
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.1k</span>
+    <span title="Site words total count">13.5k</span>
   
 </div>
 
@@ -1018,7 +1068,7 @@ if(canvas.getContext){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.1k字</span>
+  <span class="post-count">博客全站共13.5k字</span>
 </div>
 
         
