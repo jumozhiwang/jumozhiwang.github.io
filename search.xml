@@ -11,183 +11,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MATLAB编程</title>
-    <url>/2022/02/12/MATLAB%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="MATLAB编程"><a href="#MATLAB编程" class="headerlink" title="MATLAB编程"></a>MATLAB编程</h1><h2 id="一、M文件"><a href="#一、M文件" class="headerlink" title="一、M文件"></a>一、M文件</h2><p>M文件是将处理问题的各种命令融合到一个文件中，该文件以.m为拓展名，然后由MAYLAB系统编译，得出相应的运行结果。M文件有脚本文件和函数文件两种。脚本文件不需要输入参数和输出参数，按照文件中指定的顺序执行命令序列。而函数文件则接受其他数据为输入参数，且可返回数据。</p>
-<p>MATLAB脚本(MATLAB scripts)：</p>
-<p>简单执行一系列MATLAB语句，需多次运行的文件</p>
-<p>不能接受输入参数，也不返回输出结果</p>
-<p>将变量保存在基本(Base)工作空间，这是多个脚本和命令窗口建立的变量的共享空间。</p>
-<p>MTALAB函数(MATLAB functions)：</p>
-<p>有函数定义语句——function，主要用来写应用程序</p>
-<p>能够接受输入参数，也能返回输出结果</p>
-<p>有自己单独的工作空间，变量保存于此</p>
-<h3 id="1-1、M文件编辑器"><a href="#1-1、M文件编辑器" class="headerlink" title="1-1、M文件编辑器"></a>1-1、M文件编辑器</h3><p>M文件不仅可以用来编辑M文件，还可对M文件进行交互性调试。而且，M文件编辑器还可用于阅读和编辑其他ASCII码文件。打开M文件编辑器：</p>
-<p>单击常用工具栏上的“新建”图标。</p>
-<p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
-<p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure></div>
-<p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
-<p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
-<p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
-<p><strong>4.注释</strong>：以%开始的注释可出现在函数任何位置，也可在语句右边。若注释行很多，可使用注释块操作符—— %{……%}</p>
-<p><strong>5.函数体</strong>：函数体是函数和脚本中计算和处理数据的主体，可包含进行计算和赋值的语句、函数调用、循环和流控制语句，以及注释语句。空行等。</p>
-<h3 id="1-2、脚本式M文件"><a href="#1-2、脚本式M文件" class="headerlink" title="1-2、脚本式M文件"></a>1-2、脚本式M文件</h3><p>对较多命令进行重复输入、调试等用户可以将需要重复输入的所有命令按顺序放到M文件，每次运行只要输入文件名或单击”运行“按钮，或F5快捷键。脚本式文件的运行相当于在命令窗口依次输入运行命令。不需要预先定义变量，命令文件中变量都是全局变量。</p>
-<h3 id="1-3、函数式M文件"><a href="#1-3、函数式M文件" class="headerlink" title="1-3、函数式M文件"></a>1-3、函数式M文件</h3><p>函数式命令文件一般要自带变量，且有返回结果，也可不带变量，此时文件中一般会使用一些全局变量来实现与外界和其他函数之间的数据交换。以关键词function开始，实质为用户向MATLAB函数库中添加自定义子函数。</p>
-<h2 id="二、流程控制"><a href="#二、流程控制" class="headerlink" title="二、流程控制"></a>二、流程控制</h2><p>MATLAB基本程序为顺序结构，但不能满足程序设计需要，需使用流程控制语句。包括判断语句，循环语句，分支语句等。</p>
-<h3 id="2-1、顺序结构"><a href="#2-1、顺序结构" class="headerlink" title="2-1、顺序结构"></a>2-1、顺序结构</h3><p>1、if语句</p>
-<p><code>if···end</code>             <code>if···else···end</code>               <code>if···elseif···else···end</code></p>
-<p>2、switch语句</p>
-<p><code>switch···case···end</code></p>
-<p>3、for循环（嵌套）</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>4、while循环</p>
-<p><code>while 表达式    执行语句      end</code></p>
-<p>5、continue命令——-break命令</p>
-<p>跳过进行下一次循环———-根据终止条件跳出循环</p>
-<p>6、return命令</p>
-<p>使得当前调用的函数正常退出   <code>return</code></p>
-<h3 id="2-2、人机交互命令"><a href="#2-2、人机交互命令" class="headerlink" title="2-2、人机交互命令"></a>2-2、人机交互命令</h3><p>1、输入提示命令input</p>
-<p><code>user_entry = input(&#39;prompt&#39;)</code>            <code>user_entry = input(&#39;prompt&#39;,&#39;s&#39;)</code></p>
-<p>2、请求键盘输入命令keyboard</p>
-<p>如keyboard命令被放在M文件中，将终止文件的继续执行，将控制权交给键盘。可通过在提示符前显示K表征这种特殊状态，M文件中使用该命令对程序调控及修改变量都方便。为终止keyboard模式，可键入命令return，然后按回车键。</p>
-<p>3、pause命令</p>
-<p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure></div>
-<p>4、echo语句</p>
-<p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure></div>
-<h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MATLAB计算</title>
-    <url>/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/</url>
-    <content><![CDATA[<h1 id="MATLAB计算"><a href="#MATLAB计算" class="headerlink" title="MATLAB计算"></a>MATLAB计算</h1><p>关于matlab的数值计算以及符号计算问题。</p>
-<a id="more"></a>
-<h2 id="一、因式分解"><a href="#一、因式分解" class="headerlink" title="一、因式分解"></a>一、因式分解</h2><h3 id="1-矩阵基础计算"><a href="#1-矩阵基础计算" class="headerlink" title="1.矩阵基础计算"></a>1.矩阵基础计算</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">2</span>; <span class="number">1</span>; <span class="number">4</span>]; c= <span class="number">3</span>; b=c*a     <span class="comment">% b=[6; 3; 12],数量乘法</span></span><br><span class="line">y=a'                       <span class="comment">%转置</span></span><br><span class="line">d=C.'               <span class="comment">%转置复数矩阵不计算元素共轭值</span></span><br><span class="line">A.^K  A^k           <span class="comment">%数组A每个元素k次方     K个矩阵A相乘</span></span><br><span class="line">k.^A  k^A           <span class="comment">%K为底，A元素为幂       矩的阵幂</span></span><br><span class="line">A.*B                <span class="comment">%数组相乘而不是矩阵</span></span><br><span class="line">A\B   B/A           <span class="comment">%AX=B的解       XA=B的解</span></span><br><span class="line">A./B=B./A           <span class="comment">%数组元素与元素匹配相除</span></span><br><span class="line">C = A +(-) B        <span class="comment">%向量相加减（长度，类型都相同）</span></span><br><span class="line">A=[A; B]  T=[R, S]  <span class="comment">%矩阵合并</span></span><br><span class="line">Y=<span class="built_in">exp</span>(x); Z=x.^<span class="number">2</span>    <span class="comment">%向量的乘方必须在幂运算符前（^）前加上句（.）</span></span><br><span class="line"><span class="built_in">linspace</span>(a,b,n)     <span class="comment">%创建了 a、b 之间含有 n 个等差元素的向量,无n默认100</span></span><br><span class="line"><span class="built_in">logspace</span>(a,b,n)     <span class="comment">%创建 n 个对数值相隔相同的行向量</span></span><br><span class="line">norm(x)             <span class="comment">%求向量范数</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="2-行列式、逆和秩"><a href="#2-行列式、逆和秩" class="headerlink" title="2.行列式、逆和秩"></a>2.行列式、逆和秩</h3><p>逆矩阵: AB=BA=E    伪逆矩阵：BA=E ,AB!=E</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">det(A)    <span class="comment">%矩阵行列式值--必须为方阵    det(A^-1)=1/det(A)</span></span><br><span class="line">rank(A)    <span class="comment">%矩阵秩</span></span><br><span class="line">inv(A)     <span class="comment">%方阵A的逆矩阵B=A^-1  INF表示矩阵值为0，不存在逆矩阵</span></span><br><span class="line">pinv(A)    <span class="comment">%矩阵伪逆</span></span><br><span class="line">trance(A)   <span class="comment">%矩阵迹，即对角线元素和</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="3-矩阵分解"><a href="#3-矩阵分解" class="headerlink" title="3.矩阵分解"></a>3.矩阵分解</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">R=chol(A)       <span class="comment">%cholesky分解:A=R'R, A是对称且正定的   Ax=b--R'Rx=b---x=R\(R'\b)</span></span><br><span class="line">[L,U]=lu(A)     <span class="comment">% L单位对角线的下三角矩阵  U上三角矩阵  Ax=b---x=U\(L\b)</span></span><br><span class="line">[Q,R]=qr(A)     <span class="comment">%正交矩阵A，Q单位正交矩阵，R上三角矩阵  </span></span><br><span class="line">[Q1,R1]=gradelete(Q,R,<span class="built_in">j</span>)   <span class="comment">%去掉A的j列后矩阵QR分解</span></span><br><span class="line">[Q1,R1]=qrinset(Q,R,b,<span class="built_in">j</span>)   <span class="comment">%在A的j列前插入列向量b，然后QR分解</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="4-矩阵特征值和奇异值"><a href="#4-矩阵特征值和奇异值" class="headerlink" title="4.矩阵特征值和奇异值"></a>4.矩阵特征值和奇异值</h3><p>n阶方阵A，数λ和向量X，AX=λA成立，λ为A特征值，X为A特征向量。（A-λI)X有非0解X———丨A-λI丨=0</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">E=eig（A)                         <span class="comment">%矩阵A全部特征值构成E</span></span><br><span class="line">[V,D]=eig(A)                      <span class="comment">%矩阵A全部特征值构成对角矩阵D，A特征向量构成V列向量</span></span><br><span class="line">[V,D]=eig(A,<span class="string">'nobalance'</span>)          <span class="comment">%同上</span></span><br></pre></td></tr></table></figure></div>
-<p>两矢量u，v,常熟s，矩阵A满足：Av=su,A’u=sv;  s为奇异值—-对角方阵∑，U,V为奇异矢量</p>
-<p>AV=U∑   A’U=V∑      U,V正交—-A=U∑V’      奇异值分解 <code>[U,S,V]=svd(A)</code></p>
-<h2 id="二、概率统计"><a href="#二、概率统计" class="headerlink" title="二、概率统计"></a>二、概率统计</h2><h3 id="1-基本分析函数"><a href="#1-基本分析函数" class="headerlink" title="1.基本分析函数"></a>1.基本分析函数</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">B=sum(A)      B=sum(A,dim)      <span class="comment">%向量元素和或矩阵各列元素和   矩阵第dim维元素和</span></span><br><span class="line"></span><br><span class="line">B=cumsum(A)                     <span class="comment">%向量元素积和或矩阵各列元素积和  </span></span><br><span class="line">B=cumsum(A,dim)                  <span class="comment">% dim=1列方向求积和 dim=2行方向求积和</span></span><br><span class="line"></span><br><span class="line">B=prod(A)    B=prod(A,dim)        <span class="comment">%向量积或矩阵列元素积       矩阵第dim维元素积</span></span><br><span class="line"></span><br><span class="line">B=cumprod(A)  B=cumprod(A,dim)     <span class="comment">%累积乘积   dim=1列方向 dim=2 行方向</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sort</span>(A)    B=<span class="built_in">sort</span>(A,mode)       <span class="comment">%默认升序排序   mode为'ascend'表升序,'descend'表降序</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sortrows</span>(A)  B=<span class="built_in">sortrows</span>(A,column)   <span class="comment">%按行对A升序排序   基于向量column指定列排序 负号表降序</span></span><br><span class="line"></span><br><span class="line">C=<span class="built_in">max</span>(A) C=<span class="built_in">min</span>(A)                 <span class="comment">%返回向量最大元素或矩阵各列向量最大值（最小）</span></span><br><span class="line"></span><br><span class="line">M=<span class="built_in">mean</span>(A)                        <span class="comment">%平均值</span></span><br><span class="line">M=median(A)                      <span class="comment">%中值</span></span><br><span class="line">S=std(A)   S=std(A,flag)         <span class="comment">%标准差（falg取1/0表示两种方法）</span></span><br><span class="line">V=var(X)   V=var(X,<span class="number">1</span>)            <span class="comment">%方差（两种方法）</span></span><br><span class="line">C=cov(X)   C=cov(x,y)            <span class="comment">%协方差</span></span><br><span class="line"></span><br><span class="line">[r,p]=corrcoef(X)   [r,p]=corrcoef(x,y)      <span class="comment">%矩阵相关系数</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="2、概率函数、分布函数、逆分布函数和随机数"><a href="#2、概率函数、分布函数、逆分布函数和随机数" class="headerlink" title="2、概率函数、分布函数、逆分布函数和随机数"></a>2、概率函数、分布函数、逆分布函数和随机数</h3><p>PMF(probability mass function)               <strong>概率质量函数</strong>       离散变量<br>PDF Probability density function             <strong>概率密度函数</strong>        连续变量<br>CDF(cumulative distribution function)    <strong>累积分布函数 </strong>       F(X)=P(X&lt;=x)</p>
-<p>Bernoulli distribution                                <strong>伯努利分布</strong>           也称为两点分布或者0-1分布</p>
-<script type="math/tex; mode=display">
-概率质量函数:P(x)=p^x(1-p)^{1-x}=\begin{cases} p，x=1\\ q， x=0\end{cases}</script><script type="math/tex; mode=display">
-期望值:E(x)=\sum{xP(x)}=0\cdot q+1\cdot p=p</script><script type="math/tex; mode=display">
-方差:Var(x)=E[(x-E(X)^2)]=\sum{(x-p)^2}P(x)=pq</script><p>Binomial distribution                   <strong>二项分布 </strong>           n次伯努利实验，成功概率为p，成功x次概率表示为</p>
-<script type="math/tex; mode=display">
-P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为np，方差为npq。matlab中关于二项分布三个常用指令如下</p>
-<p>Poisson distribution                      <strong>泊松分布</strong>           描述单位时间内随机事件发生的次数的概率分布，计λ为单位时间（或单位面积）内随机事件的平均发生率。期望和方差均为 λ。当二项分布n很大p很小时，泊松分布可作二项分布的近似，λ=np</p>
-<script type="math/tex; mode=display">
-概率质量函数：P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}</script><p>standard normal distribution           <strong>正态分布</strong>            期望值μ=0，即曲线图象对称轴为Y轴，标准差σ=1条件下的正态分布，记为N(0，1)。正态分布关于平均数对称。</p>
-<p>uniform distribution                         <strong>均匀分布</strong>            在相同长度间隔的分布概率相等，由两个参数a，b定义。</p>
-<script type="math/tex; mode=display">
-概率质量函数:f(x)=\begin{cases} \frac{1}{b-a},a<x<b\\ 0,else\end{cases}</script><script type="math/tex; mode=display">
-概率累积分布函数：F(x)=\begin{cases}0,x<a \\ \frac{x-a}{b-a},a\leq x\leq b \\ 1,x>b \end{cases}</script><p>chi-square distribution                     <strong>χ²分布</strong>            若n个相互独立的随机变量ξ₁，ξ₂，…,ξn ，均服从标准正态分布，则这n个服从标准正态分布的随机变量的平方和构成一新的随机变量，其分布规律称为卡方分布。</p>
-<p>F-distribution                             <strong>F分布</strong>                    （看不太懂）</p>
-<p>t-distribution                              <strong>t分布</strong>                  用于根据小样本来估计呈正态分布且方差未知的总体的均值。如果总体方差已知（例如在样本数量足够多时），则应该用正态分布来估计总体均值。</p>
-<p>常见分布的相关函数</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">分布名称</th>
-<th style="text-align:center">概率密度函数</th>
-<th style="text-align:center">累积分布函数</th>
-<th style="text-align:center">逆累积分布函数</th>
-<th style="text-align:center">随机数发生器</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">二项分布</td>
-<td style="text-align:center">binopdf</td>
-<td style="text-align:center">binocdf</td>
-<td style="text-align:center">binoinv</td>
-<td style="text-align:center">binornd</td>
-</tr>
-<tr>
-<td style="text-align:center">泊松分布</td>
-<td style="text-align:center">poisspdf</td>
-<td style="text-align:center">poisscdf</td>
-<td style="text-align:center">poissinv</td>
-<td style="text-align:center">poissrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">正态分布</td>
-<td style="text-align:center">normpdf</td>
-<td style="text-align:center">normcdf</td>
-<td style="text-align:center">norminv</td>
-<td style="text-align:center">normrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">均匀分布</td>
-<td style="text-align:center">unifpdf</td>
-<td style="text-align:center">unifcdf</td>
-<td style="text-align:center">unifinv</td>
-<td style="text-align:center">unifrnd</td>
-</tr>
-<tr>
-<td style="text-align:center">X^2分布</td>
-<td style="text-align:center">chi2pdf</td>
-<td style="text-align:center">chi2cdf</td>
-<td style="text-align:center">chi2inv</td>
-<td style="text-align:center">chi2rnd</td>
-</tr>
-<tr>
-<td style="text-align:center">F分布</td>
-<td style="text-align:center">fpdf</td>
-<td style="text-align:center">fcdf</td>
-<td style="text-align:center">finv</td>
-<td style="text-align:center">frnd</td>
-</tr>
-<tr>
-<td style="text-align:center">t分布</td>
-<td style="text-align:center">tpdf</td>
-<td style="text-align:center">tcdf</td>
-<td style="text-align:center">tinv</td>
-<td style="text-align:center">trnd</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>​                                                        .<img src="/assets/20161207224852700.png" alt="img"></p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">N=<span class="number">100</span>;p=<span class="number">0.2</span>;k=<span class="number">0</span>:N;</span><br><span class="line">pk=binopdf(k,N,p);</span><br><span class="line">ck=binocdf(k,N,p);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);h=plotyy(k,pk,k,ck);</span><br><span class="line">text(<span class="number">55</span>,<span class="number">0.07</span>,<span class="string">'p=0.2'</span>);title(<span class="string">'二项分布'</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">20</span>;y1=poisspdf(x,<span class="number">2.5</span>);y2=poisspdf(x,<span class="number">5</span>);y3=poisspdf(x,<span class="number">10</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="built_in">plot</span>(x,y1,<span class="string">'r*'</span>,x,y2,<span class="string">'b-'</span>,x,y3,<span class="string">'g&lt;'</span>);</span><br><span class="line">title(<span class="string">'Poisson分布'</span>);</span><br><span class="line"></span><br><span class="line">x3=<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>;n=normpdf(x3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="built_in">plot</span>(x3,n);grid;</span><br><span class="line">title(<span class="string">'标准正态分布'</span>);</span><br><span class="line"></span><br><span class="line">x4=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">30</span>;</span><br><span class="line">z=chi2pdf(x4,<span class="number">1</span>);</span><br><span class="line">z1=chi2pdf(x4,<span class="number">4</span>);</span><br><span class="line">z2=chi2pdf(x4,<span class="number">10</span>);</span><br><span class="line">z3=chi2pdf(x4,<span class="number">20</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);<span class="built_in">plot</span>(x4,z,<span class="string">'r-'</span>,x4,z1,<span class="string">'-.b'</span>,x4,z2,<span class="string">':k'</span>,x4,z3,<span class="string">'--g'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'自由度为1'</span>,<span class="string">'自由度为4'</span>,<span class="string">'自由度为10'</span>,<span class="string">'自由度为20'</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0.2</span>]);title(<span class="string">'卡方分布'</span>);</span><br></pre></td></tr></table></figure></div>
-<p><img src="/assets/disburition.jpg" alt="disburition"></p>
-<h2 id="三、数值求导与积分"><a href="#三、数值求导与积分" class="headerlink" title="三、数值求导与积分"></a>三、数值求导与积分</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=diff(X)              <span class="comment">%X相邻元素间一阶差分</span></span><br><span class="line">FX=gradient(F)         <span class="comment">%向量F的一维数值梯度</span></span><br><span class="line">[FX,FY]=gradient(F)     <span class="comment">%矩阵F的二维梯度x和y部分</span></span><br><span class="line"></span><br><span class="line">q=quad(fun,,a,b)          <span class="comment">%函数fun在a到b区间数值积分----Simpson方法，，精度高</span></span><br><span class="line">q=quadl(fun,,a,b)         <span class="comment">%函数fun在a到b区间数值积分----Lobatto方法，，精度较高</span></span><br><span class="line">T=trapz(y)                <span class="comment">%计算向量或者矩阵每列的积分----梯形法，，速度快，精度差</span></span><br><span class="line">Z=cumtrapz(X,Y)           <span class="comment">%求Y对X的积分             ----梯形法</span></span><br><span class="line"></span><br><span class="line">q=dblquad(fun,xmin,xmax,ymin,ymax)        <span class="comment">%二重积分</span></span><br><span class="line">q=triplequad(fun,xmin,xmax,ymin,ymax,zmin,zmax)     <span class="comment">%三重积分</span></span><br></pre></td></tr></table></figure></div>
-<h2 id="四、插值"><a href="#四、插值" class="headerlink" title="四、插值"></a>四、插值</h2><p>插值指在已知数据之间计算估计值的过程。<br>一维数据插值常用函数interp1，一般的语法格式为：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yi=interp1(x,y,xi,method)      <span class="comment">%xi为插值点向量或数组，method为插值方法</span></span><br><span class="line">method=<span class="string">'nearest'</span>       <span class="comment">%邻近点插值----速度最快，平滑性最差</span></span><br><span class="line">method=<span class="string">'linear'</span>        <span class="comment">%线性插值-----两个数据点连接直线（默认），运算时间长，占内存多</span></span><br><span class="line">method=<span class="string">'spline'</span>    <span class="comment">%三次样条插值----通过数据点拟合三次样条曲线，时间最长，占内存较少平滑性好</span></span><br><span class="line">method=<span class="string">'pchip'</span>or <span class="string">'cubic'</span>   <span class="comment">%分段立方Hermite插值方法</span></span><br></pre></td></tr></table></figure></div>
-<p>二维插值主要用于图形图像处理和三维曲线拟合等领域。由函数interp2实现，一般语法为：zi=interp2(x,y,z,xi,yi,method)</p>
-<p>三维插值函数interp3和n维插值函数interpn，其调用方式一般格式为：zi=interp3(x,y,z/v,xi,yi,zi,method)</p>
-<p>样条插值：根据已知数据点找一组拟合多项式，拟合过程数据组每个相邻样点对用三次多项式去拟合曲线。为保证拟合的唯一性，对三次多项式在样点处一阶、二阶导数加以约束。一般格式为</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yy=spline(x,y,xx)   <span class="comment">%根据样点数据(x,y)，求xx对应三次样条插值</span></span><br><span class="line">pp=spline(x,y)      <span class="comment">%从样点数据(x,y),求xx对应三次样条插值</span></span><br></pre></td></tr></table></figure></div>
-<p>e.g.</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">strmod=&#123;<span class="string">'nearest'</span>,<span class="string">'linear'</span>,<span class="string">'spline'</span>,<span class="string">'cubic'</span>&#125;;</span><br><span class="line">strlb=&#123;<span class="string">'(a)method=nearest'</span>,<span class="string">'(b)method=linear'</span>,<span class="string">'(c)method=spline'</span>,<span class="string">'(d)method=cubic'</span>&#125;;</span><br><span class="line">x1=<span class="number">1</span>:<span class="number">10</span>;y1=<span class="built_in">cos</span>(x1);xi1=<span class="number">0</span>:<span class="number">0.25</span>:<span class="number">10</span>;</span><br><span class="line">[x2,y2,z2]=peaks(<span class="number">6</span>);</span><br><span class="line">[xi2,yi2]=<span class="built_in">meshgrid</span>(<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>);</span><br><span class="line">[x3,y3,z3,v3]=flow(<span class="number">8</span>);</span><br><span class="line">[xi3,yi3,zi3]=<span class="built_in">meshgrid</span>(<span class="number">0.1</span>:<span class="number">0.25</span>:<span class="number">10</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">yi1=interp1(x1,y1,xi1,strmod&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">i</span>)</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">'ro'</span>,xi1,yi1,<span class="string">'b'</span>),xlabel(strlb(<span class="built_in">i</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);mesh(x2,y2,z2);title(<span class="string">'原始数据'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">8</span></span><br><span class="line">zi2=interp2(x2,y2,x2,xi2,yi2,strmod&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">j</span>);mesh(xi2,yi2,zi2);title(strlb&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>);slice(x3,y3,z3,v3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);title(<span class="string">'插值前'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">10</span>:<span class="number">12</span></span><br><span class="line">vi3=interp3(x3,y3,z3,v3,xi3,yi3,zi3,strmod&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,k);slice(xi3,yi3,zi3,vi3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);xlabel(strlb&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p><img src="/assets/9-1578887741457.jpg" alt="9"></p>
-<h2 id="五、曲线拟合"><a href="#五、曲线拟合" class="headerlink" title="五、曲线拟合"></a>五、曲线拟合</h2><p>​       曲线拟合用于求与一组数据最吻合的函数，用polyfit函数实现，该函数采用最小二乘法计算，使拟合函数多项式在各数据点处偏差的平方之和达最小。调用格式如下：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">p=polyfit(x,y,n)         <span class="comment">% P(1)*X^N + P(2)*X^(N-1) +...+ P(N)*X + P(N+1)即为该函数</span></span><br><span class="line">[p,s]=polyfit(x,y,n)     <span class="comment">% s为拟合多项式有关误差估计的结构数组</span></span><br><span class="line">p=polyfit(x,<span class="built_in">log10</span>(y),<span class="number">1</span>)  <span class="comment">% y=b(10)^mx指数函数拟合，w=log10y,z=x--w=p1z+p2</span></span><br></pre></td></tr></table></figure></div>
-<h2 id="六、Fourier分析"><a href="#六、Fourier分析" class="headerlink" title="六、Fourier分析"></a>六、Fourier分析</h2><p>对于离散数据，频谱分析的计算基础是离散傅里叶变换（DFT),调用如下：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=fft(X)        <span class="comment">%对数据X作一维快速离散傅里叶变换  ifft--傅里叶反变换</span></span><br><span class="line">Y=fft2(X)       <span class="comment">%二位快速傅里叶变换,相对于fft(fft(X)')'  --- ifft2</span></span><br><span class="line">Y=fftshift(X)   <span class="comment">%把变换结果Y（频域数据）中的直流分量（频率为0处值）移到中间位置---ifftshift</span></span><br></pre></td></tr></table></figure></div>
-<h2 id="七、微分方程"><a href="#七、微分方程" class="headerlink" title="七、微分方程"></a>七、微分方程</h2><h3 id="1、常微分方程"><a href="#1、常微分方程" class="headerlink" title="1、常微分方程"></a>1、常微分方程</h3><p>​      对广泛的、非线性性的一般常微分方程，通常不存在初等函数解析解。由于实际问题求解的需要，求近似的数值解成为解决问题的重要手段。常见求数值解的方法有欧拉折线法，阿当姆斯法，龙格—库塔法与吉尔法等。数值解不受方程类型限制，即可求任何形式常微分方程特解。龙格—库塔法精度较高，计算量适中，所以使用较广泛。调用语法如下：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[t,y]=ode23(filename,tspan,y0)      <span class="comment">%二阶、三阶龙格——库塔法计算</span></span><br><span class="line">[t,y]=ode45(filename,tspan,y0)      <span class="comment">%四阶、五阶龙格——库塔法计算</span></span><br><span class="line"><span class="comment">%filename是定义f(t,y)的函数文件名，Tspan的形式为[t0,f0],表示求解区间，y0是初始状态列向量</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="2、偏微分方程"><a href="#2、偏微分方程" class="headerlink" title="2、偏微分方程"></a>2、偏微分方程</h3><p>MATLAB提供一个专门用于求解偏微分方程（PDE）的工具箱PDE Toolbox。本节介绍一些简单、经典的偏微分方程并给出求解方法：</p>
-<p>椭圆形问题：assempde()函数</p>
-<p>抛物型问题：parabolic()函数</p>
-<p>双曲型问题：hyperbolic()函数</p>
-]]></content>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MATLAB符号计算</title>
     <url>/2020/02/09/MATLAB%E7%AC%A6%E5%8F%B7%E8%AE%A1%E7%AE%97/</url>
     <content><![CDATA[<h1 id="符号计算"><a href="#符号计算" class="headerlink" title="符号计算"></a>符号计算</h1><h2 id="一、符号变量、表达式及符号方程"><a href="#一、符号变量、表达式及符号方程" class="headerlink" title="一、符号变量、表达式及符号方程"></a>一、符号变量、表达式及符号方程</h2><p>进行符号运算前，先定义符号对象，然后利用符号对象构建表达式，最后进行符号计算。</p>
@@ -471,113 +294,56 @@ L^{-1}[f](x)=\frac{1}{2πi}\int_{c-i\infty}^{c+i\infty}{f(s)e^{st}}ds</script><d
       </tags>
   </entry>
   <entry>
-    <title>verilog 语言</title>
-    <url>/2022/03/24/verilog-%E8%AF%AD%E8%A8%80/</url>
-    <content><![CDATA[<h1 id="Verilog-HDL"><a href="#Verilog-HDL" class="headerlink" title="Verilog HDL"></a>Verilog HDL</h1><p>参考:《Adcanced Digital Design with the Verilog HDL》 Second Edition by Michael D.Ciletti</p>
-<a id="more"></a>
-<h2 id="Verilog基础"><a href="#Verilog基础" class="headerlink" title="Verilog基础"></a>Verilog基础</h2><p>狄摩根(DeMorgan)定理：</p>
-<script type="math/tex; mode=display">
-(A+B+C+...)'=A'\cdot B' \cdot C' \cdot...</script><p>香农(Shannon)公式：</p>
-<script type="math/tex; mode=display">
-f(x_1,x_2,...,x_i,x_{i+1},...,x_n)=x_i \cdot f_{xi}+x_{i'}\cdot f_{xi'}=(x_i+f_{xi'})\cdot(f_{i'}+f_{xi})\\
-f_{xi}=f(x_1,x_2,...,x_{i-1},1,x_{i+1},...,x_n)\\
-f_{xi'}=f(x_1,x_2,...,x_{i-1},0,x_{i+1},...,x_n)</script><p>其中布尔函数$\ f $的微分为：$\ \partial f / \partial x_i=f_{xi}\oplus f_{xi’}$ </p>
-<p>静态冒险：由不同扇出路径上的不同传播时延造成。对于同步时序电路，通过延长时钟周期消除。</p>
-<p>两级电路消除静态1冒险：用质蕴涵项覆盖函数积之和形式的卡诺图中相邻单元所有1格。</p>
-<p>两级电路消除静态0冒险：覆盖无静态1冒险函数积之和形式中所有相邻的0格。</p>
-<p>多级电路中静态冒险：将输出表达式的多级描述转换成“瞬态输出函数”的积之和形式$f_{tof}$。变量与其反变量的乘积($aa’$)揭示了哪个输入中含有静态0冒险，变量与其反变量之和($a+a’$)揭示了哪个输入中含有静态1冒险。然后化为两级电路消除冒险。</p>
-<p>动态冒险：多条重新汇聚路径所导致的的多个静态冒险的结果。不存在静态冒险，也就不存在动态冒险，因此通过消除静态冒险消除。</p>
-<p>Multiplexers(多路复用器)</p>
-<p>Demultiplexers(多路解复用器)</p>
-<p>Encoders(编码器)</p>
-<p>Decoder(译码器)</p>
-<p>Synchronous sequential circuit(同步时序电路)</p>
-<p>Asynchronous sequential circuit(异步时序电路)</p>
-<p>Latches(锁存器)</p>
-<p>Filp-Flops(触发器)</p>
-<h2 id="Verilog语言结构"><a href="#Verilog语言结构" class="headerlink" title="Verilog语言结构"></a>Verilog语言结构</h2><h3 id="模块结构"><a href="#模块结构" class="headerlink" title="模块结构"></a>模块结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> name (<span class="keyword">output</span>,<span class="keyword">input</span>);</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
-<p>逻辑门：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">与</th>
-<th style="text-align:center">与非</th>
-<th style="text-align:center">或</th>
-<th style="text-align:center">或非</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">and</td>
-<td style="text-align:center">nand</td>
-<td style="text-align:center">or</td>
-<td style="text-align:center">nor</td>
-</tr>
-<tr>
-<td style="text-align:center">异或</td>
-<td style="text-align:center">异或非（同或）</td>
-<td style="text-align:center">缓冲器</td>
-<td style="text-align:center">反相器</td>
-</tr>
-<tr>
-<td style="text-align:center">xor</td>
-<td style="text-align:center">xnor</td>
-<td style="text-align:center">buf</td>
-<td style="text-align:center">not</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p> 模块嵌套—&gt;自顶向下</p>
-<p>Verilog矢量：规定区间最左端为最高位，若选取部分在原区间外，返回值x。</p>
-<p>逻辑==x==意味着未知值，逻辑==z==意味着高阻</p>
-<p>未声明的标识符默认为==wire==类型</p>
-<p>*当三态门使能信号无效时会产生一个z值，而当两个相反输入驱动wire信号时，会产生x值。</p>
-<h3 id="测试模块"><a href="#测试模块" class="headerlink" title="测试模块"></a>测试模块</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> a,b;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Time Out</span></span><br><span class="line">    #<span class="number">100</span> <span class="built_in">$finish</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Stimulus patterns</span></span><br><span class="line">    #<span class="number">10</span> a=b;b=<span class="number">0</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> a=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>由关键词==initial==定义，通过填充关键词==begin…end==之间语句完成。</p>
-<p>关键词==reg==声明测试的输入，待测输出则可定义为wire型。</p>
-<p>*Verilog仿真器对所有wire变量赋予z值初始值，对reg变量赋予初始值x。</p>
-<p><strong>定长数</strong>：指定了储存数值的位宽的数。例：8’ha表示十六进制数a以8位方式0000_1010储存。</p>
-<p>二进制(binary)、十进制(decimal)、八进制(octal)、十六进制(hexadecimal)；默认为十进制。</p>
-<p>首行中的<code>timescale 1ns/1ps</code>指示仿真器用ps的精确度说明具有ns单位的数字时间变量。</p>
-<h3 id="UPD结构"><a href="#UPD结构" class="headerlink" title="UPD结构"></a>UPD结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">primitive</span> latch_rp(<span class="keyword">output</span> <span class="keyword">reg</span> q_out,<span class="keyword">input</span> enable,data);       <span class="comment">//透明锁存器</span></span><br><span class="line">    <span class="keyword">table</span></span><br><span class="line"><span class="comment">//    enable         data          state        q_out/next_state</span></span><br><span class="line">        <span class="number">1</span>              <span class="number">1</span>       :     ?       :        <span class="number">1</span>;</span><br><span class="line">        <span class="number">1</span>              <span class="number">0</span>       :     ?       :        <span class="number">0</span>;</span><br><span class="line">        <span class="number">0</span>              ?       :     ?       :        -;</span><br><span class="line">        x              <span class="number">0</span>       :     <span class="number">0</span>       :        -;</span><br><span class="line">        x              <span class="number">1</span>       :     <span class="number">1</span>       :        -;</span><br><span class="line">    <span class="keyword">endtable</span></span><br><span class="line"><span class="keyword">endprimitive</span></span><br></pre></td></tr></table></figure></div>
-<p>关键词==primitive…endprimitive==进行模块化封装UPD真值表</p>
-<p>符号==？==表示输入可以为0,1,x中任意一个</p>
-<p>时序UDP的输出必须定义为reg类型</p>
-<p>下降沿跳变信号：(10)、(1x)、(x0)；上升沿跳变信号：(01)、(0x)、(x1)</p>
-<h3 id="矢量"><a href="#矢量" class="headerlink" title="矢量"></a>矢量</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">default_nettype</span> none       //禁用imllicit nets,减少bug</span></span><br><span class="line"><span class="keyword">module</span> top_module(<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">15</span>:<span class="number">0</span>] in, </span><br><span class="line">                  <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] out,       <span class="comment">//矢量时定义宽度在名称前面</span></span><br><span class="line">                  <span class="keyword">output</span> out_and);</span><br><span class="line">    out_and = &amp; in;   <span class="comment">//16与门输出</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
-<p><strong>Implicit nets</strong>:未被定义的变量通常是1bit，作为矢量使用时通常会造成bug。使用<code>`default_nettype none</code>显示</p>
-<p><strong>Bitwise &amp; Logical Operators</strong></p>
-<p>位运算符：~(取反)、&amp;(按位与)、|(按位或)、^(按位异或)、^~(按位同或)</p>
-<p>逻辑运算：&amp;&amp;(与)、||(或)、！(非)</p>
-<p>条件操作符：(？:)———  <code>enable ? a : b</code>   enable为真计算a，else计算b。常用于数据选择时</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> Latch_Rbar_CA(        <span class="comment">//低有效复位功能的D锁存器</span></span><br><span class="line">    <span class="keyword">output</span> q_out.</span><br><span class="line">    <span class="keyword">input</span> data_in,enable,rst_b</span><br><span class="line">);</span><br><span class="line">    <span class="keyword">assign</span> q_out = !(rst_b==<span class="number">1'b0</span>) ? <span class="number">0</span> : enable ? data_in : q_out;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
-<p><strong>Concatenation Operator</strong>:连接运算符{ }  ———需要知道每个部分的宽度，{1,2,3}是illegal，{2’b11}是legal.</p>
-<p><strong>Replication Operator</strong> :复制操作符： {num{vector}}   ———-{5{1’b1}}</p>
-<p><strong>Parity Checking</strong>: 奇偶校检常用于做传输数据时检查错误的方法，将所有数据位异或运算即可实现。</p>
-<h2 id="Hierarchy"><a href="#Hierarchy" class="headerlink" title="Hierarchy"></a>Hierarchy</h2><p>模块层次化</p>
-<p>模块端口与信号连接方式：<br>by position: <code>mod_a instance (a,b,c)</code>      </p>
-<p>by name: <code>mod_a instance2 (.out(c), .in1(a), .in2(b))</code></p>
-<h2 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h2><p>对于综合硬件，<strong>always</strong>块有两种形式：</p>
-<p>Combinational: always @(*) ———————-赋值方式：a=b，组合逻辑电路中</p>
-<p>Clocked: always @(posedge clk)—————-赋值方式：a&lt;=b  (输出等到下个时延才能输出) reg类型被综合为寄存器</p>
-<p><strong>If</strong> statement:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line">alwsys @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (condition) <span class="keyword">begin</span></span><br><span class="line">        out = x;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        out = y;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p> if 中锁存器问题：如果 if 条件不满足，Verilog将保持输出不变。</p>
-<p><strong>Case</strong> statement:</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (in)</span><br><span class="line">        <span class="number">1'b1</span> : </span><br><span class="line">            <span class="keyword">begin</span></span><br><span class="line">            out = <span class="number">1'b1</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="number">1'b0</span> : </span><br><span class="line">            out = <span class="number">1'b0</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            out = <span class="number">1'bx</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p>e.g. Priority Encode（优先编码器）：输出输入的矢量中第一个高位电平的位置。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// synthesis verilog_input_version verilog_2001</span></span><br><span class="line"><span class="keyword">module</span> top_module (</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] in,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] pos  );</span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">case</span>(<span class="number">1</span>)</span><br><span class="line">            in[<span class="number">0</span>]: pos=<span class="number">0</span>;</span><br><span class="line">            in[<span class="number">1</span>]: pos=<span class="number">1</span>;</span><br><span class="line">            in[<span class="number">2</span>]: pos=<span class="number">2</span>;</span><br><span class="line">            in[<span class="number">3</span>]: pos=<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: pos=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"><span class="comment">//另一种方法      Casez statement：将 z 视为不关心的位; casex也类似，它将x和z无视</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span>  </span><br><span class="line">        <span class="keyword">casez</span> (in[<span class="number">3</span>:<span class="number">0</span>])</span><br><span class="line">            <span class="number">4'bzzz1</span>: out=<span class="number">0</span>;              <span class="comment">//？是z的同义词，所以2b'z0=2'b?0</span></span><br><span class="line">            <span class="number">4'bzz10</span>: out=<span class="number">1</span>;</span><br><span class="line">            <span class="number">4'bz100</span>: out=<span class="number">2</span>;</span><br><span class="line">            <span class="number">4'b1000</span>: out=<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: out=<span class="number">0</span>;             <span class="comment">//对输出进行先赋初值，从而节省代码，这也不再需要default项</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
-<p><strong>Generate</strong> Statement：常用于编写可配置的、可综合的RTL设计结构。可用于创建模块的多个实例化。generate循环使用必须先在genvar声明中声明循环索引变量。</p>
-<p>e.g. 实例化bcd_fadd的100个副本，以创建一个100位的BCD行波进位加法器。</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> top_module( </span><br><span class="line">    <span class="keyword">input</span> [<span class="number">399</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">input</span> cin,</span><br><span class="line">    <span class="keyword">output</span> cout,</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">399</span>:<span class="number">0</span>] sum );</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">99</span>:<span class="number">0</span>] cout_temp;</span><br><span class="line">	<span class="keyword">genvar</span> i;</span><br><span class="line">    <span class="keyword">generate</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) <span class="keyword">begin</span>:bcd_fadd</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)</span><br><span class="line">                bcd_fadd bcd_inst(a[<span class="number">3</span>:<span class="number">0</span>],b[<span class="number">3</span>:<span class="number">0</span>],cin,cout_temp[<span class="number">0</span>],sum[<span class="number">3</span>:<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                bcd_fadd bcd_inst(a[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i],b[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i],cout_temp[i-<span class="number">1</span>],cout_temp[i],sum[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i]);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">assign</span> cout=cout_temp[<span class="number">99</span>];</span><br><span class="line">    <span class="keyword">endgenerate</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+    <title>MATLAB编程</title>
+    <url>/2022/02/12/MATLAB%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="MATLAB编程"><a href="#MATLAB编程" class="headerlink" title="MATLAB编程"></a>MATLAB编程</h1><h2 id="一、M文件"><a href="#一、M文件" class="headerlink" title="一、M文件"></a>一、M文件</h2><p>M文件是将处理问题的各种命令融合到一个文件中，该文件以.m为拓展名，然后由MAYLAB系统编译，得出相应的运行结果。M文件有脚本文件和函数文件两种。脚本文件不需要输入参数和输出参数，按照文件中指定的顺序执行命令序列。而函数文件则接受其他数据为输入参数，且可返回数据。</p>
+<p>MATLAB脚本(MATLAB scripts)：</p>
+<p>简单执行一系列MATLAB语句，需多次运行的文件</p>
+<p>不能接受输入参数，也不返回输出结果</p>
+<p>将变量保存在基本(Base)工作空间，这是多个脚本和命令窗口建立的变量的共享空间。</p>
+<p>MTALAB函数(MATLAB functions)：</p>
+<p>有函数定义语句——function，主要用来写应用程序</p>
+<p>能够接受输入参数，也能返回输出结果</p>
+<p>有自己单独的工作空间，变量保存于此</p>
+<h3 id="1-1、M文件编辑器"><a href="#1-1、M文件编辑器" class="headerlink" title="1-1、M文件编辑器"></a>1-1、M文件编辑器</h3><p>M文件不仅可以用来编辑M文件，还可对M文件进行交互性调试。而且，M文件编辑器还可用于阅读和编辑其他ASCII码文件。打开M文件编辑器：</p>
+<p>单击常用工具栏上的“新建”图标。</p>
+<p>单击【File】【New】【M-File】菜单命令新建空白M文件。</p>
+<p>在“命令”窗口直接输入edit命令，或使用edit mfiles命令编辑已存在的文件，mfiles为用户需编辑的文件名（可不带扩展名)</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fact</span><span class="params">(n)</span>                    %函数定义行</span></span><br><span class="line"><span class="comment">% Compute a factorial value                % H1行</span></span><br><span class="line"><span class="comment">% FACT(N) returns the factorial of N.   % help脚本文件</span></span><br><span class="line"><span class="comment">% usually denotednby n!</span></span><br><span class="line"><span class="comment">% put simply, FACT(N) is PROD(1:N)             %注释</span></span><br><span class="line">f = prod(<span class="number">1</span>:n);                           <span class="comment">%函数体或脚本主体</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>1.函数定义行</strong>：定义函数名称，定义输入输出变量的数量、顺序。脚本式M文件没有此行。函数定义语句为：                                                                                         <code>function [out1,out2,out3...] =  funName(in1,in2,in3...)</code>                                                                               无输出的课用空括号[ ],或者无括号和等号：<code>function funName(in1,in2,in3...)</code></p>
+<p><strong>2.H1行</strong>：Help文本的第一行，用%开始，命令窗口输入 <code>help filename</code> 或 <code>lookfor filename</code>可显示H1行文本。</p>
+<p><strong>3.Help文本</strong>：可以是连续多行的注释文本，只能在命令窗口观看，遇到第一个非注释行结束，其他注释行不被显示。lookfor 命令是搜索所有函数命令中包括filename字符串的汉，将函数H1行列出来。</p>
+<p><strong>4.注释</strong>：以%开始的注释可出现在函数任何位置，也可在语句右边。若注释行很多，可使用注释块操作符—— %{……%}</p>
+<p><strong>5.函数体</strong>：函数体是函数和脚本中计算和处理数据的主体，可包含进行计算和赋值的语句、函数调用、循环和流控制语句，以及注释语句。空行等。</p>
+<h3 id="1-2、脚本式M文件"><a href="#1-2、脚本式M文件" class="headerlink" title="1-2、脚本式M文件"></a>1-2、脚本式M文件</h3><p>对较多命令进行重复输入、调试等用户可以将需要重复输入的所有命令按顺序放到M文件，每次运行只要输入文件名或单击”运行“按钮，或F5快捷键。脚本式文件的运行相当于在命令窗口依次输入运行命令。不需要预先定义变量，命令文件中变量都是全局变量。</p>
+<h3 id="1-3、函数式M文件"><a href="#1-3、函数式M文件" class="headerlink" title="1-3、函数式M文件"></a>1-3、函数式M文件</h3><p>函数式命令文件一般要自带变量，且有返回结果，也可不带变量，此时文件中一般会使用一些全局变量来实现与外界和其他函数之间的数据交换。以关键词function开始，实质为用户向MATLAB函数库中添加自定义子函数。</p>
+<h2 id="二、流程控制"><a href="#二、流程控制" class="headerlink" title="二、流程控制"></a>二、流程控制</h2><p>MATLAB基本程序为顺序结构，但不能满足程序设计需要，需使用流程控制语句。包括判断语句，循环语句，分支语句等。</p>
+<h3 id="2-1、顺序结构"><a href="#2-1、顺序结构" class="headerlink" title="2-1、顺序结构"></a>2-1、顺序结构</h3><p>1、if语句</p>
+<p><code>if···end</code>             <code>if···else···end</code>               <code>if···elseif···else···end</code></p>
+<p>2、switch语句</p>
+<p><code>switch···case···end</code></p>
+<p>3、for循环（嵌套）</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> variable = initval:stepval:endval      <span class="comment">%variable表示变量，默认步长为1</span></span><br><span class="line">     statement</span><br><span class="line">     ···</span><br><span class="line">     statement</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>4、while循环</p>
+<p><code>while 表达式    执行语句      end</code></p>
+<p>5、continue命令——-break命令</p>
+<p>跳过进行下一次循环———-根据终止条件跳出循环</p>
+<p>6、return命令</p>
+<p>使得当前调用的函数正常退出   <code>return</code></p>
+<h3 id="2-2、人机交互命令"><a href="#2-2、人机交互命令" class="headerlink" title="2-2、人机交互命令"></a>2-2、人机交互命令</h3><p>1、输入提示命令input</p>
+<p><code>user_entry = input(&#39;prompt&#39;)</code>            <code>user_entry = input(&#39;prompt&#39;,&#39;s&#39;)</code></p>
+<p>2、请求键盘输入命令keyboard</p>
+<p>如keyboard命令被放在M文件中，将终止文件的继续执行，将控制权交给键盘。可通过在提示符前显示K表征这种特殊状态，M文件中使用该命令对程序调控及修改变量都方便。为终止keyboard模式，可键入命令return，然后按回车键。</p>
+<p>3、pause命令</p>
+<p>用于暂时中止程序运行，等待用户按任意键继续运行，可用于查询中间结果。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">pause             <span class="comment">%暂停</span></span><br><span class="line">pause(n)          <span class="comment">%暂停n秒</span></span><br><span class="line">pause on            <span class="comment">%允许后续的pause命令中止程序运行</span></span><br><span class="line">pause off            <span class="comment">%保证后续的pause或pause(n)命令都不中止程序运行</span></span><br></pre></td></tr></table></figure></div>
+<p>4、echo语句</p>
+<p>查看文件中命令的执行情况，需要将M文件中所有命令在执行过程中显示出来，可使用echo命令。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%脚本文件</span></span><br><span class="line">echo on    <span class="comment">%显示以后所有执行的命令</span></span><br><span class="line">echo off    <span class="comment">%不显示以后所有执行的命令</span></span><br><span class="line">echo        <span class="comment">%两种方式间切换</span></span><br><span class="line"><span class="comment">%函数文件</span></span><br><span class="line">echo fcnname on        <span class="comment">%使fcnname指定的M文件的执行命令显示出来</span></span><br><span class="line">echo fcnname off       <span class="comment">%使fcnname指定的M文件的执行命令不显示出来</span></span><br><span class="line">echo fcnname          <span class="comment">%在以上两种情况切换</span></span><br><span class="line">echo on all          <span class="comment">%其后所有是M文件的执行命令显示出来</span></span><br><span class="line">echo off all            <span class="comment">%其后所有的M文件的执行命令不显示出来</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="三、函数"><a href="#三、函数" class="headerlink" title="三、函数"></a>三、函数</h2><p>MATLAB中函数创建方法</p>
 ]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
       <tags>
-        <tag>verilog</tag>
+        <tag>MATLAB</tag>
       </tags>
   </entry>
   <entry>
@@ -799,6 +565,203 @@ f_{xi'}=f(x_1,x_2,...,x_{i-1},0,x_{i+1},...,x_n)</script><p>其中布尔函数$\
 ]]></content>
   </entry>
   <entry>
+    <title>verilog 语言</title>
+    <url>/2022/03/24/verilog-%E8%AF%AD%E8%A8%80/</url>
+    <content><![CDATA[<h1 id="Verilog-HDL"><a href="#Verilog-HDL" class="headerlink" title="Verilog HDL"></a>Verilog HDL</h1><p>参考:《Adcanced Digital Design with the Verilog HDL》 Second Edition by Michael D.Ciletti</p>
+<a id="more"></a>
+<h2 id="Verilog基础"><a href="#Verilog基础" class="headerlink" title="Verilog基础"></a>Verilog基础</h2><p>狄摩根(DeMorgan)定理：</p>
+<script type="math/tex; mode=display">
+(A+B+C+...)'=A'\cdot B' \cdot C' \cdot...</script><p>香农(Shannon)公式：</p>
+<script type="math/tex; mode=display">
+f(x_1,x_2,...,x_i,x_{i+1},...,x_n)=x_i \cdot f_{xi}+x_{i'}\cdot f_{xi'}=(x_i+f_{xi'})\cdot(f_{i'}+f_{xi})\\
+f_{xi}=f(x_1,x_2,...,x_{i-1},1,x_{i+1},...,x_n)\\
+f_{xi'}=f(x_1,x_2,...,x_{i-1},0,x_{i+1},...,x_n)</script><p>其中布尔函数$\ f $的微分为：$\ \partial f / \partial x_i=f_{xi}\oplus f_{xi’}$ </p>
+<p>静态冒险：由不同扇出路径上的不同传播时延造成。对于同步时序电路，通过延长时钟周期消除。</p>
+<p>两级电路消除静态1冒险：用质蕴涵项覆盖函数积之和形式的卡诺图中相邻单元所有1格。</p>
+<p>两级电路消除静态0冒险：覆盖无静态1冒险函数积之和形式中所有相邻的0格。</p>
+<p>多级电路中静态冒险：将输出表达式的多级描述转换成“瞬态输出函数”的积之和形式$f_{tof}$。变量与其反变量的乘积($aa’$)揭示了哪个输入中含有静态0冒险，变量与其反变量之和($a+a’$)揭示了哪个输入中含有静态1冒险。然后化为两级电路消除冒险。</p>
+<p>动态冒险：多条重新汇聚路径所导致的的多个静态冒险的结果。不存在静态冒险，也就不存在动态冒险，因此通过消除静态冒险消除。</p>
+<p>Multiplexers(多路复用器)</p>
+<p>Demultiplexers(多路解复用器)</p>
+<p>Encoders(编码器)</p>
+<p>Decoder(译码器)</p>
+<p>Synchronous sequential circuit(同步时序电路)</p>
+<p>Asynchronous sequential circuit(异步时序电路)</p>
+<p>Latches(锁存器)</p>
+<p>Filp-Flops(触发器)</p>
+<h2 id="Verilog语言结构"><a href="#Verilog语言结构" class="headerlink" title="Verilog语言结构"></a>Verilog语言结构</h2><h3 id="模块结构"><a href="#模块结构" class="headerlink" title="模块结构"></a>模块结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> name (<span class="keyword">output</span>,<span class="keyword">input</span>);</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+<p>逻辑门：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">与</th>
+<th style="text-align:center">与非</th>
+<th style="text-align:center">或</th>
+<th style="text-align:center">或非</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">and</td>
+<td style="text-align:center">nand</td>
+<td style="text-align:center">or</td>
+<td style="text-align:center">nor</td>
+</tr>
+<tr>
+<td style="text-align:center">异或</td>
+<td style="text-align:center">异或非（同或）</td>
+<td style="text-align:center">缓冲器</td>
+<td style="text-align:center">反相器</td>
+</tr>
+<tr>
+<td style="text-align:center">xor</td>
+<td style="text-align:center">xnor</td>
+<td style="text-align:center">buf</td>
+<td style="text-align:center">not</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 模块嵌套—&gt;自顶向下</p>
+<p>Verilog矢量：规定区间最左端为最高位，若选取部分在原区间外，返回值x。</p>
+<p>逻辑==x==意味着未知值，逻辑==z==意味着高阻</p>
+<p>未声明的标识符默认为==wire==类型</p>
+<p>*当三态门使能信号无效时会产生一个z值，而当两个相反输入驱动wire信号时，会产生x值。</p>
+<h3 id="测试模块"><a href="#测试模块" class="headerlink" title="测试模块"></a>测试模块</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">reg</span> a,b;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Time Out</span></span><br><span class="line">    #<span class="number">100</span> <span class="built_in">$finish</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span>               <span class="comment">//Stimulus patterns</span></span><br><span class="line">    #<span class="number">10</span> a=b;b=<span class="number">0</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> a=<span class="number">1</span>;</span><br><span class="line">    #<span class="number">10</span> b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>由关键词==initial==定义，通过填充关键词==begin…end==之间语句完成。</p>
+<p>关键词==reg==声明测试的输入，待测输出则可定义为wire型。</p>
+<p>*Verilog仿真器对所有wire变量赋予z值初始值，对reg变量赋予初始值x。</p>
+<p><strong>定长数</strong>：指定了储存数值的位宽的数。例：8’ha表示十六进制数a以8位方式0000_1010储存。</p>
+<p>二进制(binary)、十进制(decimal)、八进制(octal)、十六进制(hexadecimal)；默认为十进制。</p>
+<p>首行中的<code>timescale 1ns/1ps</code>指示仿真器用ps的精确度说明具有ns单位的数字时间变量。</p>
+<h3 id="UPD结构"><a href="#UPD结构" class="headerlink" title="UPD结构"></a>UPD结构</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">primitive</span> latch_rp(<span class="keyword">output</span> <span class="keyword">reg</span> q_out,<span class="keyword">input</span> enable,data);       <span class="comment">//透明锁存器</span></span><br><span class="line">    <span class="keyword">table</span></span><br><span class="line"><span class="comment">//    enable         data          state        q_out/next_state</span></span><br><span class="line">        <span class="number">1</span>              <span class="number">1</span>       :     ?       :        <span class="number">1</span>;</span><br><span class="line">        <span class="number">1</span>              <span class="number">0</span>       :     ?       :        <span class="number">0</span>;</span><br><span class="line">        <span class="number">0</span>              ?       :     ?       :        -;</span><br><span class="line">        x              <span class="number">0</span>       :     <span class="number">0</span>       :        -;</span><br><span class="line">        x              <span class="number">1</span>       :     <span class="number">1</span>       :        -;</span><br><span class="line">    <span class="keyword">endtable</span></span><br><span class="line"><span class="keyword">endprimitive</span></span><br></pre></td></tr></table></figure></div>
+<p>关键词==primitive…endprimitive==进行模块化封装UPD真值表</p>
+<p>符号==？==表示输入可以为0,1,x中任意一个</p>
+<p>时序UDP的输出必须定义为reg类型</p>
+<p>下降沿跳变信号：(10)、(1x)、(x0)；上升沿跳变信号：(01)、(0x)、(x1)</p>
+<h3 id="矢量"><a href="#矢量" class="headerlink" title="矢量"></a>矢量</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">default_nettype</span> none       //禁用imllicit nets,减少bug</span></span><br><span class="line"><span class="keyword">module</span> top_module(<span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">15</span>:<span class="number">0</span>] in, </span><br><span class="line">                  <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] out,       <span class="comment">//矢量时定义宽度在名称前面</span></span><br><span class="line">                  <span class="keyword">output</span> out_and);</span><br><span class="line">    out_and = &amp; in;   <span class="comment">//16与门输出</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>Implicit nets</strong>:未被定义的变量通常是1bit，作为矢量使用时通常会造成bug。使用<code>`default_nettype none</code>显示</p>
+<p><strong>Bitwise &amp; Logical Operators</strong></p>
+<p>位运算符：~(取反)、&amp;(按位与)、|(按位或)、^(按位异或)、^~(按位同或)</p>
+<p>逻辑运算：&amp;&amp;(与)、||(或)、！(非)</p>
+<p>条件操作符：(？:)———  <code>enable ? a : b</code>   enable为真计算a，else计算b。常用于数据选择时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> Latch_Rbar_CA(        <span class="comment">//低有效复位功能的D锁存器</span></span><br><span class="line">    <span class="keyword">output</span> q_out.</span><br><span class="line">    <span class="keyword">input</span> data_in,enable,rst_b</span><br><span class="line">);</span><br><span class="line">    <span class="keyword">assign</span> q_out = !(rst_b==<span class="number">1'b0</span>) ? <span class="number">0</span> : enable ? data_in : q_out;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>Concatenation Operator</strong>:连接运算符{ }  ———需要知道每个部分的宽度，{1,2,3}是illegal，{2’b11}是legal.</p>
+<p><strong>Replication Operator</strong> :复制操作符： {num{vector}}   ———-{5{1’b1}}</p>
+<p><strong>Parity Checking</strong>: 奇偶校检常用于做传输数据时检查错误的方法，将所有数据位异或运算即可实现。</p>
+<h2 id="Hierarchy"><a href="#Hierarchy" class="headerlink" title="Hierarchy"></a>Hierarchy</h2><p>模块层次化</p>
+<p>模块端口与信号连接方式：<br>by position: <code>mod_a instance (a,b,c)</code>      </p>
+<p>by name: <code>mod_a instance2 (.out(c), .in1(a), .in2(b))</code></p>
+<h2 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h2><p>对于综合硬件，<strong>always</strong>块有两种形式：</p>
+<p>Combinational: always @(*) ———————-赋值方式：a=b，组合逻辑电路中</p>
+<p>Clocked: always @(posedge clk)—————-赋值方式：a&lt;=b  (输出等到下个时延才能输出) reg类型被综合为寄存器</p>
+<p><strong>If</strong> statement:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line">alwsys @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span> (condition) <span class="keyword">begin</span></span><br><span class="line">        out = x;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">        out = y;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p> if 中锁存器问题：如果 if 条件不满足，Verilog将保持输出不变。</p>
+<p><strong>Case</strong> statement:</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">case</span> (in)</span><br><span class="line">        <span class="number">1'b1</span> : </span><br><span class="line">            <span class="keyword">begin</span></span><br><span class="line">            out = <span class="number">1'b1</span>;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="number">1'b0</span> : </span><br><span class="line">            out = <span class="number">1'b0</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            out = <span class="number">1'bx</span>;</span><br><span class="line">    <span class="keyword">endcase</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p>e.g. Priority Encode（优先编码器）：输出输入的矢量中第一个高位电平的位置。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">// synthesis verilog_input_version verilog_2001</span></span><br><span class="line"><span class="keyword">module</span> top_module (</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">3</span>:<span class="number">0</span>] in,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] pos  );</span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">case</span>(<span class="number">1</span>)</span><br><span class="line">            in[<span class="number">0</span>]: pos=<span class="number">0</span>;</span><br><span class="line">            in[<span class="number">1</span>]: pos=<span class="number">1</span>;</span><br><span class="line">            in[<span class="number">2</span>]: pos=<span class="number">2</span>;</span><br><span class="line">            in[<span class="number">3</span>]: pos=<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: pos=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"><span class="comment">//另一种方法      Casez statement：将 z 视为不关心的位; casex也类似，它将x和z无视</span></span><br><span class="line">    <span class="keyword">always</span> @(*) <span class="keyword">begin</span>  </span><br><span class="line">        <span class="keyword">casez</span> (in[<span class="number">3</span>:<span class="number">0</span>])</span><br><span class="line">            <span class="number">4'bzzz1</span>: out=<span class="number">0</span>;              <span class="comment">//？是z的同义词，所以2b'z0=2'b?0</span></span><br><span class="line">            <span class="number">4'bzz10</span>: out=<span class="number">1</span>;</span><br><span class="line">            <span class="number">4'bz100</span>: out=<span class="number">2</span>;</span><br><span class="line">            <span class="number">4'b1000</span>: out=<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">default</span>: out=<span class="number">0</span>;             <span class="comment">//对输出进行先赋初值，从而节省代码，这也不再需要default项</span></span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>Generate</strong> Statement：常用于编写可配置的、可综合的RTL设计结构。可用于创建模块的多个实例化。generate循环使用必须先在genvar声明中声明循环索引变量。</p>
+<p>e.g. 实例化bcd_fadd的100个副本，以创建一个100位的BCD行波进位加法器。</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="VERILOG"><figure class="iseeu highlight /verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> top_module( </span><br><span class="line">    <span class="keyword">input</span> [<span class="number">399</span>:<span class="number">0</span>] a, b,</span><br><span class="line">    <span class="keyword">input</span> cin,</span><br><span class="line">    <span class="keyword">output</span> cout,</span><br><span class="line">    <span class="keyword">output</span> [<span class="number">399</span>:<span class="number">0</span>] sum );</span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">99</span>:<span class="number">0</span>] cout_temp;</span><br><span class="line">	<span class="keyword">genvar</span> i;</span><br><span class="line">    <span class="keyword">generate</span></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) <span class="keyword">begin</span>:bcd_fadd</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)</span><br><span class="line">                bcd_fadd bcd_inst(a[<span class="number">3</span>:<span class="number">0</span>],b[<span class="number">3</span>:<span class="number">0</span>],cin,cout_temp[<span class="number">0</span>],sum[<span class="number">3</span>:<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                bcd_fadd bcd_inst(a[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i],b[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i],cout_temp[i-<span class="number">1</span>],cout_temp[i],sum[<span class="number">4</span>*i+<span class="number">3</span>:<span class="number">4</span>*i]);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">assign</span> cout=cout_temp[<span class="number">99</span>];</span><br><span class="line">    <span class="keyword">endgenerate</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>verilog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宇宙学</title>
+    <url>/2022/01/06/%E5%AE%87%E5%AE%99%E5%AD%A6/</url>
+    <content><![CDATA[<h1 id="宇宙学"><a href="#宇宙学" class="headerlink" title="宇宙学"></a>宇宙学</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMD</td>
+<td>cold dark matter</td>
+<td style="text-align:center">冷暗物质</td>
+</tr>
+<tr>
+<td>FRW</td>
+<td>Friedmann-Robertson-Walker</td>
+<td style="text-align:center">均匀各向同性大爆炸模型</td>
+</tr>
+<tr>
+<td>WIMPs</td>
+<td>Weakly interacting massive particles</td>
+<td style="text-align:center">大质量弱相互作用粒子</td>
+</tr>
+<tr>
+<td>SUSY</td>
+<td>supersymmetry</td>
+<td style="text-align:center">超对称</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">
+\Lambda-CDM\quad\quad Lambda-CDM\quad Model \quad\quad \quad \Lambda-冷暗物质模型</script><p>1.观测表明宇宙是由物质组成</p>
+<p>2.宇宙中占据支配地位的是暗物质，不发光，不参与强相互作用和电磁相互作用</p>
+<p>3.星系形式的可见物质的空间分布呈现大的团状和长纤维状，同时存在上忆光年的星系密度很低的空洞结构</p>
+<p>4.宇宙的空间部分是高度平坦的</p>
+<p>5.星系和其他大尺度结构的形成是引力作用于宇宙的原初温度涨落和密度涨落的结果</p>
+<p>6.不同方向上宇宙微波背景辐射温度接近于相同，但是有微小的涨落（10^-5量级)</p>
+<p>7.宇宙在加速膨胀</p>
+<p>8.暗物质和暗能量占宇宙总质-能密度的95%，暗能量70%、暗物质25%</p>
+<p><img src="/assets/cj.png" alt="cj"></p>
+<h2 id="热大爆炸宇宙学"><a href="#热大爆炸宇宙学" class="headerlink" title="热大爆炸宇宙学"></a>热大爆炸宇宙学</h2><h3 id="宇宙的膨胀"><a href="#宇宙的膨胀" class="headerlink" title="宇宙的膨胀"></a>宇宙的膨胀</h3><p>热大爆炸模型建立在爱因斯坦的广义相对论和宇宙在宇观尺度上为均匀和各向同性的假说上。描述均匀各向同性时空的度规是Robertson-Walker度规。FRW宇宙学体现为宇宙尺度因子随时间的演化。</p>
+<script type="math/tex; mode=display">
+辐射为主时期，a(t)\propto t^{1/2};实物为主时期，a(t)\propto t^{3/2};真空为主时期，a(t)\propto exp(t),</script><p><img src="/assets/image-20210106163728821.png" alt="image-20210106163728821"></p>
+<p>牛顿发现<strong>引力不稳定性</strong>现象，在一个不均匀的宇宙中，物质密度大于平均密度的区域会最终会从低密度区吸引物质从而造成密度的不均匀度增大。爱因斯坦在相对论宇宙学中引入“宇宙学常数”防止宇宙收缩或膨胀。哈勃利用已有的径向速度数据，进一步发现了星系距离与其退行速度的相关关系—这是宇宙膨胀的证据，速度-距离关系的斜率给出了哈勃常数，即宇宙膨胀速率。膨胀的宇宙中传播的光子波长随时间变长，即“<strong>红移</strong>”（遥远星系的光谱线系统移向光谱的红端）。</p>
+<p>有两种方法确定宇宙年龄：</p>
+<p>1.基于宇宙学模型和宇宙膨胀历史，宇宙膨胀由其膨胀速度，引力减慢膨胀的程度和暗物质造成的膨胀加速支配。对于没有暗物质的平坦宇宙，宇宙年龄为哈勃时间的三分之二，即93亿年。一个含三分之一物质、三分之二暗物质的宇宙，年龄与哈勃时间相若，约135亿年。</p>
+<p>2.利用恒星演化模型预测宇宙中最古老恒星的年龄。模型计算恒星内核中氢转化为氦的速率，与球状星团中恒星的观测比较给出的年龄为125亿年，不确定度为10%。还需考虑球状星团形成的时间，理论估计为10亿年。其他的天文钟：最古老白矮星的冷却、恒星爆炸中产生的几种放射性同位素的衰变和宇宙微波背景辐射，都给出相似的结果。</p>
+<h3 id="宇宙微波辐射背景"><a href="#宇宙微波辐射背景" class="headerlink" title="宇宙微波辐射背景"></a>宇宙微波辐射背景</h3><p>大爆炸后38万年，宇宙温度高到足以让宇宙间一切实物完全电离，这个热等离子体中光子不断被自由电子散射，达到热平衡。随着宇宙膨胀，温度降低到大约3000K时。电子开始与质子结合形成原子，复合的结果是光子自由程增加，辐射与实物退藕，允许光子不受阻碍地在宇宙中传播。这一宇宙温度为3000K时最后一次被电子散射的辐射场今天已经冷却到温度为（2.75+-0.002）K，由于宇宙膨胀产生红移而在微波波段被探测到。</p>
+<p>宇宙背景辐射是来自宇宙空间背景上的各向同性的微波辐射。1992年COBE(宇宙背景辐射探测卫星)首次探测到背景辐射的温度中的残余涨落。与温度涨落相关联的是复合时期前后物质密度的涨落，复合过程中及其后，由于引力不稳定性，密度不均匀性的幅度开始增长。如图为微波背景辐射温度的全天区图，图显示的温度各向异性直接反映了大爆炸后40万年宇宙的状态。</p>
+<p><img src="/assets/cobe.jpg" alt="cobe"></p>
+<h3 id="轻元素丰度"><a href="#轻元素丰度" class="headerlink" title="轻元素丰度"></a>轻元素丰度</h3><p>大爆炸理论的成功之一是观测到现在的轻元素丰度与对大爆炸中产生的元素丰度预测一致。观测表明宇宙中可见物质主要是氢(75%)和氦4(约25%)，还有少量其他元素。大爆炸认为大约大爆炸后三分钟前后，原初的中子与质子结合形成氢、氦和锂。比锂重的元素则是在恒星演化中形成的。大爆炸后约一分钟之前，温度太高导致原子核无法存在；大爆炸几分钟后，温度和密度降太低而核反应无法进行，于是大爆炸核合成结束，元素丰度”冻结”。</p>
+<h2 id="现代宇宙学"><a href="#现代宇宙学" class="headerlink" title="现代宇宙学"></a>现代宇宙学</h2><h3 id="暗物质"><a href="#暗物质" class="headerlink" title="暗物质"></a>暗物质</h3><p>暗物质最可能的解释是它是一种新的、尚未被探测到的基本粒子，它能逃过早期宇宙中的湮没过程，有足够的粒子残存下来，而主导今天宇宙的静止质量密度。</p>
+<h4 id="重子暗物质"><a href="#重子暗物质" class="headerlink" title="重子暗物质"></a>重子暗物质</h4><p>宇宙总质能密度只有大约5%可归于普通物质(主要由质子和中子组成，统称为重子)。其中只有1%是发光的从而可以被观测到，其余暗物质有许多可能性：黑洞，过去恒星的暗而致密的残骸，非常昏暗的恒星、行星、岩石、热或温的电离气体。</p>
+<h4 id="非重子暗物质"><a href="#非重子暗物质" class="headerlink" title="非重子暗物质"></a>非重子暗物质</h4><p>其他证据表明有额外的(非重子)暗物质存在，占总体密度的25%。</p>
+<p>推断暗物质存在的途径之一是观测处于大质量星系图后面的远处的星系。由于引力透镜效应，这些星系的像会被拉成弧状结构，亮度被放大。测量星系内恒星运动的速度和银河系外围光晕中小的伴星系的速度，以及星系在星系图中的运动，也表明有大量看不见的物质的存在，否则这些恒星和伴星系将不再受约束。发射X射线的气体温度的测量给出星系团中暗物质质量的另一估值。</p>
+<p>非重子暗物质根据其运动快慢分为半相对论性的(热的)和及其非相对论性的(冷的)。若宇宙早期热暗物质粒子太多，这些快速运动的粒子通过扩散会破坏较小的密度的不均匀性，这样宇宙中首批形成的天体将是最大尺度的结构即超团，更小的天体是回来通过碎裂产生的，这将预言现时的宇宙中的存在的结构很少。而这与从初始的起伏成长为星系的大规模模拟研究的结果不相恰，此外空间望远镜和大型地面望远镜已经观测到红移极大、时间极早的星系，比超团形成更古老。于是推测宇宙中大部分非重子暗物质是冷暗物质。</p>
+<p>非重子暗物质的候选者为：热平衡遗迹（弱相互作用有质量粒子）和非平衡遗迹（轴子和WIMPZILLAs）</p>
+<p>热平衡遗迹：假想粒子，在宇宙早期处于热平衡状态，其相对丰度由粒子质量和宇宙温度比值决定；当粒子的产生或者消灭过程远小于宇宙膨胀速度时，粒子退出热平衡，相对丰度由于宇宙膨胀而降低。</p>
+<p>热的热平衡遗迹(中微子)：中微子质量约为电子质量的千万分之一，只参与弱相互作用，属于非重子暗物质。中微子有三种：</p>
+<script type="math/tex; mode=display">
+电子中微子、\gamma中微子、\mu中微子</script><p>日本的超级神冈实验室和加拿大Sudbury中微子观测站发现了中微子传播中不同种类间的转变的证据</p>
+<p>冷的热平衡遗迹：中微子被冻结是在相对论状态下，在非相对论状态下冻结的WIMP叫冷的热平衡遗迹。相互作用越强，热平衡停留时间约长，冻结温度越低。大的湮没截面得出更低的冻结温度，导致更低的丰度。任何湮没截面与弱相互作用截面可比的稳定粒子都是WIMP的候选者。首选的是最轻的超对称粒子。粒子物理学有个想法希望自然界有一种新的对称性，即SUSY。SUSY将为介于弱作用能量尺度(100GeV)和普朗克能量（10^19GeV）之间的阶梯结构提供解释。SUSY要求任何一个实物和辐射基本粒子都有其对应的超对称伴子，预测SUSY粒子的质量大于他们已经观测到的超伴子，并且衰变非常快。但是最轻的超对称粒子例外，由于宇称守恒，它们是稳定的。</p>
+<p>由于暗物质相互作用弱，暗物质粒子在引力塌缩过程中不能有效地把能量耗散掉，从而不能形成很紧的束缚体，因此，在银河系和其他星系中，弱相互作用大质量粒子将只是与发光物质有松散的联系，形成环绕星系和其他星系团的暗物质晕。</p>
+<p>非热平衡遗迹：轴子(axion)是对称性破缺可能产生的一种粒子，这种对称性用于解释弱相互作用中无CP破坏的。预测其质量远小于WIMP，为10^-3~10^-5eV，产生在宇宙早期夸克-强子转化时期前后。另一个可能的暗物质来源是超大质量粒子或”WIMPZILLAs”，其可能由于变化的引力场而产生在暴胀结束时，质量达10^12~10^16GeV，与早期宇宙中的夸克-胶子浆相互作用非常弱，在他们冻结出来时从未达到热平衡。</p>
+<h3 id="暗能量"><a href="#暗能量" class="headerlink" title="暗能量"></a>暗能量</h3><p>若宇宙是以物质或辐射为主，若万有引力是吸引力，引力是大尺度上的唯一作用力，那么宇宙膨胀速度应当越来越慢，但是观测表明宇宙在加速膨胀。在FRW宇宙学中，若能量密度和压强满足不等式</p>
+<script type="math/tex; mode=display">
+\rho+3p<0</script><p>尺度因子的加速是可能的，但是实物和辐射的压强是正的，加速条件表示存在另一种质-能密度成分。与宇宙学常数相联系的能量与压强关系式为</p>
+<script type="math/tex; mode=display">
+\rho=-p</script><p>观测结果与此一致：宇宙中有三分之一的实物，三分之二的别种不同的形式，如具有巨大的负压强的暗能量。暗能量不与物质引力成团，现在对暗能量还没有解释，暗能量的理论解释至少存在两个主要的挑战：其一为暗能量的大小，计算量子真空所期待的能量，计算结果与观测值相差55个数量级以上。第二个突出问题是为什么我们处于刚好这样一个时期，宇宙的膨胀动力学正在变成以暗能量为主。</p>
+<p>广义相对论中描述宇宙膨胀的两个关键性方程(kbd）：</p>
+<script type="math/tex; mode=display">
+H^2(t)=\frac{8πG}{3}\Sigma_ip_i(t)-\frac{j}{a^2(t)}</script><script type="math/tex; mode=display">
+a^{..}/a=-4πG\Sigma_i(\rho_i+3p_i)</script><h3 id="暴胀"><a href="#暴胀" class="headerlink" title="暴胀"></a>暴胀</h3><p>由于<strong>因果性视界</strong>，标准宇宙学模型不能解释为什么宇宙是均匀和各向同性的，以及空间为什么这样平坦。                                              暴胀理论预言宇宙在早期能量密度以真空能为主，导致宇宙尺度因子快速增长。宇宙尺度因子的暴胀意味着宇宙的一个平滑的小空间区域指数膨胀，以致空间几何变成平坦。暴胀在今天的宇宙留下了可探测到的痕迹：观测到的原初温度涨落、原初密度涨落，及尚待观测的原初引力波。</p>
+<h2 id="再电离后的宇宙"><a href="#再电离后的宇宙" class="headerlink" title="再电离后的宇宙"></a>再电离后的宇宙</h2><p>红移~1100时，宇宙温度足够低，允许电子和质子结合在一起，宇宙中绝大多数物质从完全电离状态迅速转变为电中性，由于引力的不稳定性发展出结构，第一代大质量恒星连同它们中心有黑洞的母星系一并形成，人们认为它们的辐射的光会将宇宙再度电离。</p>
+<p>对于”黑暗时期”，行星的形成和演化等问题还有待了解。哈勃望远镜获得的深度曝光的照片加上地面望远镜的光谱观测，已经证认出大爆炸后几十亿年，红移为1~3这段时间内，星系经历了猛烈的恒星形成过程。如图<img src="/assets/Choques%20entre%20galaxias.jpg" alt="Choques entre galaxias"></p>
+<p><a href="http://ramanujan25449.blogspot.com/2011/08/la-formacion-de-nuestra-galaxia.html" target="_blank" rel="noopener">参见链接</a></p>
+]]></content>
+      <tags>
+        <tag>physics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Matlab绘图</title>
     <url>/2019/12/28/Matlab%E7%BB%98%E5%9B%BE/</url>
     <content><![CDATA[<hr>
@@ -918,90 +881,127 @@ y=2e^{-0.5x}</script><div class="highlight-wrap"autocomplete="off" autocorrect="
       </tags>
   </entry>
   <entry>
-    <title>宇宙学</title>
-    <url>/2022/01/06/%E5%AE%87%E5%AE%99%E5%AD%A6/</url>
-    <content><![CDATA[<h1 id="宇宙学"><a href="#宇宙学" class="headerlink" title="宇宙学"></a>宇宙学</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><div class="table-container">
+    <title>MATLAB计算</title>
+    <url>/2019/12/31/MATLAB%E8%AE%A1%E7%AE%97/</url>
+    <content><![CDATA[<h1 id="MATLAB计算"><a href="#MATLAB计算" class="headerlink" title="MATLAB计算"></a>MATLAB计算</h1><p>关于matlab的数值计算以及符号计算问题。</p>
+<a id="more"></a>
+<h2 id="一、因式分解"><a href="#一、因式分解" class="headerlink" title="一、因式分解"></a>一、因式分解</h2><h3 id="1-矩阵基础计算"><a href="#1-矩阵基础计算" class="headerlink" title="1.矩阵基础计算"></a>1.矩阵基础计算</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">a=[<span class="number">2</span>; <span class="number">1</span>; <span class="number">4</span>]; c= <span class="number">3</span>; b=c*a     <span class="comment">% b=[6; 3; 12],数量乘法</span></span><br><span class="line">y=a'                       <span class="comment">%转置</span></span><br><span class="line">d=C.'               <span class="comment">%转置复数矩阵不计算元素共轭值</span></span><br><span class="line">A.^K  A^k           <span class="comment">%数组A每个元素k次方     K个矩阵A相乘</span></span><br><span class="line">k.^A  k^A           <span class="comment">%K为底，A元素为幂       矩的阵幂</span></span><br><span class="line">A.*B                <span class="comment">%数组相乘而不是矩阵</span></span><br><span class="line">A\B   B/A           <span class="comment">%AX=B的解       XA=B的解</span></span><br><span class="line">A./B=B./A           <span class="comment">%数组元素与元素匹配相除</span></span><br><span class="line">C = A +(-) B        <span class="comment">%向量相加减（长度，类型都相同）</span></span><br><span class="line">A=[A; B]  T=[R, S]  <span class="comment">%矩阵合并</span></span><br><span class="line">Y=<span class="built_in">exp</span>(x); Z=x.^<span class="number">2</span>    <span class="comment">%向量的乘方必须在幂运算符前（^）前加上句（.）</span></span><br><span class="line"><span class="built_in">linspace</span>(a,b,n)     <span class="comment">%创建了 a、b 之间含有 n 个等差元素的向量,无n默认100</span></span><br><span class="line"><span class="built_in">logspace</span>(a,b,n)     <span class="comment">%创建 n 个对数值相隔相同的行向量</span></span><br><span class="line">norm(x)             <span class="comment">%求向量范数</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2-行列式、逆和秩"><a href="#2-行列式、逆和秩" class="headerlink" title="2.行列式、逆和秩"></a>2.行列式、逆和秩</h3><p>逆矩阵: AB=BA=E    伪逆矩阵：BA=E ,AB!=E</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">det(A)    <span class="comment">%矩阵行列式值--必须为方阵    det(A^-1)=1/det(A)</span></span><br><span class="line">rank(A)    <span class="comment">%矩阵秩</span></span><br><span class="line">inv(A)     <span class="comment">%方阵A的逆矩阵B=A^-1  INF表示矩阵值为0，不存在逆矩阵</span></span><br><span class="line">pinv(A)    <span class="comment">%矩阵伪逆</span></span><br><span class="line">trance(A)   <span class="comment">%矩阵迹，即对角线元素和</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="3-矩阵分解"><a href="#3-矩阵分解" class="headerlink" title="3.矩阵分解"></a>3.矩阵分解</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">R=chol(A)       <span class="comment">%cholesky分解:A=R'R, A是对称且正定的   Ax=b--R'Rx=b---x=R\(R'\b)</span></span><br><span class="line">[L,U]=lu(A)     <span class="comment">% L单位对角线的下三角矩阵  U上三角矩阵  Ax=b---x=U\(L\b)</span></span><br><span class="line">[Q,R]=qr(A)     <span class="comment">%正交矩阵A，Q单位正交矩阵，R上三角矩阵  </span></span><br><span class="line">[Q1,R1]=gradelete(Q,R,<span class="built_in">j</span>)   <span class="comment">%去掉A的j列后矩阵QR分解</span></span><br><span class="line">[Q1,R1]=qrinset(Q,R,b,<span class="built_in">j</span>)   <span class="comment">%在A的j列前插入列向量b，然后QR分解</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="4-矩阵特征值和奇异值"><a href="#4-矩阵特征值和奇异值" class="headerlink" title="4.矩阵特征值和奇异值"></a>4.矩阵特征值和奇异值</h3><p>n阶方阵A，数λ和向量X，AX=λA成立，λ为A特征值，X为A特征向量。（A-λI)X有非0解X———丨A-λI丨=0</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">E=eig（A)                         <span class="comment">%矩阵A全部特征值构成E</span></span><br><span class="line">[V,D]=eig(A)                      <span class="comment">%矩阵A全部特征值构成对角矩阵D，A特征向量构成V列向量</span></span><br><span class="line">[V,D]=eig(A,<span class="string">'nobalance'</span>)          <span class="comment">%同上</span></span><br></pre></td></tr></table></figure></div>
+<p>两矢量u，v,常熟s，矩阵A满足：Av=su,A’u=sv;  s为奇异值—-对角方阵∑，U,V为奇异矢量</p>
+<p>AV=U∑   A’U=V∑      U,V正交—-A=U∑V’      奇异值分解 <code>[U,S,V]=svd(A)</code></p>
+<h2 id="二、概率统计"><a href="#二、概率统计" class="headerlink" title="二、概率统计"></a>二、概率统计</h2><h3 id="1-基本分析函数"><a href="#1-基本分析函数" class="headerlink" title="1.基本分析函数"></a>1.基本分析函数</h3><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">B=sum(A)      B=sum(A,dim)      <span class="comment">%向量元素和或矩阵各列元素和   矩阵第dim维元素和</span></span><br><span class="line"></span><br><span class="line">B=cumsum(A)                     <span class="comment">%向量元素积和或矩阵各列元素积和  </span></span><br><span class="line">B=cumsum(A,dim)                  <span class="comment">% dim=1列方向求积和 dim=2行方向求积和</span></span><br><span class="line"></span><br><span class="line">B=prod(A)    B=prod(A,dim)        <span class="comment">%向量积或矩阵列元素积       矩阵第dim维元素积</span></span><br><span class="line"></span><br><span class="line">B=cumprod(A)  B=cumprod(A,dim)     <span class="comment">%累积乘积   dim=1列方向 dim=2 行方向</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sort</span>(A)    B=<span class="built_in">sort</span>(A,mode)       <span class="comment">%默认升序排序   mode为'ascend'表升序,'descend'表降序</span></span><br><span class="line"></span><br><span class="line">B=<span class="built_in">sortrows</span>(A)  B=<span class="built_in">sortrows</span>(A,column)   <span class="comment">%按行对A升序排序   基于向量column指定列排序 负号表降序</span></span><br><span class="line"></span><br><span class="line">C=<span class="built_in">max</span>(A) C=<span class="built_in">min</span>(A)                 <span class="comment">%返回向量最大元素或矩阵各列向量最大值（最小）</span></span><br><span class="line"></span><br><span class="line">M=<span class="built_in">mean</span>(A)                        <span class="comment">%平均值</span></span><br><span class="line">M=median(A)                      <span class="comment">%中值</span></span><br><span class="line">S=std(A)   S=std(A,flag)         <span class="comment">%标准差（falg取1/0表示两种方法）</span></span><br><span class="line">V=var(X)   V=var(X,<span class="number">1</span>)            <span class="comment">%方差（两种方法）</span></span><br><span class="line">C=cov(X)   C=cov(x,y)            <span class="comment">%协方差</span></span><br><span class="line"></span><br><span class="line">[r,p]=corrcoef(X)   [r,p]=corrcoef(x,y)      <span class="comment">%矩阵相关系数</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2、概率函数、分布函数、逆分布函数和随机数"><a href="#2、概率函数、分布函数、逆分布函数和随机数" class="headerlink" title="2、概率函数、分布函数、逆分布函数和随机数"></a>2、概率函数、分布函数、逆分布函数和随机数</h3><p>PMF(probability mass function)               <strong>概率质量函数</strong>       离散变量<br>PDF Probability density function             <strong>概率密度函数</strong>        连续变量<br>CDF(cumulative distribution function)    <strong>累积分布函数 </strong>       F(X)=P(X&lt;=x)</p>
+<p>Bernoulli distribution                                <strong>伯努利分布</strong>           也称为两点分布或者0-1分布</p>
+<script type="math/tex; mode=display">
+概率质量函数:P(x)=p^x(1-p)^{1-x}=\begin{cases} p，x=1\\ q， x=0\end{cases}</script><script type="math/tex; mode=display">
+期望值:E(x)=\sum{xP(x)}=0\cdot q+1\cdot p=p</script><script type="math/tex; mode=display">
+方差:Var(x)=E[(x-E(X)^2)]=\sum{(x-p)^2}P(x)=pq</script><p>Binomial distribution                   <strong>二项分布 </strong>           n次伯努利实验，成功概率为p，成功x次概率表示为</p>
+<script type="math/tex; mode=display">
+P(x)=C_n^xp^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}p^x(1-p)^{n-x}</script><p>均值为np，方差为npq。matlab中关于二项分布三个常用指令如下</p>
+<p>Poisson distribution                      <strong>泊松分布</strong>           描述单位时间内随机事件发生的次数的概率分布，计λ为单位时间（或单位面积）内随机事件的平均发生率。期望和方差均为 λ。当二项分布n很大p很小时，泊松分布可作二项分布的近似，λ=np</p>
+<script type="math/tex; mode=display">
+概率质量函数：P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}</script><p>standard normal distribution           <strong>正态分布</strong>            期望值μ=0，即曲线图象对称轴为Y轴，标准差σ=1条件下的正态分布，记为N(0，1)。正态分布关于平均数对称。</p>
+<p>uniform distribution                         <strong>均匀分布</strong>            在相同长度间隔的分布概率相等，由两个参数a，b定义。</p>
+<script type="math/tex; mode=display">
+概率质量函数:f(x)=\begin{cases} \frac{1}{b-a},a<x<b\\ 0,else\end{cases}</script><script type="math/tex; mode=display">
+概率累积分布函数：F(x)=\begin{cases}0,x<a \\ \frac{x-a}{b-a},a\leq x\leq b \\ 1,x>b \end{cases}</script><p>chi-square distribution                     <strong>χ²分布</strong>            若n个相互独立的随机变量ξ₁，ξ₂，…,ξn ，均服从标准正态分布，则这n个服从标准正态分布的随机变量的平方和构成一新的随机变量，其分布规律称为卡方分布。</p>
+<p>F-distribution                             <strong>F分布</strong>                    （看不太懂）</p>
+<p>t-distribution                              <strong>t分布</strong>                  用于根据小样本来估计呈正态分布且方差未知的总体的均值。如果总体方差已知（例如在样本数量足够多时），则应该用正态分布来估计总体均值。</p>
+<p>常见分布的相关函数</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th style="text-align:center"></th>
+<th style="text-align:center">分布名称</th>
+<th style="text-align:center">概率密度函数</th>
+<th style="text-align:center">累积分布函数</th>
+<th style="text-align:center">逆累积分布函数</th>
+<th style="text-align:center">随机数发生器</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>CMD</td>
-<td>cold dark matter</td>
-<td style="text-align:center">冷暗物质</td>
+<td style="text-align:center">二项分布</td>
+<td style="text-align:center">binopdf</td>
+<td style="text-align:center">binocdf</td>
+<td style="text-align:center">binoinv</td>
+<td style="text-align:center">binornd</td>
 </tr>
 <tr>
-<td>FRW</td>
-<td>Friedmann-Robertson-Walker</td>
-<td style="text-align:center">均匀各向同性大爆炸模型</td>
+<td style="text-align:center">泊松分布</td>
+<td style="text-align:center">poisspdf</td>
+<td style="text-align:center">poisscdf</td>
+<td style="text-align:center">poissinv</td>
+<td style="text-align:center">poissrnd</td>
 </tr>
 <tr>
-<td>WIMPs</td>
-<td>Weakly interacting massive particles</td>
-<td style="text-align:center">大质量弱相互作用粒子</td>
+<td style="text-align:center">正态分布</td>
+<td style="text-align:center">normpdf</td>
+<td style="text-align:center">normcdf</td>
+<td style="text-align:center">norminv</td>
+<td style="text-align:center">normrnd</td>
 </tr>
 <tr>
-<td>SUSY</td>
-<td>supersymmetry</td>
-<td style="text-align:center">超对称</td>
+<td style="text-align:center">均匀分布</td>
+<td style="text-align:center">unifpdf</td>
+<td style="text-align:center">unifcdf</td>
+<td style="text-align:center">unifinv</td>
+<td style="text-align:center">unifrnd</td>
+</tr>
+<tr>
+<td style="text-align:center">X^2分布</td>
+<td style="text-align:center">chi2pdf</td>
+<td style="text-align:center">chi2cdf</td>
+<td style="text-align:center">chi2inv</td>
+<td style="text-align:center">chi2rnd</td>
+</tr>
+<tr>
+<td style="text-align:center">F分布</td>
+<td style="text-align:center">fpdf</td>
+<td style="text-align:center">fcdf</td>
+<td style="text-align:center">finv</td>
+<td style="text-align:center">frnd</td>
+</tr>
+<tr>
+<td style="text-align:center">t分布</td>
+<td style="text-align:center">tpdf</td>
+<td style="text-align:center">tcdf</td>
+<td style="text-align:center">tinv</td>
+<td style="text-align:center">trnd</td>
 </tr>
 </tbody>
 </table>
 </div>
-<script type="math/tex; mode=display">
-\Lambda-CDM\quad\quad Lambda-CDM\quad Model \quad\quad \quad \Lambda-冷暗物质模型</script><p>1.观测表明宇宙是由物质组成</p>
-<p>2.宇宙中占据支配地位的是暗物质，不发光，不参与强相互作用和电磁相互作用</p>
-<p>3.星系形式的可见物质的空间分布呈现大的团状和长纤维状，同时存在上忆光年的星系密度很低的空洞结构</p>
-<p>4.宇宙的空间部分是高度平坦的</p>
-<p>5.星系和其他大尺度结构的形成是引力作用于宇宙的原初温度涨落和密度涨落的结果</p>
-<p>6.不同方向上宇宙微波背景辐射温度接近于相同，但是有微小的涨落（10^-5量级)</p>
-<p>7.宇宙在加速膨胀</p>
-<p>8.暗物质和暗能量占宇宙总质-能密度的95%，暗能量70%、暗物质25%</p>
-<p><img src="/assets/cj.png" alt="cj"></p>
-<h2 id="热大爆炸宇宙学"><a href="#热大爆炸宇宙学" class="headerlink" title="热大爆炸宇宙学"></a>热大爆炸宇宙学</h2><h3 id="宇宙的膨胀"><a href="#宇宙的膨胀" class="headerlink" title="宇宙的膨胀"></a>宇宙的膨胀</h3><p>热大爆炸模型建立在爱因斯坦的广义相对论和宇宙在宇观尺度上为均匀和各向同性的假说上。描述均匀各向同性时空的度规是Robertson-Walker度规。FRW宇宙学体现为宇宙尺度因子随时间的演化。</p>
-<script type="math/tex; mode=display">
-辐射为主时期，a(t)\propto t^{1/2};实物为主时期，a(t)\propto t^{3/2};真空为主时期，a(t)\propto exp(t),</script><p><img src="/assets/image-20210106163728821.png" alt="image-20210106163728821"></p>
-<p>牛顿发现<strong>引力不稳定性</strong>现象，在一个不均匀的宇宙中，物质密度大于平均密度的区域会最终会从低密度区吸引物质从而造成密度的不均匀度增大。爱因斯坦在相对论宇宙学中引入“宇宙学常数”防止宇宙收缩或膨胀。哈勃利用已有的径向速度数据，进一步发现了星系距离与其退行速度的相关关系—这是宇宙膨胀的证据，速度-距离关系的斜率给出了哈勃常数，即宇宙膨胀速率。膨胀的宇宙中传播的光子波长随时间变长，即“<strong>红移</strong>”（遥远星系的光谱线系统移向光谱的红端）。</p>
-<p>有两种方法确定宇宙年龄：</p>
-<p>1.基于宇宙学模型和宇宙膨胀历史，宇宙膨胀由其膨胀速度，引力减慢膨胀的程度和暗物质造成的膨胀加速支配。对于没有暗物质的平坦宇宙，宇宙年龄为哈勃时间的三分之二，即93亿年。一个含三分之一物质、三分之二暗物质的宇宙，年龄与哈勃时间相若，约135亿年。</p>
-<p>2.利用恒星演化模型预测宇宙中最古老恒星的年龄。模型计算恒星内核中氢转化为氦的速率，与球状星团中恒星的观测比较给出的年龄为125亿年，不确定度为10%。还需考虑球状星团形成的时间，理论估计为10亿年。其他的天文钟：最古老白矮星的冷却、恒星爆炸中产生的几种放射性同位素的衰变和宇宙微波背景辐射，都给出相似的结果。</p>
-<h3 id="宇宙微波辐射背景"><a href="#宇宙微波辐射背景" class="headerlink" title="宇宙微波辐射背景"></a>宇宙微波辐射背景</h3><p>大爆炸后38万年，宇宙温度高到足以让宇宙间一切实物完全电离，这个热等离子体中光子不断被自由电子散射，达到热平衡。随着宇宙膨胀，温度降低到大约3000K时。电子开始与质子结合形成原子，复合的结果是光子自由程增加，辐射与实物退藕，允许光子不受阻碍地在宇宙中传播。这一宇宙温度为3000K时最后一次被电子散射的辐射场今天已经冷却到温度为（2.75+-0.002）K，由于宇宙膨胀产生红移而在微波波段被探测到。</p>
-<p>宇宙背景辐射是来自宇宙空间背景上的各向同性的微波辐射。1992年COBE(宇宙背景辐射探测卫星)首次探测到背景辐射的温度中的残余涨落。与温度涨落相关联的是复合时期前后物质密度的涨落，复合过程中及其后，由于引力不稳定性，密度不均匀性的幅度开始增长。如图为微波背景辐射温度的全天区图，图显示的温度各向异性直接反映了大爆炸后40万年宇宙的状态。</p>
-<p><img src="/assets/cobe.jpg" alt="cobe"></p>
-<h3 id="轻元素丰度"><a href="#轻元素丰度" class="headerlink" title="轻元素丰度"></a>轻元素丰度</h3><p>大爆炸理论的成功之一是观测到现在的轻元素丰度与对大爆炸中产生的元素丰度预测一致。观测表明宇宙中可见物质主要是氢(75%)和氦4(约25%)，还有少量其他元素。大爆炸认为大约大爆炸后三分钟前后，原初的中子与质子结合形成氢、氦和锂。比锂重的元素则是在恒星演化中形成的。大爆炸后约一分钟之前，温度太高导致原子核无法存在；大爆炸几分钟后，温度和密度降太低而核反应无法进行，于是大爆炸核合成结束，元素丰度”冻结”。</p>
-<h2 id="现代宇宙学"><a href="#现代宇宙学" class="headerlink" title="现代宇宙学"></a>现代宇宙学</h2><h3 id="暗物质"><a href="#暗物质" class="headerlink" title="暗物质"></a>暗物质</h3><p>暗物质最可能的解释是它是一种新的、尚未被探测到的基本粒子，它能逃过早期宇宙中的湮没过程，有足够的粒子残存下来，而主导今天宇宙的静止质量密度。</p>
-<h4 id="重子暗物质"><a href="#重子暗物质" class="headerlink" title="重子暗物质"></a>重子暗物质</h4><p>宇宙总质能密度只有大约5%可归于普通物质(主要由质子和中子组成，统称为重子)。其中只有1%是发光的从而可以被观测到，其余暗物质有许多可能性：黑洞，过去恒星的暗而致密的残骸，非常昏暗的恒星、行星、岩石、热或温的电离气体。</p>
-<h4 id="非重子暗物质"><a href="#非重子暗物质" class="headerlink" title="非重子暗物质"></a>非重子暗物质</h4><p>其他证据表明有额外的(非重子)暗物质存在，占总体密度的25%。</p>
-<p>推断暗物质存在的途径之一是观测处于大质量星系图后面的远处的星系。由于引力透镜效应，这些星系的像会被拉成弧状结构，亮度被放大。测量星系内恒星运动的速度和银河系外围光晕中小的伴星系的速度，以及星系在星系图中的运动，也表明有大量看不见的物质的存在，否则这些恒星和伴星系将不再受约束。发射X射线的气体温度的测量给出星系团中暗物质质量的另一估值。</p>
-<p>非重子暗物质根据其运动快慢分为半相对论性的(热的)和及其非相对论性的(冷的)。若宇宙早期热暗物质粒子太多，这些快速运动的粒子通过扩散会破坏较小的密度的不均匀性，这样宇宙中首批形成的天体将是最大尺度的结构即超团，更小的天体是回来通过碎裂产生的，这将预言现时的宇宙中的存在的结构很少。而这与从初始的起伏成长为星系的大规模模拟研究的结果不相恰，此外空间望远镜和大型地面望远镜已经观测到红移极大、时间极早的星系，比超团形成更古老。于是推测宇宙中大部分非重子暗物质是冷暗物质。</p>
-<p>非重子暗物质的候选者为：热平衡遗迹（弱相互作用有质量粒子）和非平衡遗迹（轴子和WIMPZILLAs）</p>
-<p>热平衡遗迹：假想粒子，在宇宙早期处于热平衡状态，其相对丰度由粒子质量和宇宙温度比值决定；当粒子的产生或者消灭过程远小于宇宙膨胀速度时，粒子退出热平衡，相对丰度由于宇宙膨胀而降低。</p>
-<p>热的热平衡遗迹(中微子)：中微子质量约为电子质量的千万分之一，只参与弱相互作用，属于非重子暗物质。中微子有三种：</p>
-<script type="math/tex; mode=display">
-电子中微子、\gamma中微子、\mu中微子</script><p>日本的超级神冈实验室和加拿大Sudbury中微子观测站发现了中微子传播中不同种类间的转变的证据</p>
-<p>冷的热平衡遗迹：中微子被冻结是在相对论状态下，在非相对论状态下冻结的WIMP叫冷的热平衡遗迹。相互作用越强，热平衡停留时间约长，冻结温度越低。大的湮没截面得出更低的冻结温度，导致更低的丰度。任何湮没截面与弱相互作用截面可比的稳定粒子都是WIMP的候选者。首选的是最轻的超对称粒子。粒子物理学有个想法希望自然界有一种新的对称性，即SUSY。SUSY将为介于弱作用能量尺度(100GeV)和普朗克能量（10^19GeV）之间的阶梯结构提供解释。SUSY要求任何一个实物和辐射基本粒子都有其对应的超对称伴子，预测SUSY粒子的质量大于他们已经观测到的超伴子，并且衰变非常快。但是最轻的超对称粒子例外，由于宇称守恒，它们是稳定的。</p>
-<p>由于暗物质相互作用弱，暗物质粒子在引力塌缩过程中不能有效地把能量耗散掉，从而不能形成很紧的束缚体，因此，在银河系和其他星系中，弱相互作用大质量粒子将只是与发光物质有松散的联系，形成环绕星系和其他星系团的暗物质晕。</p>
-<p>非热平衡遗迹：轴子(axion)是对称性破缺可能产生的一种粒子，这种对称性用于解释弱相互作用中无CP破坏的。预测其质量远小于WIMP，为10^-3~10^-5eV，产生在宇宙早期夸克-强子转化时期前后。另一个可能的暗物质来源是超大质量粒子或”WIMPZILLAs”，其可能由于变化的引力场而产生在暴胀结束时，质量达10^12~10^16GeV，与早期宇宙中的夸克-胶子浆相互作用非常弱，在他们冻结出来时从未达到热平衡。</p>
-<h3 id="暗能量"><a href="#暗能量" class="headerlink" title="暗能量"></a>暗能量</h3><p>若宇宙是以物质或辐射为主，若万有引力是吸引力，引力是大尺度上的唯一作用力，那么宇宙膨胀速度应当越来越慢，但是观测表明宇宙在加速膨胀。在FRW宇宙学中，若能量密度和压强满足不等式</p>
-<script type="math/tex; mode=display">
-\rho+3p<0</script><p>尺度因子的加速是可能的，但是实物和辐射的压强是正的，加速条件表示存在另一种质-能密度成分。与宇宙学常数相联系的能量与压强关系式为</p>
-<script type="math/tex; mode=display">
-\rho=-p</script><p>观测结果与此一致：宇宙中有三分之一的实物，三分之二的别种不同的形式，如具有巨大的负压强的暗能量。暗能量不与物质引力成团，现在对暗能量还没有解释，暗能量的理论解释至少存在两个主要的挑战：其一为暗能量的大小，计算量子真空所期待的能量，计算结果与观测值相差55个数量级以上。第二个突出问题是为什么我们处于刚好这样一个时期，宇宙的膨胀动力学正在变成以暗能量为主。</p>
-<p>广义相对论中描述宇宙膨胀的两个关键性方程(kbd）：</p>
-<script type="math/tex; mode=display">
-H^2(t)=\frac{8πG}{3}\Sigma_ip_i(t)-\frac{j}{a^2(t)}</script><script type="math/tex; mode=display">
-a^{..}/a=-4πG\Sigma_i(\rho_i+3p_i)</script><h3 id="暴胀"><a href="#暴胀" class="headerlink" title="暴胀"></a>暴胀</h3><p>由于<strong>因果性视界</strong>，标准宇宙学模型不能解释为什么宇宙是均匀和各向同性的，以及空间为什么这样平坦。                                              暴胀理论预言宇宙在早期能量密度以真空能为主，导致宇宙尺度因子快速增长。宇宙尺度因子的暴胀意味着宇宙的一个平滑的小空间区域指数膨胀，以致空间几何变成平坦。暴胀在今天的宇宙留下了可探测到的痕迹：观测到的原初温度涨落、原初密度涨落，及尚待观测的原初引力波。</p>
-<h2 id="再电离后的宇宙"><a href="#再电离后的宇宙" class="headerlink" title="再电离后的宇宙"></a>再电离后的宇宙</h2><p>红移~1100时，宇宙温度足够低，允许电子和质子结合在一起，宇宙中绝大多数物质从完全电离状态迅速转变为电中性，由于引力的不稳定性发展出结构，第一代大质量恒星连同它们中心有黑洞的母星系一并形成，人们认为它们的辐射的光会将宇宙再度电离。</p>
-<p>对于”黑暗时期”，行星的形成和演化等问题还有待了解。哈勃望远镜获得的深度曝光的照片加上地面望远镜的光谱观测，已经证认出大爆炸后几十亿年，红移为1~3这段时间内，星系经历了猛烈的恒星形成过程。如图<img src="/assets/Choques%20entre%20galaxias.jpg" alt="Choques entre galaxias"></p>
-<p><a href="http://ramanujan25449.blogspot.com/2011/08/la-formacion-de-nuestra-galaxia.html" target="_blank" rel="noopener">参见链接</a></p>
+<p>​                                                        .<img src="/assets/20161207224852700.png" alt="img"></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">N=<span class="number">100</span>;p=<span class="number">0.2</span>;k=<span class="number">0</span>:N;</span><br><span class="line">pk=binopdf(k,N,p);</span><br><span class="line">ck=binocdf(k,N,p);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);h=plotyy(k,pk,k,ck);</span><br><span class="line">text(<span class="number">55</span>,<span class="number">0.07</span>,<span class="string">'p=0.2'</span>);title(<span class="string">'二项分布'</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="number">0</span>:<span class="number">20</span>;y1=poisspdf(x,<span class="number">2.5</span>);y2=poisspdf(x,<span class="number">5</span>);y3=poisspdf(x,<span class="number">10</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);<span class="built_in">plot</span>(x,y1,<span class="string">'r*'</span>,x,y2,<span class="string">'b-'</span>,x,y3,<span class="string">'g&lt;'</span>);</span><br><span class="line">title(<span class="string">'Poisson分布'</span>);</span><br><span class="line"></span><br><span class="line">x3=<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>;n=normpdf(x3,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="built_in">plot</span>(x3,n);grid;</span><br><span class="line">title(<span class="string">'标准正态分布'</span>);</span><br><span class="line"></span><br><span class="line">x4=<span class="number">0</span>:<span class="number">0.01</span>:<span class="number">30</span>;</span><br><span class="line">z=chi2pdf(x4,<span class="number">1</span>);</span><br><span class="line">z1=chi2pdf(x4,<span class="number">4</span>);</span><br><span class="line">z2=chi2pdf(x4,<span class="number">10</span>);</span><br><span class="line">z3=chi2pdf(x4,<span class="number">20</span>);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>);<span class="built_in">plot</span>(x4,z,<span class="string">'r-'</span>,x4,z1,<span class="string">'-.b'</span>,x4,z2,<span class="string">':k'</span>,x4,z3,<span class="string">'--g'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'自由度为1'</span>,<span class="string">'自由度为4'</span>,<span class="string">'自由度为10'</span>,<span class="string">'自由度为20'</span>);</span><br><span class="line">axis([<span class="number">0</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">0.2</span>]);title(<span class="string">'卡方分布'</span>);</span><br></pre></td></tr></table></figure></div>
+<p><img src="/assets/disburition.jpg" alt="disburition"></p>
+<h2 id="三、数值求导与积分"><a href="#三、数值求导与积分" class="headerlink" title="三、数值求导与积分"></a>三、数值求导与积分</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=diff(X)              <span class="comment">%X相邻元素间一阶差分</span></span><br><span class="line">FX=gradient(F)         <span class="comment">%向量F的一维数值梯度</span></span><br><span class="line">[FX,FY]=gradient(F)     <span class="comment">%矩阵F的二维梯度x和y部分</span></span><br><span class="line"></span><br><span class="line">q=quad(fun,,a,b)          <span class="comment">%函数fun在a到b区间数值积分----Simpson方法，，精度高</span></span><br><span class="line">q=quadl(fun,,a,b)         <span class="comment">%函数fun在a到b区间数值积分----Lobatto方法，，精度较高</span></span><br><span class="line">T=trapz(y)                <span class="comment">%计算向量或者矩阵每列的积分----梯形法，，速度快，精度差</span></span><br><span class="line">Z=cumtrapz(X,Y)           <span class="comment">%求Y对X的积分             ----梯形法</span></span><br><span class="line"></span><br><span class="line">q=dblquad(fun,xmin,xmax,ymin,ymax)        <span class="comment">%二重积分</span></span><br><span class="line">q=triplequad(fun,xmin,xmax,ymin,ymax,zmin,zmax)     <span class="comment">%三重积分</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="四、插值"><a href="#四、插值" class="headerlink" title="四、插值"></a>四、插值</h2><p>插值指在已知数据之间计算估计值的过程。<br>一维数据插值常用函数interp1，一般的语法格式为：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yi=interp1(x,y,xi,method)      <span class="comment">%xi为插值点向量或数组，method为插值方法</span></span><br><span class="line">method=<span class="string">'nearest'</span>       <span class="comment">%邻近点插值----速度最快，平滑性最差</span></span><br><span class="line">method=<span class="string">'linear'</span>        <span class="comment">%线性插值-----两个数据点连接直线（默认），运算时间长，占内存多</span></span><br><span class="line">method=<span class="string">'spline'</span>    <span class="comment">%三次样条插值----通过数据点拟合三次样条曲线，时间最长，占内存较少平滑性好</span></span><br><span class="line">method=<span class="string">'pchip'</span>or <span class="string">'cubic'</span>   <span class="comment">%分段立方Hermite插值方法</span></span><br></pre></td></tr></table></figure></div>
+<p>二维插值主要用于图形图像处理和三维曲线拟合等领域。由函数interp2实现，一般语法为：zi=interp2(x,y,z,xi,yi,method)</p>
+<p>三维插值函数interp3和n维插值函数interpn，其调用方式一般格式为：zi=interp3(x,y,z/v,xi,yi,zi,method)</p>
+<p>样条插值：根据已知数据点找一组拟合多项式，拟合过程数据组每个相邻样点对用三次多项式去拟合曲线。为保证拟合的唯一性，对三次多项式在样点处一阶、二阶导数加以约束。一般格式为</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">yy=spline(x,y,xx)   <span class="comment">%根据样点数据(x,y)，求xx对应三次样条插值</span></span><br><span class="line">pp=spline(x,y)      <span class="comment">%从样点数据(x,y),求xx对应三次样条插值</span></span><br></pre></td></tr></table></figure></div>
+<p>e.g.</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">strmod=&#123;<span class="string">'nearest'</span>,<span class="string">'linear'</span>,<span class="string">'spline'</span>,<span class="string">'cubic'</span>&#125;;</span><br><span class="line">strlb=&#123;<span class="string">'(a)method=nearest'</span>,<span class="string">'(b)method=linear'</span>,<span class="string">'(c)method=spline'</span>,<span class="string">'(d)method=cubic'</span>&#125;;</span><br><span class="line">x1=<span class="number">1</span>:<span class="number">10</span>;y1=<span class="built_in">cos</span>(x1);xi1=<span class="number">0</span>:<span class="number">0.25</span>:<span class="number">10</span>;</span><br><span class="line">[x2,y2,z2]=peaks(<span class="number">6</span>);</span><br><span class="line">[xi2,yi2]=<span class="built_in">meshgrid</span>(<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.2</span>:<span class="number">3</span>);</span><br><span class="line">[x3,y3,z3,v3]=flow(<span class="number">8</span>);</span><br><span class="line">[xi3,yi3,zi3]=<span class="built_in">meshgrid</span>(<span class="number">0.1</span>:<span class="number">0.25</span>:<span class="number">10</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>,<span class="number">-3</span>:<span class="number">0.25</span>:<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">4</span></span><br><span class="line">yi1=interp1(x1,y1,xi1,strmod&#123;<span class="built_in">i</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">i</span>)</span><br><span class="line"><span class="built_in">plot</span>(x1,y1,<span class="string">'ro'</span>,xi1,yi1,<span class="string">'b'</span>),xlabel(strlb(<span class="built_in">i</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>);mesh(x2,y2,z2);title(<span class="string">'原始数据'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">6</span>:<span class="number">8</span></span><br><span class="line">zi2=interp2(x2,y2,x2,xi2,yi2,strmod&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="built_in">j</span>);mesh(xi2,yi2,zi2);title(strlb&#123;<span class="built_in">j</span><span class="number">-5</span>&#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>);slice(x3,y3,z3,v3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);title(<span class="string">'插值前'</span>);</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">10</span>:<span class="number">12</span></span><br><span class="line">vi3=interp3(x3,y3,z3,v3,xi3,yi3,zi3,strmod&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">4</span>,k);slice(xi3,yi3,zi3,vi3,[<span class="number">3</span>,<span class="number">5</span>],<span class="number">2</span>,[<span class="number">-2</span>,<span class="number">3</span>]);xlabel(strlb&#123;k<span class="number">-8</span>&#125;);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="/assets/9-1578887741457.jpg" alt="9"></p>
+<h2 id="五、曲线拟合"><a href="#五、曲线拟合" class="headerlink" title="五、曲线拟合"></a>五、曲线拟合</h2><p>​       曲线拟合用于求与一组数据最吻合的函数，用polyfit函数实现，该函数采用最小二乘法计算，使拟合函数多项式在各数据点处偏差的平方之和达最小。调用格式如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">p=polyfit(x,y,n)         <span class="comment">% P(1)*X^N + P(2)*X^(N-1) +...+ P(N)*X + P(N+1)即为该函数</span></span><br><span class="line">[p,s]=polyfit(x,y,n)     <span class="comment">% s为拟合多项式有关误差估计的结构数组</span></span><br><span class="line">p=polyfit(x,<span class="built_in">log10</span>(y),<span class="number">1</span>)  <span class="comment">% y=b(10)^mx指数函数拟合，w=log10y,z=x--w=p1z+p2</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="六、Fourier分析"><a href="#六、Fourier分析" class="headerlink" title="六、Fourier分析"></a>六、Fourier分析</h2><p>对于离散数据，频谱分析的计算基础是离散傅里叶变换（DFT),调用如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">Y=fft(X)        <span class="comment">%对数据X作一维快速离散傅里叶变换  ifft--傅里叶反变换</span></span><br><span class="line">Y=fft2(X)       <span class="comment">%二位快速傅里叶变换,相对于fft(fft(X)')'  --- ifft2</span></span><br><span class="line">Y=fftshift(X)   <span class="comment">%把变换结果Y（频域数据）中的直流分量（频率为0处值）移到中间位置---ifftshift</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="七、微分方程"><a href="#七、微分方程" class="headerlink" title="七、微分方程"></a>七、微分方程</h2><h3 id="1、常微分方程"><a href="#1、常微分方程" class="headerlink" title="1、常微分方程"></a>1、常微分方程</h3><p>​      对广泛的、非线性性的一般常微分方程，通常不存在初等函数解析解。由于实际问题求解的需要，求近似的数值解成为解决问题的重要手段。常见求数值解的方法有欧拉折线法，阿当姆斯法，龙格—库塔法与吉尔法等。数值解不受方程类型限制，即可求任何形式常微分方程特解。龙格—库塔法精度较高，计算量适中，所以使用较广泛。调用语法如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MATLAB"><figure class="iseeu highlight /matlab"><table><tr><td class="code"><pre><span class="line">[t,y]=ode23(filename,tspan,y0)      <span class="comment">%二阶、三阶龙格——库塔法计算</span></span><br><span class="line">[t,y]=ode45(filename,tspan,y0)      <span class="comment">%四阶、五阶龙格——库塔法计算</span></span><br><span class="line"><span class="comment">%filename是定义f(t,y)的函数文件名，Tspan的形式为[t0,f0],表示求解区间，y0是初始状态列向量</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="2、偏微分方程"><a href="#2、偏微分方程" class="headerlink" title="2、偏微分方程"></a>2、偏微分方程</h3><p>MATLAB提供一个专门用于求解偏微分方程（PDE）的工具箱PDE Toolbox。本节介绍一些简单、经典的偏微分方程并给出求解方法：</p>
+<p>椭圆形问题：assempde()函数</p>
+<p>抛物型问题：parabolic()函数</p>
+<p>双曲型问题：hyperbolic()函数</p>
 ]]></content>
       <tags>
-        <tag>physics</tag>
+        <tag>MATLAB</tag>
       </tags>
   </entry>
 </search>
